@@ -36,20 +36,16 @@ This is a simple Todo List web app built as part of my Code the Dream (CTD) Reac
    You should see the Todo List title and three sample todos.
 
 3. 🛠️ Technologies Used
-
-   Vite – for fast project setup and development server
-
-   React (JSX) – building the UI
-
-   JavaScript – app logic
-
-   ESLint & Prettier – code quality and formatting (see Stretch Goals)
+   - **Vite** – for fast project setup and development server
+   - **React** (JSX) – building the UI
+   - **JavaScript** – app logic
+   - **ESLint & Prettier** – code quality and formatting (see Stretch Goals)
 
 4. 📚 Stretch Goals (Optional)
-   - ESLint:
+   - **ESLint:**
      Added React linting to help catch code errors and enforce style.
 
-   - Prettier:
+   - **Prettier:**
      Integrated Prettier for consistent code formatting.
 
 Both tools can be installed as VS Code extensions and with npm install as described in project instructions.
