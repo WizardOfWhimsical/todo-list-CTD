@@ -20,67 +20,75 @@ This is a simple Todo List web app built as part of my Code the Dream (CTD) Reac
    cd todo-list
    ```
    Install Dependencies:
+   ```
+   npm install
+   ```
+2. 🏃 Running the Development Server
 
-npm install
+   Start the local dev server with:
 
-🏃 Running the Development Server
+   ```
+   npm run dev
+   ```
 
-Start the local dev server with:
+   Open your browser and go to the Local URL displayed in the terminal (typically http://localhost:5173).
 
-npm run dev
+   You should see the Todo List title and three sample todos.
 
-Open your browser and go to the Local URL displayed in the terminal (typically http://localhost:5173).
+3. 🛠️ Technologies Used
 
-You should see the Todo List title and three sample todos.
+   Vite – for fast project setup and development server
 
-🛠️ Technologies Used
+   React (JSX) – building the UI
 
-Vite – for fast project setup and development server
+   JavaScript – app logic
 
-React (JSX) – building the UI
+   ESLint & Prettier – code quality and formatting (see Stretch Goals)
 
-JavaScript – app logic
+4. 📚 Stretch Goals (Optional)
+   - ESLint:
+     Added React linting to help catch code errors and enforce style.
 
-ESLint & Prettier – code quality and formatting (see Stretch Goals)
-
-📚 Stretch Goals (Optional)
-
-ESLint:
-Added React linting to help catch code errors and enforce style.
-
-Prettier:
-Integrated Prettier for consistent code formatting.
+   - Prettier:
+     Integrated Prettier for consistent code formatting.
 
 Both tools can be installed as VS Code extensions and with npm install as described in project instructions.
 
-💡 What I Learned / Reflections – Week 1
+### 💡 What I Learned / Reflections – Week 1
 
-This week, I worked closely with my mentor EJ. Here are some of the key things I learned, tripped over, or just found cool:
+#### This week, I worked closely with my mentor EJ. Here are some of the key things I learned, tripped over, or just found cool:
 
-Config Files Matter:
-I got my first real exposure to customizing config files—like ESLint and Prettier. It’s cool to see how these can enforce clean code and help catch mistakes before they get big.
+- Config Files Matter:
+  I got my first real exposure to customizing config files—like ESLint and Prettier. It’s cool to see how these can enforce clean code and help catch mistakes before they get big.
 
-Branching & Repo Management:
-I made a common mistake—getting so excited I jumped into making a branch before pushing my “main” branch to GitHub. I learned how to reset things and manage my branches/commits properly, with EJ’s help. Turns out, knowing how to do a hard reset and reference commit IDs is invaluable!
+- Branching & Repo Management:
+  I made a common mistake—getting so excited I jumped into making a branch before pushing my “main” branch to GitHub. I learned how to reset things and manage my branches/commits properly, with EJ’s help. Turns out, knowing how to do a hard reset and reference commit IDs is invaluable!
 
-Talking Through Problems:
-Walking my mentor through my process—explaining how and why I did things—helped me lock down my own understanding. It felt good to be able to teach back what I learned.
+- Talking Through Problems:
+  Walking my mentor through my process—explaining how and why I did things—helped me lock down my own understanding. It felt good to be able to teach back what I learned.
 
-Mapping in React:
-Mapping an array to create dynamic UI (the todo list) felt straightforward, but it’s powerful. React’s way of turning data into DOM is starting to make sense!
+- Mapping in React:
+  Mapping an array to create dynamic UI (the todo list) felt straightforward, but it’s powerful. React’s way of turning data into DOM is starting to make sense!
 
-It’s Okay to Ask for Help:
-Having a mentor there when I got stuck made a huge difference. I’m getting better at knowing what I don’t know and reaching out for help early.
+- It’s Okay to Ask for Help:
+  Having a mentor there when I got stuck made a huge difference. I’m getting better at knowing what I don’t know and reaching out for help early.
 
-🏁 Next Steps
+### 🏁 Next Steps
 
-Continue to add new features and learn more React concepts
+1. Continue to add new features and learn more React concepts
 
-Practice better git habits from the start (branching, commit discipline)
+2. Practice better git habits from the start (branching, commit discipline)
 
-Dive deeper into JSX and component structure
+3. Dive deeper into JSX and component structure
 
-Note:
+**Note :**
 This project is a school assignment. Any code not written by me is clearly marked as "AI-assisted" or from my mentor.
 
-If you have any questions or want to learn more about my process, feel free to check out my commits or reach out!
+## If you have any questions or want to learn more about my process, feel free to check out my commits or reach out!
+
+## 📬 Contact
+
+- 📨 **Yahoo:** [My Yahoo Email](mailto:st.rayis1085@yahoo.com)
+- 📧 **Gmail:** [My Gmail](mailto:st.rayis1085@gmail.com)
+- 🐙 **GitHub:** [The Wizards Domain](https://github.com/WizardOfWhimsical)
+- 🔗 **LinkedIn:** [Stephen Raymond Lewis](https://linkedin.com/in/stephenrlewis)
