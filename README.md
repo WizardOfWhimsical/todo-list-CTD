@@ -23,7 +23,7 @@ This is a simple Todo List web app built as part of my Code the Dream (CTD) Reac
    ```
    npm install
    ```
-2. 🏃 Running the Development Server
+2. **🏃 Running the Development Server**
 
    Start the local dev server with:
 
@@ -35,13 +35,13 @@ This is a simple Todo List web app built as part of my Code the Dream (CTD) Reac
 
    You should see the Todo List title and three sample todos.
 
-3. 🛠️ Technologies Used
+3. **🛠️ Technologies Used**
    - **Vite** – for fast project setup and development server
    - **React** (JSX) – building the UI
    - **JavaScript** – app logic
    - **ESLint & Prettier** – code quality and formatting (see Stretch Goals)
 
-4. 📚 Stretch Goals (Optional)
+4. **📚 Stretch Goals (Optional)**
    - **ESLint:**
      Added React linting to help catch code errors and enforce style.
 
@@ -50,7 +50,11 @@ This is a simple Todo List web app built as part of my Code the Dream (CTD) Reac
 
 Both tools can be installed as VS Code extensions and with npm install as described in project instructions.
 
+---
+
 ### 💡 What I Learned / Reflections – Week 1
+
+---
 
 #### This week, I worked closely with my mentor EJ. Here are some of the key things I learned, tripped over, or just found cool:
 
