@@ -1,12 +1,22 @@
-import './App.css'
+import './App.css';
+
+const todos = [
+  { id: 1, title: 'review resources' },
+  { id: 2, title: 'take notes' },
+  { id: 3, title: 'code out app' },
+];
 
 function App() {
-
   return (
-    <div>
+    <>
       <h1>My Todos</h1>
-    </div>
-  )
+      <ul>
+        {todos.map((todo) => (
+          <li key={todo.id}>{todo.title}</li>
+        ))}
+      </ul>
+    </>
+  );
 }
 
-export default App
+export default App;
