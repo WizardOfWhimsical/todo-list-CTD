@@ -1,16 +1,86 @@
-# React + Vite
+# Todo List App – Week 1
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a simple Todo List web app built as part of my Code the Dream (CTD) React course, **Week 1**. The goal of this assignment was to set up a new React project using Vite, get familiar with version control (Git + GitHub), and render a dynamic list of todos in the browser.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📝 App Overview
 
-## React Compiler
+- **Name:** Todo List
+- **Description:**  
+  A basic React app that displays a title and a list of todo items. It’s designed as a starting point for learning React, project scaffolding, and best practices around code style (ESLint, Prettier).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🚀 Installation
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. **Clone the Repo:**
+   ```bash
+   git clone https://github.com/your-username/todo-list.git
+   cd todo-list
+   ```
+   Install Dependencies:
+
+npm install
+
+🏃 Running the Development Server
+
+Start the local dev server with:
+
+npm run dev
+
+Open your browser and go to the Local URL displayed in the terminal (typically http://localhost:5173).
+
+You should see the Todo List title and three sample todos.
+
+🛠️ Technologies Used
+
+Vite – for fast project setup and development server
+
+React (JSX) – building the UI
+
+JavaScript – app logic
+
+ESLint & Prettier – code quality and formatting (see Stretch Goals)
+
+📚 Stretch Goals (Optional)
+
+ESLint:
+Added React linting to help catch code errors and enforce style.
+
+Prettier:
+Integrated Prettier for consistent code formatting.
+
+Both tools can be installed as VS Code extensions and with npm install as described in project instructions.
+
+💡 What I Learned / Reflections – Week 1
+
+This week, I worked closely with my mentor EJ. Here are some of the key things I learned, tripped over, or just found cool:
+
+Config Files Matter:
+I got my first real exposure to customizing config files—like ESLint and Prettier. It’s cool to see how these can enforce clean code and help catch mistakes before they get big.
+
+Branching & Repo Management:
+I made a common mistake—getting so excited I jumped into making a branch before pushing my “main” branch to GitHub. I learned how to reset things and manage my branches/commits properly, with EJ’s help. Turns out, knowing how to do a hard reset and reference commit IDs is invaluable!
+
+Talking Through Problems:
+Walking my mentor through my process—explaining how and why I did things—helped me lock down my own understanding. It felt good to be able to teach back what I learned.
+
+Mapping in React:
+Mapping an array to create dynamic UI (the todo list) felt straightforward, but it’s powerful. React’s way of turning data into DOM is starting to make sense!
+
+It’s Okay to Ask for Help:
+Having a mentor there when I got stuck made a huge difference. I’m getting better at knowing what I don’t know and reaching out for help early.
+
+🏁 Next Steps
+
+Continue to add new features and learn more React concepts
+
+Practice better git habits from the start (branching, commit discipline)
+
+Dive deeper into JSX and component structure
+
+Note:
+This project is a school assignment. Any code not written by me is clearly marked as "AI-assisted" or from my mentor.
+
+If you have any questions or want to learn more about my process, feel free to check out my commits or reach out!
