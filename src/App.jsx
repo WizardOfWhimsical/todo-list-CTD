@@ -12,7 +12,7 @@ function App() {
       <h1>My Todos</h1>
       <ul>
         {todos.map((todo) => (
-          <li key={todo.id}>{todo.title}</li>
+          <li key={`todo-${todo.id}`}>{todo.title}</li>
         ))}
       </ul>
     </>
