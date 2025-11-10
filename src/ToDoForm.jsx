@@ -1,10 +1,11 @@
 function ToDoForm() {
   return (
     <form>
-      <div>
-        <label htmlFor="todoTitle">To Do: </label>
-        <input type="input" id="todoTitle" />
-      </div>
+      <label htmlFor="todoTitle">To Do: </label>
+      <input type="input" id="todoTitle" />
+      <button type="submit" disabled>
+        Add ToDo
+      </button>
     </form>
   );
 }
