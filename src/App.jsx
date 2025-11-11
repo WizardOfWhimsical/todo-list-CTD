@@ -4,7 +4,7 @@ import ToDoList from './todolist';
 import ToDoForm from './ToDoForm';
 import inventoryData from './data.json';
 
-console.log(inventoryData.inventory);
+// console.log(inventoryData.inventory);
 
 // function App() {
 //   return (
