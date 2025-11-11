@@ -104,3 +104,5 @@ This project is built primarily as a **learning exercise** following the [Web De
 - 📧 **Gmail:** [My Gmail](mailto:st.rayis1085@gmail.com)
 - 🐙 **GitHub:** [The Wizards Domain](https://github.com/WizardOfWhimsical)
 - 🔗 **LinkedIn:** [Stephen Raymond Lewis](https://linkedin.com/in/stephenrlewis)
+
+break apart the app file so that i have a form component and inventory item component. break everything up into working components

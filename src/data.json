@@ -1,0 +1,34 @@
+{
+  "inventory": [
+    {
+      "id": 1,
+      "baseName": "Bucket Hat",
+      "variantName": "Black",
+      "price": 22.99,
+      "baseDescription": "Protect your head from the sun with this stylish bucket hat",
+      "variantDescription": "Black with an orange logo",
+      "image": "bucket-hat-black.png",
+      "inStock": "TRUE"
+    },
+    {
+      "id": 2,
+      "baseName": "Bucket Hat",
+      "variantName": "Peach",
+      "price": 22.99,
+      "baseDescription": "Protect your head from the sun with this stylish bucket hat",
+      "variantDescription": "Pale peach with an orange logo",
+      "image": "bucket-hat-peach.png",
+      "inStock": "TRUE"
+    },
+    {
+      "id": 5,
+      "baseName": "Clock",
+      "variantName": "Default",
+      "price": 27.99,
+      "baseDescription": "Battery-powered wall clock. White face with black logo",
+      "variantDescription": "",
+      "image": "clock.png",
+      "inStock": "TRUE"
+    }
+  ]
+}
