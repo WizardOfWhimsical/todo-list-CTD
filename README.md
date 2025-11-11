@@ -176,3 +176,10 @@ make new branch CTD swag, rebase from last commit on branch, then switch to CTDS
 > This README log will help future-me remember how I made it all click, piece by piece.
 
 ---
+
+> **Transparency Statement**
+> To the best of my knowledge, GitHub Copilot has been turned off during this project.  
+> Any small suggestion boxes that appear while typing are standard editor autocomplete or IntelliSense features.
+> I use **ChatGPT** regularly to help me **understand difficult concepts**, talk through assignments, and organize my thoughts — much like studying with a tutor or mentor.  
+> Echo also helps me write and format my **README files**, but **all code in this project is hand‑typed by me.**
+> If there are any questions about how something was written, please ask me to explain my code — I’d be happy to walk through it.
