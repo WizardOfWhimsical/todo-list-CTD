@@ -3,6 +3,7 @@ import './App.css';
 import ToDoList from './todolist';
 import ToDoForm from './ToDoForm';
 import inventoryData from './data.json';
+import ListItemCard from './ListItemCard';
 
 // console.log(inventoryData.inventory);
 
@@ -75,7 +76,8 @@ function App() {
       </form>
 
       <ul>
-        {inventory.map((item) => {
+        <ListItemCard props={inventory} />
+        {/* {inventory.map((item) => {
           return (
             <li key={item.id}>
               <div className="itemCard">
@@ -84,7 +86,7 @@ function App() {
               </div>
             </li>
           );
-        })}
+        })} */}
       </ul>
     </main>
   );
