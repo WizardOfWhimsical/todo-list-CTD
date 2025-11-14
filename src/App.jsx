@@ -3,22 +3,12 @@ import './App.css';
 import ToDoList from './todolist';
 import ToDoForm from './ToDoForm';
 import inventoryData from './data.json';
-import ListItemCard from './ListItemCard';
-
-// console.log(inventoryData.inventory);
-
-// function App() {
-//   return (
-//     <>
-//       <h1>My Todos</h1>
-//       <ToDoForm />
-//       <ToDoList />
-//     </>
-//   );
-// }
+// import ListItemCard from './ListItemCard';
+import { Product } from './Product';
 
 // unique numbers id- react form library
 // console.log(window.crypto.randomUUID());
+
 function App() {
   const [inventory, setInventory] = useState(inventoryData.inventory);
   const [count, setCount] = useState(0);
@@ -76,17 +66,22 @@ function App() {
       </form>
 
       <ul>
-        <ListItemCard props={inventory} />
-        {/* {inventory.map((item) => {
+        {/* <Product baseName="cool kat" baseDescription="Calming" id="001" /> */}
+        {/* <Product location="EARTH" /> */}
+        {inventory.map(({ baseName, baseDescription, id }) => {
+          const userFacingInfo = {
+            baseName,
+            baseDescription,
+          };
           return (
-            <li key={item.id}>
-              <div className="itemCard">
-                <h2>{item.baseName}</h2>
-                <p>{item.baseDescription}</p>
-              </div>
-            </li>
+            <Product
+              // baseName={item.baseName}
+              // baseDescription={item.baseDescription}
+              {...userFacingInfo}
+              key={id}
+            />
           );
-        })} */}
+        })}
       </ul>
     </main>
   );
