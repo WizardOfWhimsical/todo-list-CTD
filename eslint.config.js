@@ -22,11 +22,8 @@ export default defineConfig([
         sourceType: 'module',
       },
     },
-    "rules": {
-    "react/jsx-uses-react": "error",    // (for older React versions)
-    "react/jsx-uses-vars": "error",     // THIS IS THE ONE!
-    "no-unused-vars": ["warn", { "varsIgnorePattern": "^[A-Z]" }], // ignore PascalCase
-        'react/prop-types': 'off', //this suppresses warnings about not using 
+    rules: {
+      'no-unused-vars': ['warn', { varsIgnorePattern: '^[A-Z_]' }],
     },
   },
 ])
