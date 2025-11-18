@@ -5,13 +5,15 @@ import ToDoForm from './ToDoForm';
 import inventoryData from './data.json';
 // import ListItemCard from './ListItemCard';
 import { Product } from './Product';
+import { ProductList } from './ProductList';
+import { Field } from './Field';
 
 // unique numbers id- react form library
 // console.log(window.crypto.randomUUID());
 
 function App() {
   const [inventory, setInventory] = useState(inventoryData.inventory);
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
   const [itemName, setItemName] = useState('');
   const [itemDescription, setItemDescription] = useState('');
   console.log(itemDescription);
@@ -44,15 +46,7 @@ function App() {
       </div>
 
       <form onSubmit={handleButtonClick}>
-        <label htmlFor="inputField">Item Name</label>
-        <input
-          type="text"
-          id="inputField"
-          value={itemName}
-          onChange={(evt) => {
-            setItemName(evt.target.value);
-          }}
-        />
+        <Field name="baseName" labelText="Item Name" />
         <label htmlFor="another">description</label>
         <textarea
           id="another"
@@ -64,8 +58,7 @@ function App() {
         {/* when passing a funtion to setBlah it will take the previous value of state */}
         <button type="submit">add</button>
       </form>
-
-      <ul>
+      <ProductList>
         {/* <Product baseName="cool kat" baseDescription="Calming" id="001" /> */}
         {/* <Product location="EARTH" /> */}
         {inventory.map(({ baseName, baseDescription, id }) => {
@@ -73,16 +66,9 @@ function App() {
             baseName,
             baseDescription,
           };
-          return (
-            <Product
-              // baseName={item.baseName}
-              // baseDescription={item.baseDescription}
-              {...userFacingInfo}
-              key={id}
-            />
-          );
+          return <Product {...userFacingInfo} key={id} />;
         })}
-      </ul>
+      </ProductList>
     </main>
   );
 }
