@@ -1,17 +1,11 @@
-function ToDoList() {
-  const todos = [
-    { id: 1, title: 'review resources' },
-    { id: 2, title: 'take notes' },
-    { id: 3, title: 'code out app' },
-  ];
-
+function ToDoList({ props }) {
   return (
     <ul>
-      {todos.map((todo) => (
-        <li key={todo.id}>{todo.title}</li>
+      {props.map((prop) => (
+        <li key={prop.id}>{prop.title}</li>
       ))}
     </ul>
   );
 }
-
+//the expample in the curriculim is confussing
 export default ToDoList;
