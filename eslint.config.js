@@ -23,8 +23,7 @@ export default defineConfig([
       },
     },
     rules: {
-        'no-unused-vars': 'warn', //this changes the error to a warning
-        'react/prop-types': 'off', //this suppresses warnings about not using 
+      'no-unused-vars': ['warn', { varsIgnorePattern: '^[A-Z_]' }],
     },
   },
 ])
