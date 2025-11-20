@@ -1,8 +1,11 @@
-function ToDoList({ props }) {
+import { ToDoListItem } from './ToDoListItem';
+
+function ToDoList({ todos }) {
+  console.log(todos);
   return (
     <ul>
-      {props.map((prop) => (
-        <li key={prop.id}>{prop.title}</li>
+      {todos.map((todo) => (
+        <ToDoListItem key={todo.id} todo={todo} />
       ))}
     </ul>
   );

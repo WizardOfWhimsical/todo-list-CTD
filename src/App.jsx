@@ -1,5 +1,5 @@
 import './App.css';
-import ToDoList from './todolist';
+import ToDoList from './ToDoList';
 import ToDoForm from './ToDoForm';
 import { useState } from 'react';
 
@@ -15,7 +15,7 @@ function App() {
     <>
       <h1>My Todos</h1>
       <ToDoForm />
-      <ToDoList props={todos} />
+      <ToDoList todos={todos} />
     </>
   );
 }
