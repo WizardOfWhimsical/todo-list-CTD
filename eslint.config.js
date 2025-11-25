@@ -22,7 +22,7 @@ export default defineConfig([
         sourceType: 'module',
       },
     },
-   rules: {
+    rules: {
       'no-unused-vars': ['warn', { varsIgnorePattern: '^[A-Z_]' }],
     },
   },
