@@ -12,10 +12,14 @@ const todos = [
 
 function App() {
   const [toDoList, setToDoList] = useState(todos);
+  function addToDo(newTitle) {
+    const newToDo = { id: window.crypto.randomUUID(), title: newTitle };
+    setToDoList((previousToDos) => [...previousToDos, newToDo]);
+  }
   return (
     <>
       <h1>My Todos</h1>
-      <ToDoForm />
+      <ToDoForm onFormSubmit={addToDo} />
       <ToDoList todos={toDoList} />
     </>
   );
