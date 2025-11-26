@@ -6,6 +6,9 @@ import { useState } from 'react';
 
 function App() {
   const [toDoList, setToDoList] = useState([]);
+  function addTodo(todoTitle) {
+    return setToDoList([{ id: new Date(), title: todoTitle }, ...toDoList]);
+  }
 
   return (
     <>
