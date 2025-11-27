@@ -18,9 +18,15 @@ function ToDoForm({ onAddTodo }) {
   };
 
   return (
-    <form>
+    <form onSubmit={handleAddTodo}>
       <label htmlFor="todoTitle">To Do: </label>
-      <input type="input" id="todoTitle" />
+      <input
+        type="text"
+        id="todoTitle"
+        name="todoTitle"
+        ref={inputRef}
+        required
+      />
       <button type="submit" disabled>
         Add ToDo
       </button>
