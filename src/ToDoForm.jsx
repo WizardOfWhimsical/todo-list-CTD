@@ -10,6 +10,7 @@ function ToDoForm({ onAddTodo }) {
     //trim is always smart.
     const todoTitle = event.target.todoTitle.value.trim();
     //check for empty string
+    //theres form validation in here??
     if (todoTitle) {
       onAddTodo(todoTitle);
       event.target.reset();
@@ -27,9 +28,7 @@ function ToDoForm({ onAddTodo }) {
         ref={inputRef}
         required
       />
-      <button type="submit" disabled>
-        Add ToDo
-      </button>
+      <button type="submit">Add ToDo</button>
     </form>
   );
 }
