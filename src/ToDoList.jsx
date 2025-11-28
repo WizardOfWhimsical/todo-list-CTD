@@ -1,4 +1,12 @@
 //ToDoList.jsx
+
+/**
+ * In TodoList.jsx, replace the current return statement with a ternary operator that:
+        Checks if the todoList length equals zero
+            If true, renders a paragraph element with the text "Add todo above to get started"
+            If false, renders the existing unordered list with the mapped todos
+ */
+
 import { ToDoListItem } from './ToDoListItem';
 
 function ToDoList({ todos }) {
