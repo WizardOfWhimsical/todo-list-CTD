@@ -1,21 +1,16 @@
 //ToDoList.jsx
 
-/**
- * In TodoList.jsx, replace the current return statement with a ternary operator that:
-        Checks if the todoList length equals zero
-            If true, renders a paragraph element with the text "Add todo above to get started"
-            If false, renders the existing unordered list with the mapped todos
- */
-
 import { ToDoListItem } from './ToDoListItem';
 
 function ToDoList({ todos }) {
   console.log(todos);
 
   return (
+    // watched {todo.length === 0 && "No Todos"}
+    // its called shortCircuting, represents a conditional??
     <ul>
-      {todos.length === 0
-        ? 'NO TODOS TODAY \n\t {^-^}'
+      {todos.length <= 0
+        ? `NO TODOS TODAY {^-^}`
         : todos.map((todo) => <ToDoListItem key={todo.id} todo={todo} />)}
     </ul>
   );
