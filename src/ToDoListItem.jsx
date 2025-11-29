@@ -1,4 +1,11 @@
 //ToDoListItem.jsx
-export function ToDoListItem({ todo }) {
-  return <li>{todo.title}</li>;
+export function ToDoListItem({ todo, onDeleteTodo }) {
+  return (
+    <li>
+      {todo.title}
+      <button type="button" onClick={() => onDeleteTodo(todo.id)}>
+        Delete
+      </button>
+    </li>
+  );
 }

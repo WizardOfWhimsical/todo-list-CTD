@@ -23,12 +23,20 @@ function App() {
     //this gives us the current list (previousTodo) to add new item to the list
     setToDoList((previousTodos) => [newToDo, ...previousTodos]);
   }
-
+  /**
+   *
+   * @param {string} todoId
+   */
+  function deleteTodo(todoId) {
+    setToDoList((previousTodos) =>
+      previousTodos.filter((todo) => todo.id !== todoId)
+    );
+  }
   return (
     <>
       <h1>My Todos</h1>
       <ToDoForm onAddTodo={addToDo} />
-      <ToDoList todos={todoList} />
+      <ToDoList todos={todoList} onDeleteTodo={deleteTodo} />
     </>
   );
 }

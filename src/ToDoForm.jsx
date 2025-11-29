@@ -2,13 +2,20 @@ import { useRef } from 'react';
 
 function ToDoForm({ onAddTodo }) {
   const inputRef = useRef();
-
+  /**
+   *
+   * @param {Event} event
+   */
   const handleAddTodo = (event) => {
     event.preventDefault();
 
     console.log(event.target.todoTitle.value);
+    /**
+     * @type {HTMLInputElement}
+     */
+    const inputFieldElement = event.target.todoTitle;
     //trim is always smart.
-    const todoTitle = event.target.todoTitle.value.trim();
+    const todoTitle = inputFieldElement.value.trim();
     //check for empty string
     //theres form validation in here??
     if (todoTitle) {
