@@ -13,7 +13,12 @@ const initalTodos = [
 const ADD = 'ADD',
   COMPLETE = 'COMPLETE',
   DELETE = 'DELETE';
-
+/**
+ *
+ * @param {object} todos
+ * @param {string} action
+ * @returns
+ */
 function todoReducer(todos, action) {
   if (action.type === ADD) {
     return [...todos, { title: action.title, id: action.id }];
