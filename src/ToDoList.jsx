@@ -2,7 +2,7 @@
 
 import { ToDoListItem } from './ToDoListItem';
 
-function ToDoList({ todos, onDeleteTodo }) {
+function ToDoList({ todos, onDeleteTodo, onCompleteTodo }) {
   console.log(todos);
 
   return (
@@ -16,6 +16,7 @@ function ToDoList({ todos, onDeleteTodo }) {
               key={todo.id}
               todo={todo}
               onDeleteTodo={onDeleteTodo}
+              onCompleteTodo={onCompleteTodo}
             />
           ))}
     </ul>
