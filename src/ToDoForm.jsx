@@ -2,6 +2,7 @@ import { useRef } from 'react';
 
 function ToDoForm({ onAddTodo }) {
   const inputRef = useRef();
+
   /**
    *
    * @param {Event} event
@@ -9,18 +10,19 @@ function ToDoForm({ onAddTodo }) {
   const handleAddTodo = (event) => {
     event.preventDefault();
 
-    console.log(event.target.todoTitle.value);
     /**
-     * @type {HTMLInputElement}
+     * @type {HTMLInputElement}//how we define it as a string
      */
     const inputFieldElement = event.target.todoTitle;
+
     //trim is always smart.
     const todoTitle = inputFieldElement.value.trim();
     //check for empty string
     //theres form validation in here??
     if (todoTitle) {
+      //<-check if the inputs empty or not
       onAddTodo(todoTitle);
-      event.target.reset();
+      event.target.reset(); //restets form input
       inputRef.current.focus(); //<-whats this do?
     }
   };
