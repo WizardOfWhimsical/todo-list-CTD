@@ -8,7 +8,7 @@ function ToDoForm({ onAddTodo }) {
 
     console.log(event.target.todoTitle.value);
     //trim is always smart.
-    const todoTitle = event.target.todoTitle.value.trim();
+    const todoTitle = inputRef.current.value.trim();
     //check for empty string
     //theres form validation in here??
     if (todoTitle) {

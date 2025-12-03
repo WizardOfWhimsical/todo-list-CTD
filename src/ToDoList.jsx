@@ -2,7 +2,7 @@
 
 import { ToDoListItem } from './ToDoListItem';
 
-function ToDoList({ todos }) {
+function ToDoList({ todos, onCompleteTodo }) {
   console.log(todos);
 
   return (
@@ -11,7 +11,13 @@ function ToDoList({ todos }) {
     <ul>
       {todos.length <= 0
         ? `NO TODOS TODAY {^-^}`
-        : todos.map((todo) => <ToDoListItem key={todo.id} todo={todo} />)}
+        : todos.map((todo) => (
+            <ToDoListItem
+              onCompleteTodo={onCompleteTodo}
+              key={todo.id}
+              todo={todo}
+            />
+          ))}
     </ul>
   );
 }
