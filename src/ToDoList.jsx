@@ -1,17 +1,15 @@
-function ToDoList() {
-  const todos = [
-    { id: 1, title: 'review resources' },
-    { id: 2, title: 'take notes' },
-    { id: 3, title: 'code out app' },
-  ];
+//ToDoList.jsx
+import { ToDoListItem } from './ToDoListItem';
 
+function ToDoList({ todos }) {
+  console.log(todos);
   return (
     <ul>
       {todos.map((todo) => (
-        <li key={todo.id}>{todo.title}</li>
+        <ToDoListItem key={todo.id} todo={todo} />
       ))}
     </ul>
   );
 }
-
+//the expample in the curriculim is confussing
 export default ToDoList;
