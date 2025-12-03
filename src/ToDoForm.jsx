@@ -13,8 +13,8 @@ function ToDoForm({ onAddTodo }) {
     //theres form validation in here??
     if (todoTitle) {
       onAddTodo(todoTitle);
-      event.target.reset();
-      inputRef.current.focus(); //<-whats this do?
+      event.target.reset(); //<-clears field
+      inputRef.current.focus(); //<-puts cursor into input
     }
   };
 

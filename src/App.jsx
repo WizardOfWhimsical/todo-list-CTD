@@ -18,7 +18,7 @@ function App() {
    * @param {string} todoTitle
    */
   function addToDo(todoTitle) {
-    const newToDo = { id: Date.now(), title: todoTitle };
+    const newToDo = { id: Date.now(), title: todoTitle, isCompleted: false };
     //when passing in the first parameter, it is like recieving a promise
     //this gives us the current list (previousTodo) to add new item to the list
     setToDoList((previousTodos) => [newToDo, ...previousTodos]);
