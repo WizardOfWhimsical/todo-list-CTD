@@ -4,6 +4,7 @@ import { ToDoListItem } from './ToDoListItem';
 
 function ToDoList({ todos, onCompleteTodo }) {
   console.log(todos);
+  const filteredTodos = todos.filter((todo) => todo.isCompleted === false);
 
   return (
     // watched {todo.length === 0 && "No Todos"}
@@ -11,7 +12,7 @@ function ToDoList({ todos, onCompleteTodo }) {
     <ul>
       {todos.length <= 0
         ? `NO TODOS TODAY {^-^}`
-        : todos.map((todo) => (
+        : filteredTodos.map((todo) => (
             <ToDoListItem
               onCompleteTodo={onCompleteTodo}
               key={todo.id}
