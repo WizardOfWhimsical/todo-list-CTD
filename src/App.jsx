@@ -1,7 +1,7 @@
 //App.jsx
 import './App.css';
-import ToDoList from './ToDoList';
-import ToDoForm from './ToDoForm';
+import ToDoList from './features/TodoList/ToDoList';
+import ToDoForm from './features/ToDoForm';
 import { useState } from 'react';
 //kept in for baseline
 const todos = [
