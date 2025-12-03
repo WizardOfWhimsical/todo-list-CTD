@@ -14,7 +14,7 @@ function ToDoForm({ onAddTodo }) {
     if (todoTitle) {
       onAddTodo(todoTitle);
       console.log('1st', event);
-      event.target.reset(); //<-clears field
+
       setWorkingTodoTitle('');
       // inputRef.current.reset();
       inputRef.current.focus(); //<-puts cursor into input
