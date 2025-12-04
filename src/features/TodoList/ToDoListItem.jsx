@@ -4,11 +4,31 @@ import TextInputWithLabel from '../../shared/TextInputWithLabel';
 //ToDoListItem.jsx
 export function ToDoListItem({ todo, onCompleteTodo }) {
   const [isEditing, setIsEditing] = useState(false);
+  const [workingTitle, setWorkingTitle] = useState(todo.title);
+
+  function handleCancel() {
+    setWorkingTitle(todo.title);
+    setIsEditing(false);
+  }
+
+  function handleEdit(e) {
+    setWorkingTitle(e.target.value);
+  }
+
   return (
     <li>
       <form>
         {isEditing ? (
-          <TextInputWithLabel value={todo.title} />
+          <>
+            <TextInputWithLabel
+              labelText="Editing task: "
+              value={workingTitle}
+              onChange={handleEdit}
+            />
+            <button type="button" onClick={handleCancel}>
+              Cancel
+            </button>
+          </>
         ) : (
           <>
             <label>
@@ -18,7 +38,10 @@ export function ToDoListItem({ todo, onCompleteTodo }) {
                 checked={todo.isCompleted}
               />
             </label>
-            <span onClick={() => setIsEditing(true)}>{todo.title}</span>
+            <span>{todo.title}</span>
+            <button type="button" onClick={() => setIsEditing(true)}>
+              EDIT
+            </button>
           </>
         )}
       </form>
