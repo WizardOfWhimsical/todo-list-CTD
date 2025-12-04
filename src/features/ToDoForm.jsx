@@ -20,8 +20,8 @@ export default function ToDoForm({ onAddTodo }) {
   return (
     <form onSubmit={handleAddTodo}>
       <TextInputWithLabel
-        htmlFor={'todoTitle'}
-        id={'todoTitle'}
+        htmlFor="todoTitle"
+        id="todoTitle"
         labelText={'To Do:'}
         value={workingTodoTitle}
         onChange={(e) => setWorkingTodoTitle(e.target.value)}

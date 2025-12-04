@@ -1,5 +1,5 @@
 export default function TextInputWithLabel({
-  elementId,
+  id,
   labelText,
   value,
   ref,
@@ -7,14 +7,8 @@ export default function TextInputWithLabel({
 }) {
   return (
     <>
-      <label htmlFor={elementId}>{labelText}</label>
-      <input
-        type="text"
-        id={elementId}
-        value={value}
-        ref={ref}
-        onChange={onChange}
-      />
+      <label htmlFor={id}>{labelText}</label>
+      <input type="text" id={id} value={value} ref={ref} onChange={onChange} />
     </>
   );
 }
