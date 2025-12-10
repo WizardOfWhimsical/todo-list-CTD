@@ -1,10 +1,12 @@
+import { useId } from 'react';
+
 export default function TextInputWithLabel({
-  id,
   labelText,
   value,
   ref,
   onChange,
 }) {
+  const id = useId();
   return (
     <>
       <label htmlFor={id}>{labelText}</label>
