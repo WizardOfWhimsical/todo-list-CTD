@@ -22,6 +22,7 @@ export function ToDoListItem({ todo, onCompleteTodo }) {
           <>
             <TextInputWithLabel
               labelText="Editing task: "
+              id="edits" //<-unique id needed
               value={workingTitle}
               onChange={handleEdit}
             />
