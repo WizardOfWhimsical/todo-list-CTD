@@ -1,25 +1,26 @@
-import { useState } from 'react';
 import TextInputWithLabel from '../../shared/TextInputWithLabel';
+import useEditableTitle from '../../hooks/useEditableTitle';
 
 //ToDoListItem.jsx
 export function ToDoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
-  const [isEditing, setIsEditing] = useState(false);
-  const [workingTitle, setWorkingTitle] = useState(todo.title);
-
-  function handleCancel() {
-    setWorkingTitle(todo.title);
-    setIsEditing(false);
-  }
+  const {
+    startEditing,
+    workingTitle,
+    isEditing,
+    updateTitle,
+    finishEdit,
+    cancelEdit,
+  } = useEditableTitle(todo.title);
 
   function handleEdit(e) {
-    setWorkingTitle(e.target.value);
+    updateTitle(e.target.value);
   }
 
   function handleUpdate(event) {
     event.preventDefault();
     if (!isEditing) return;
-    onUpdateTodo({ ...todo, title: workingTitle });
-    setIsEditing(false);
+    const finalTitle = finishEdit();
+    onUpdateTodo({ ...todo, title: finalTitle });
   }
 
   return (
@@ -32,7 +33,7 @@ export function ToDoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
               value={workingTitle}
               onChange={handleEdit}
             />
-            <button type="button" onClick={handleCancel}>
+            <button type="button" onClick={cancelEdit}>
               Cancel
             </button>
             <button key="submit" type="submit">
@@ -49,7 +50,7 @@ export function ToDoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
               />
             </label>
             <span>{todo.title}</span>
-            <button type="button" onClick={() => setIsEditing(true)}>
+            <button type="button" onClick={() => startEditing()}>
               EDIT
             </button>
           </>
