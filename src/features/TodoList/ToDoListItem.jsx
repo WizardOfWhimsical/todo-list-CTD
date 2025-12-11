@@ -2,7 +2,7 @@ import { useState } from 'react';
 import TextInputWithLabel from '../../shared/TextInputWithLabel';
 
 //ToDoListItem.jsx
-export function ToDoListItem({ todo, onCompleteTodo }) {
+export function ToDoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
   const [isEditing, setIsEditing] = useState(false);
   const [workingTitle, setWorkingTitle] = useState(todo.title);
 
@@ -15,9 +15,16 @@ export function ToDoListItem({ todo, onCompleteTodo }) {
     setWorkingTitle(e.target.value);
   }
 
+  function handleUpdate(event) {
+    event.preventDefault();
+    if (!isEditing) return;
+    onUpdateTodo({ ...todo, title: workingTitle });
+    setIsEditing(false);
+  }
+
   return (
     <li>
-      <form>
+      <form onSubmit={handleUpdate}>
         {isEditing ? (
           <>
             <TextInputWithLabel
@@ -27,6 +34,9 @@ export function ToDoListItem({ todo, onCompleteTodo }) {
             />
             <button type="button" onClick={handleCancel}>
               Cancel
+            </button>
+            <button key="submit" type="submit">
+              Update
             </button>
           </>
         ) : (

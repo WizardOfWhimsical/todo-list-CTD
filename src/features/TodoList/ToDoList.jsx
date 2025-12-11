@@ -12,8 +12,8 @@ function ToDoList({ todos, onCompleteTodo, onUpdateTodo }) {
         ? 'Add todo above to get started'
         : filteredTodos.map((todo) => (
             <ToDoListItem
-              onUpdateTodo={onUpdateTodo} //<-ask bout this
-              onCompleteTodo={onCompleteTodo} //<-ask bout this
+              onUpdateTodo={onUpdateTodo}
+              onCompleteTodo={onCompleteTodo}
               key={todo.id}
               todo={todo}
             />
