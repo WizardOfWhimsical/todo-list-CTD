@@ -2,7 +2,7 @@
 
 import { ToDoListItem } from './ToDoListItem';
 
-function ToDoList({ todos, onCompleteTodo }) {
+function ToDoList({ todos, onCompleteTodo, onUpdateTodo }) {
   const filteredTodos = todos.filter((todo) => todo.isCompleted === false);
   return (
     // watched {todo.length === 0 && "No Todos"}
@@ -12,7 +12,8 @@ function ToDoList({ todos, onCompleteTodo }) {
         ? 'Add todo above to get started'
         : filteredTodos.map((todo) => (
             <ToDoListItem
-              onCompleteTodo={onCompleteTodo}
+              onUpdateTodo={onUpdateTodo} //<-ask bout this
+              onCompleteTodo={onCompleteTodo} //<-ask bout this
               key={todo.id}
               todo={todo}
             />

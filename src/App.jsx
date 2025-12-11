@@ -35,11 +35,26 @@ function App() {
     });
   }
 
+  function updateTodo(editedTodo) {
+    setToDoList((previousTodos) => {
+      return previousTodos.map((todo) => {
+        if (todo.id === editedTodo.id) {
+          return { ...todo, title: editedTodo.title };
+        }
+        return todo;
+      });
+    });
+  }
+
   return (
     <>
       <h1>My Todos</h1>
       <ToDoForm onAddTodo={addToDo} />
-      <ToDoList onCompleteTodo={completeTodo} todos={todoList} />
+      <ToDoList
+        onUpdateTodo={updateTodo}
+        onCompleteTodo={completeTodo}
+        todos={todoList}
+      />
     </>
   );
 }
