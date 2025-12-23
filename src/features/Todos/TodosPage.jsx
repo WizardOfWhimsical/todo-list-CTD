@@ -1,6 +1,6 @@
 //TodosPage.jsx
-import ToDoList from './features/TodoList/ToDoList';
-import ToDoForm from './features/ToDoForm';
+import ToDoList from './TodoList/ToDoList';
+import ToDoForm from './ToDoForm';
 import { useState } from 'react';
 //kept in for baseline
 const todos = [
