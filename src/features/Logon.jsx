@@ -8,6 +8,7 @@ export default function Logon({
   const [password, setPassword] = useState('');
   // const [authError, setAuthError] = useState('');
   // const [isLogginOn, setIsLogginOn] = useState(false);
+  const baseUrl = import.meta.env.VITE_BASE_URL;
 
   function handleSubmit(event) {
     event.preventDefault();
