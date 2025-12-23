@@ -6,11 +6,47 @@ export default function Logon({
 }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [authError, setAuthError] = useState('');
-  const [isLogginOn, setIsLogginOn] = useState('');
+  // const [authError, setAuthError] = useState('');
+  // const [isLogginOn, setIsLogginOn] = useState(false);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    console.log('logging in', email, '\n', password);
+  }
+
+  return (
+    <>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="email">Email: </label>
+        <input
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <label htmlFor="password">Password: </label>
+        <input
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+
+        <button
+          type="submit"
+          disabled={!email || !password}
+          onClick={handleSubmit}
+        >
+          LogIn
+        </button>
+      </form>
+    </>
+  );
 }
 
-/**
+/** 
+ * https://ctd-learns-node-l42tx.ondigitalocean.app/tasks?sortBy=title&sortDirection=desc
+ *  
  * async function handleAuthenticate(credentials) {
   const options = {
     method: 'POST',
