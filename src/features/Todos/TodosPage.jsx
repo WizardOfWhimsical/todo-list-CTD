@@ -47,7 +47,7 @@ export default function TodosPage() {
 
   return (
     <>
-      <h1>My Todos</h1>
+      <h2>My Todos</h2>
       <ToDoForm onAddTodo={addToDo} />
       <ToDoList
         onUpdateTodo={updateTodo}
