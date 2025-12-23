@@ -1,3 +1,3 @@
-export default function Header() {
-  return <h1>Hopefully Do</h1>;
+export default function Header({ message }) {
+  return <h1>{message}</h1>;
 }
