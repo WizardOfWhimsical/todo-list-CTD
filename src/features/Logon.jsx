@@ -1,4 +1,4 @@
-import { useActionState, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Logon({
   onSetEmail = () => {},
@@ -6,14 +6,24 @@ export default function Logon({
 }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [authError, setAuthError] = useState('');
-  // const [isLogginOn, setIsLogginOn] = useState(false);
+  const [authError, setAuthError] = useState('');
+  const [isLogginOn, setIsLogginOn] = useState(false);
+
   const baseUrl = import.meta.env.VITE_BASE_URL;
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log('logging in', email, '\n', password);
+    console.log('logging in', email, '\n\t\t', password);
   }
+
+  useEffect(() => {
+    console.log(`${baseUrl}/user/logon`);
+    fetch(baseUrl)
+      .then((r) => r.json())
+      .then((res) => {
+        console.log(res);
+      });
+  }, [baseUrl]);
 
   return (
     <>
