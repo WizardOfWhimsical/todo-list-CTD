@@ -7,36 +7,63 @@ export default function Logon({
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [authError, setAuthError] = useState('');
-  const [isLogginOn, setIsLogginOn] = useState(false);
+  const [isLoggingOn, setIsLoggingOn] = useState(false);
 
   const baseUrl = import.meta.env.VITE_BASE_URL;
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log('logging in', email, '\n\t\t', password);
+    console.log('Its hitting');
+    async function logOn() {
+      try {
+        const response = await fetch(`${baseUrl}/user/logon`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({
+            email,
+            password,
+          }),
+        });
+        const data = await response.json();
+        console.log(data);
+        if (response.status === 200 && data.name && data.csrfToken) {
+          onSetEmail(data.name);
+          onSetToken(data.csrfToken);
+        } else {
+          setAuthError(`Authentication failed: ${data?.message}`);
+        }
+      } catch (error) {
+        setAuthError(`Error: ${error.name} | ${error.message}`);
+      } finally {
+        setIsLoggingOn(false);
+      }
+    }
+    logOn();
   }
+  // https://ctd-learns-node-l42tx.ondigitalocean.app
 
-  useEffect(() => {
-    console.log(`${baseUrl}/user/logon`);
-    fetch(baseUrl)
-      .then((r) => r.json())
-      .then((res) => {
-        console.log(res);
-      });
-  }, [baseUrl]);
+  // useEffect(() => {
+  //   console.log(`${baseUrl}/user/logon`);
+  //   logOn();
+  // }, [baseUrl, logOn]);
 
   return (
     <>
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email: </label>
         <input
+          type="email"
           id="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+          autoComplete="email"
         />
+        <br />
         <label htmlFor="password">Password: </label>
         <input
+          type="password"
           id="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
