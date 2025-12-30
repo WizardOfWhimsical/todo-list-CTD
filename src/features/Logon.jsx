@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import post from '../utils/api';
 
 export default function Logon({
   onSetEmail = () => {},
@@ -16,15 +17,16 @@ export default function Logon({
     console.log('Its hitting');
     async function logOn() {
       try {
-        const response = await fetch(`${baseUrl}/user/logon`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include',
-          body: JSON.stringify({
-            email,
-            password,
-          }),
-        });
+        // const response = await fetch(`${baseUrl}/user/logon`, {
+        //   method: 'POST',
+        //   headers: { 'Content-Type': 'application/json' },
+        //   credentials: 'include',
+        //   body: JSON.stringify({
+        //     email,
+        //     password,
+        //   }),
+        // });
+        const response = await post('user/logon', email, password);
         const data = await response.json();
         console.log(data);
         if (response.status === 200 && data.name && data.csrfToken) {

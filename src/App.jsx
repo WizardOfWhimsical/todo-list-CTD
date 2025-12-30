@@ -7,6 +7,8 @@ import { useState } from 'react';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [email, setEmail] = useState();
+  const [token, setToken] = useState();
 
   return isLoggedIn ? (
     <>
