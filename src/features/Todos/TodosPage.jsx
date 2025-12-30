@@ -3,16 +3,15 @@ import ToDoList from './TodoList/ToDoList';
 import ToDoForm from './ToDoForm';
 import { useState, useEffect } from 'react';
 //kept in for baseline
-const todos = [
-  { id: 1, title: 'review resources', isCompleted: false },
-  { id: 2, title: 'take notes', isCompleted: true },
-  { id: 3, title: 'code out app', isCompleted: false },
-];
+// const todos = [
+//   { id: 1, title: 'review resources', isCompleted: false },
+//   { id: 2, title: 'take notes', isCompleted: true },
+//   { id: 3, title: 'code out app', isCompleted: false },
+// ];
 
 export default function TodosPage({ token }) {
-  // const [todoList, setToDoList] = useState([]);
+  const [todoList, setToDoList] = useState([]);
   console.log(token);
-  const [todoList, setToDoList] = useState(todos);
   // const [todoList, setToDoList] = useState(todos);
   const [error, setError] = useState('');
   const [isTodoListLoading, setIsTodoListLoading] = useState(false);
@@ -52,18 +51,38 @@ export default function TodosPage({ token }) {
     }
     fetchTodos();
     return () => {
+      console.log('one render ran clean up');
       firstPost = true;
     };
-  }, [token]);
+  }, [token, baseUrl, error]);
 
   /**
    * @param {string} todoTitle
    */
-  function addToDo(todoTitle) {
-    const newToDo = { id: Date.now(), title: todoTitle, isCompleted: false };
+  async function addToDo(todoTitle) {
+    const newToDo = { title: todoTitle, isCompleted: false };
     //when passing in the first parameter, it is like recieving a promise
     //this gives us the current list (previousTodo) to add new item to the list
     setToDoList((previousTodos) => [newToDo, ...previousTodos]);
+
+    // fetch post
+    const options = {
+      method: 'POST',
+      headers: { 'X-CSRF-TOKEN': token, 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify(newToDo),
+    };
+    try {
+      const response = await fetch(`${baseUrl}/tasks`, options);
+      if (!response.ok) {
+        setError(response);
+        throw new Error('addToDo/POST', response.error && response.message);
+      }
+      const data = await response.json();
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   function completeTodo(todoId) {
