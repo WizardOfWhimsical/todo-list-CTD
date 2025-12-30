@@ -12,6 +12,8 @@ const todos = [
 export default function TodosPage() {
   // const [todoList, setToDoList] = useState([]);
   const [todoList, setToDoList] = useState(todos);
+  const [error, setError] = useState('');
+  const [isTodoListLoading, setIsTodoListLoading] = useState(false);
 
   /**
    * @param {string} todoTitle

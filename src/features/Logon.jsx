@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react';
 import post from '../utils/api';
 
-export default function Logon({
-  onSetEmail = () => {},
-  onSetToken = () => {},
-}) {
+export default function Logon({ onSetEmail, onSetToken }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [authError, setAuthError] = useState('');
@@ -17,15 +14,6 @@ export default function Logon({
     console.log('Its hitting');
     async function logOn() {
       try {
-        // const response = await fetch(`${baseUrl}/user/logon`, {
-        //   method: 'POST',
-        //   headers: { 'Content-Type': 'application/json' },
-        //   credentials: 'include',
-        //   body: JSON.stringify({
-        //     email,
-        //     password,
-        //   }),
-        // });
         const response = await post('user/logon', email, password);
         const data = await response.json();
         console.log(data);
@@ -94,23 +82,18 @@ export default function Logon({
     headers: { 'Content-Type': 'application/json' },
   };
   try {
-    setIsAuthenticating(true);
     const resp = await fetch(`${baseUrl}/auth/login`, options);
     if (!resp.ok) {
+      //status will be 401 if authentication fails
+      //we want to handle it differently than other errors
       if (resp.status === 401) {
-        setAuthError('email or password incorrect');
+        console.dir(resp);
       }
       throw new Error(resp.status);
     }
-    const userData = await resp.json();
-    // ADD CODE HERE!
-    
-    setAuthError('');
-    setIsAuthenticating(false);
-    setIsAuthFormOpen(false);
+    console.dir(userData);
   } catch (error) {
-    setIsAuthenticating(false);
-    console.log(error.message);
+    console.dir(error);
   }
 }
  */
