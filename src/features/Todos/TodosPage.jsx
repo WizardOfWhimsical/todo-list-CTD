@@ -9,14 +9,14 @@ import { useState, useEffect } from 'react';
 //   { id: 3, title: 'code out app', isCompleted: false },
 // ];
 
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
 export default function TodosPage({ token }) {
   const [todoList, setToDoList] = useState([]);
   console.log(token);
   // const [todoList, setToDoList] = useState(todos);
   const [error, setError] = useState('');
   const [isTodoListLoading, setIsTodoListLoading] = useState(false);
-
-  const baseUrl = import.meta.env.VITE_BASE_URL;
 
   useEffect(() => {
     if (!token) return;
@@ -54,7 +54,7 @@ export default function TodosPage({ token }) {
       console.log('one render ran clean up');
       firstPost = true;
     };
-  }, [token, baseUrl, error]);
+  }, [token, error]);
 
   /**
    * @param {string} todoTitle
@@ -111,11 +111,15 @@ export default function TodosPage({ token }) {
     <>
       <h2>My Todos</h2>
       <ToDoForm onAddTodo={addToDo} />
-      <ToDoList
-        onUpdateTodo={updateTodo}
-        onCompleteTodo={completeTodo}
-        todos={todoList}
-      />
+      {isTodoListLoading ? (
+        <h1>Is Loading the List....</h1>
+      ) : (
+        <ToDoList
+          onUpdateTodo={updateTodo}
+          onCompleteTodo={completeTodo}
+          todos={todoList}
+        />
+      )}
     </>
   );
 }
