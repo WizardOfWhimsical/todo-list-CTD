@@ -7,8 +7,6 @@ export default function Logon({ onSetEmail, onSetToken }) {
   const [authError, setAuthError] = useState('');
   const [isLoggingOn, setIsLoggingOn] = useState(false);
 
-  const baseUrl = import.meta.env.VITE_BASE_URL;
-
   function handleSubmit(event) {
     event.preventDefault();
     console.log('Its hitting');
@@ -22,9 +20,11 @@ export default function Logon({ onSetEmail, onSetToken }) {
           onSetToken(data.csrfToken);
         } else {
           setAuthError(`Authentication failed: ${data?.message}`);
+          console.log(authError);
         }
       } catch (error) {
         setAuthError(`Error: ${error.name} | ${error.message}`);
+        console.log(authError);
       } finally {
         setIsLoggingOn(false);
       }
