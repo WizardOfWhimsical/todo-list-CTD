@@ -2,6 +2,7 @@
 import ToDoList from './TodoList/ToDoList';
 import ToDoForm from './ToDoForm';
 import { useState, useEffect } from 'react';
+import post from '../../utils/api';
 //kept in for baseline
 // const todos = [
 //   { id: 1, title: 'review resources', isCompleted: false },
@@ -67,13 +68,13 @@ export default function TodosPage({ token }) {
 
     // fetch post
     const options = {
-      method: 'POST',
-      headers: { 'X-CSRF-TOKEN': token, 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify(newToDo),
+      // method: 'POST',
+      headers: { 'X-CSRF-TOKEN': token },
+      // credentials: 'include',
+      body: newToDo,
     };
     try {
-      const response = await fetch(`${baseUrl}/tasks`, options);
+      const response = await post(`tasks`, options);
       if (!response.ok) {
         setError(response);
         throw new Error('addToDo/POST', response.error && response.message);
