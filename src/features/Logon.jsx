@@ -12,7 +12,9 @@ export default function Logon({ onSetEmail, onSetToken }) {
     console.log('Its hitting');
     async function logOn() {
       try {
-        const response = await post('user/logon', email, password);
+        const response = await post('user/logon', {
+          body: { email, password },
+        });
         const data = await response.json();
         console.log(data);
         if (response.status === 200 && data.name && data.csrfToken) {
