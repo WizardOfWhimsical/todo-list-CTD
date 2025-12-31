@@ -18,6 +18,7 @@ export default function TodosPage({ token }) {
 
   useEffect(() => {
     if (!token) return;
+    if (error) return;
     let firstPost = false;
     async function fetchTodos() {
       const options = {
@@ -34,7 +35,7 @@ export default function TodosPage({ token }) {
           throw new Error('useEffect-!ok', response);
         }
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         if (!firstPost) {
           setToDoList((prev) => [...prev, ...data]);
         }
@@ -56,7 +57,7 @@ export default function TodosPage({ token }) {
    * @param {string} todoTitle
    */
   async function addToDo(todoTitle) {
-    const newToDo = { title: todoTitle, isCompleted: false };
+    const newToDo = { id: Date.now(), title: todoTitle, isCompleted: false };
     //when passing in the first parameter, it is like recieving a promise
     //this gives us the current list (previousTodo) to add new item to the list
     setToDoList((previousTodos) => [newToDo, ...previousTodos]);
@@ -69,17 +70,30 @@ export default function TodosPage({ token }) {
     try {
       const response = await post(`tasks`, options);
       if (!response.ok) {
-        setToDoList((previousTodos) =>
-          previousTodos.filter((todo) => todo.title !== newToDo.title)
-        );
-
-        setError(response);
         throw new Error('addToDo/POST', response.error && response.message);
       }
       const data = await response.json();
-      console.log(data);
+
+      setToDoList((previousTodos) => {
+        // map throu to replace newTodo with data
+        return previousTodos.map((todo) => {
+          if (todo.id === newToDo.id) {
+            return { ...data };
+          }
+          return todo;
+        });
+      });
+      console.log('Response object', data);
+      console.log(
+        'Updated State with new item replacing place holder',
+        todoList
+      );
     } catch (e) {
-      console.log(e);
+      setError(e);
+      setToDoList((previousTodos) =>
+        previousTodos.filter((todo) => todo.id !== newToDo.id)
+      );
+      console.log('Catch for adding todo', error);
     }
   }
 
