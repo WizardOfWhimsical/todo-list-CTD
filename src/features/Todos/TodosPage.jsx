@@ -2,20 +2,17 @@
 import ToDoList from './TodoList/ToDoList';
 import ToDoForm from './ToDoForm';
 import { useState, useEffect } from 'react';
-import post from '../../utils/api';
+import { post, get } from '../../utils/api';
 //kept in for baseline
 // const todos = [
 //   { id: 1, title: 'review resources', isCompleted: false },
 //   { id: 2, title: 'take notes', isCompleted: true },
 //   { id: 3, title: 'code out app', isCompleted: false },
 // ];
-
-const baseUrl = import.meta.env.VITE_BASE_URL;
+// const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export default function TodosPage({ token }) {
   const [todoList, setToDoList] = useState([]);
-  console.log(token);
-  // const [todoList, setToDoList] = useState(todos);
   const [error, setError] = useState('');
   const [isTodoListLoading, setIsTodoListLoading] = useState(false);
 
@@ -24,13 +21,11 @@ export default function TodosPage({ token }) {
     let firstPost = false;
     async function fetchTodos() {
       const options = {
-        method: 'GET',
         headers: { 'X-CSRF-TOKEN': token },
-        credentials: 'include',
       };
       try {
         setIsTodoListLoading(true);
-        const response = await fetch(`${baseUrl}/tasks`, options);
+        const response = await get(`tasks`, options);
         if (response.status === 401) {
           throw new Error('useEffect-401', response);
         }
@@ -68,14 +63,16 @@ export default function TodosPage({ token }) {
 
     // fetch post
     const options = {
-      // method: 'POST',
       headers: { 'X-CSRF-TOKEN': token },
-      // credentials: 'include',
       body: newToDo,
     };
     try {
       const response = await post(`tasks`, options);
       if (!response.ok) {
+        setToDoList((previousTodos) =>
+          previousTodos.filter((todo) => todo.title !== newToDo.title)
+        );
+
         setError(response);
         throw new Error('addToDo/POST', response.error && response.message);
       }

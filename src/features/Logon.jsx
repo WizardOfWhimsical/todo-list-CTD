@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import post from '../utils/api';
+import { post } from '../utils/api';
 
 export default function Logon({ onSetEmail, onSetToken }) {
   const [email, setEmail] = useState('');
