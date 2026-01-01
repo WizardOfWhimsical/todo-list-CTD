@@ -52,48 +52,52 @@ export default function TodosPage({ token }) {
       firstPost = true;
     };
   }, [token, error]);
+  // to watch my list
+  useEffect(() => {
+    console.log('Up to date to do list in useEffect' + '\n\t', todoList);
+  }, [todoList]);
 
   /**
    * @param {string} todoTitle
    */
   async function addToDo(todoTitle) {
     const newToDo = { id: Date.now(), title: todoTitle, isCompleted: false };
-    //when passing in the first parameter, it is like recieving a promise
-    //this gives us the current list (previousTodo) to add new item to the list
+
     setToDoList((previousTodos) => [newToDo, ...previousTodos]);
 
     // fetch post
     const options = {
       headers: { 'X-CSRF-TOKEN': token },
-      body: newToDo,
+      body: { title: newToDo.title, isCompleted: newToDo.isCompleted },
     };
+
     try {
       const response = await post(`tasks`, options);
       if (!response.ok) {
         throw new Error('addToDo/POST', response.error && response.message);
       }
+
       const data = await response.json();
 
       setToDoList((previousTodos) => {
         // map throu to replace newTodo with data
         return previousTodos.map((todo) => {
           if (todo.id === newToDo.id) {
-            return { ...data };
+            return data;
           }
           return todo;
         });
       });
-      console.log('Response object', data);
-      console.log(
-        'Updated State with new item replacing place holder',
-        todoList
-      );
     } catch (e) {
-      setError(e);
+      // chose to do this here for:
+      // trigger useEffect
+      setError((prev) => [...prev, e]);
+      // to then clean this up here
       setToDoList((previousTodos) =>
         previousTodos.filter((todo) => todo.id !== newToDo.id)
       );
-      console.log('Catch for adding todo', error);
+      // this is important because if you trigger the useEffect unknowingly you can get duplicates of state
+      console.log('Catch for adding todo', e);
     }
   }
 
