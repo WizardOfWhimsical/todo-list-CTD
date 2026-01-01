@@ -18,16 +18,21 @@ export async function post(endPoint, options) {
 }
 export async function patch(endPoint, options) {
   console.log('working right!');
-  return await fetch(`${baseUrl}/${endPoint}`, {
-    ...DEFAULT_OPTIONS,
-    ...options,
-    method: 'PATCH',
-    headers: {
-      ...DEFAULT_OPTIONS.headers,
-      ...options.headers,
-    },
-    body: JSON.stringify(options.body),
-  });
+  try {
+    return await fetch(`${baseUrl}/${endPoint}`, {
+      ...DEFAULT_OPTIONS,
+      ...options,
+      method: 'PATCH',
+      headers: {
+        ...DEFAULT_OPTIONS.headers,
+        ...options.headers,
+      },
+      body: JSON.stringify(options.body),
+    });
+  } catch (e) {
+    console.log('patch function catch\n\t', e);
+    throw new Error('Patch Function call', e);
+  }
 }
 
 export async function get(endPoint, options) {

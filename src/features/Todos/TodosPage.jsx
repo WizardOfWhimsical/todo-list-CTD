@@ -18,7 +18,7 @@ export default function TodosPage({ token }) {
 
   useEffect(() => {
     if (!token) return;
-    if (error) return;
+    // if (error) return;
     let firstPost = false;
     async function fetchTodos() {
       const options = {
@@ -31,17 +31,16 @@ export default function TodosPage({ token }) {
           throw new Error('useEffect-401', response);
         }
         if (!response.ok) {
-          setError(response);
           throw new Error('useEffect-!ok', response);
         }
         const data = await response.json();
-        // console.log(data);
+        console.log(data);
         if (!firstPost) {
           setToDoList((prev) => [...prev, ...data]);
         }
       } catch (er) {
         setError(er);
-        console.log(error);
+        console.log(er);
       } finally {
         setIsTodoListLoading(false);
       }
@@ -51,11 +50,12 @@ export default function TodosPage({ token }) {
       console.log('one render ran clean up');
       firstPost = true;
     };
-  }, [token, error]);
+  }, [token]);
   // to watch my list
   useEffect(() => {
     console.log('Up to date to do list in useEffect' + '\n\t', todoList);
-  }, [todoList]);
+    console.log('Errors updated State' + '\n\t', error);
+  }, [todoList, error]);
 
   /**
    * @param {string} todoTitle
@@ -119,15 +119,18 @@ export default function TodosPage({ token }) {
       },
     };
     try {
-      const response = await patch(`tasks/${todoId}`, options);
+      const response = await patch(`taskss/${todoId}`, options);
       if (!response.ok) {
+        const err = await response.json();
+        console.log('ERR', err);
         throw new Error(
-          'patch update for is complete' + '\n\t\t',
-          response.error && response.message
+          `Patch update for isComplete failed because:
+          ${err.message}`
         );
       }
     } catch (e) {
-      setError((prev) => [...prev, e]);
+      console.log('checking error shape', '\n\t\t', e);
+      setError(e);
       setToDoList((prev) =>
         prev.map((todo) => {
           if (todo.id === targetTodo.id) {
@@ -182,7 +185,14 @@ export default function TodosPage({ token }) {
   return (
     <>
       <h2>My Todos</h2>
+      {error && (
+        <>
+          <p>{error.message}</p>
+          <button onClick={() => setError('')}>Close</button>
+        </>
+      )}
       <ToDoForm onAddTodo={addToDo} />
+
       {isTodoListLoading ? (
         <h1>Is Loading the List....</h1>
       ) : (
