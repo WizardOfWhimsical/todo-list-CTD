@@ -13,7 +13,7 @@ import { post, patch, get } from '../../utils/api';
 
 export default function TodosPage({ token }) {
   const [todoList, setToDoList] = useState([]);
-  const [error, setError] = useState('');
+  const [error, setError] = useState([]);
   const [isTodoListLoading, setIsTodoListLoading] = useState(false);
 
   useEffect(() => {
@@ -26,12 +26,18 @@ export default function TodosPage({ token }) {
       };
       try {
         setIsTodoListLoading(true);
-        const response = await get(`tasks`, options);
+        const response = await get(`taskss`, options);
         if (response.status === 401) {
-          throw new Error('useEffect-401', response);
+          const err = await response.json();
+          console.log('401');
+          console.log(err);
+          throw new Error(`useEffect-401:\n ${err.message}`);
         }
         if (!response.ok) {
-          throw new Error('useEffect-!ok', response);
+          const err = await response.json();
+          console.log('!Ok');
+          console.log(err);
+          throw new Error(`Rresponse Not Ok:\n ${err.message}`);
         }
         const data = await response.json();
         console.log(data);
@@ -39,7 +45,7 @@ export default function TodosPage({ token }) {
           setToDoList((prev) => [...prev, ...data]);
         }
       } catch (er) {
-        setError(er);
+        setError((prev) => [...prev, er]);
         console.log(er);
       } finally {
         setIsTodoListLoading(false);
@@ -51,6 +57,7 @@ export default function TodosPage({ token }) {
       firstPost = true;
     };
   }, [token]);
+
   // to watch my list
   useEffect(() => {
     console.log('Up to date to do list in useEffect' + '\n\t', todoList);
@@ -74,7 +81,8 @@ export default function TodosPage({ token }) {
     try {
       const response = await post(`tasks`, options);
       if (!response.ok) {
-        throw new Error('addToDo/POST', response.error && response.message);
+        const err = await response.json();
+        throw new Error('addToDo/POST', err.message);
       }
 
       const data = await response.json();
@@ -122,7 +130,6 @@ export default function TodosPage({ token }) {
       const response = await patch(`tasks/${todoId}`, options);
       if (!response.ok) {
         const err = await response.json();
-        console.log('ERR', err);
         throw new Error(
           `Patch update for isComplete failed because:\n
           ${err.message}`
@@ -131,12 +138,12 @@ export default function TodosPage({ token }) {
     } catch (e) {
       console.log('checking error shape', '\n\t\t', e);
 
-      setError(e);
+      setError((prev) => [...prev, e]);
 
       setToDoList((prev) =>
         prev.map((todo) => {
           if (todo.id === targetTodo.id) {
-            return { ...targetTodo };
+            return targetTodo;
           }
           return todo;
         })
@@ -176,7 +183,7 @@ export default function TodosPage({ token }) {
       setToDoList((prev) =>
         prev.map((todo) => {
           if (todo.id === targetTodo.id) {
-            return { ...targetTodo };
+            return targetTodo;
           }
           return todo;
         })
@@ -186,13 +193,24 @@ export default function TodosPage({ token }) {
 
   return (
     <>
+      {error &&
+        error.map((err, index) => {
+          return (
+            <span key={index}>
+              <p>{err.message}</p>
+              <button
+                onClick={() =>
+                  setError((previousErrors) =>
+                    previousErrors.filter((error, i) => i !== index)
+                  )
+                }
+              >
+                Close
+              </button>
+            </span>
+          );
+        })}
       <h2>My Todos</h2>
-      {error && (
-        <>
-          <p>{error.message}</p>
-          <button onClick={() => setError('')}>Close</button>
-        </>
-      )}
       <ToDoForm onAddTodo={addToDo} />
 
       {isTodoListLoading ? (
