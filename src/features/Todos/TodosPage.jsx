@@ -139,7 +139,7 @@ export default function TodosPage({ token }) {
     }
   }
 
-  function updateTodo(editedTodo) {
+  async function updateTodo(editedTodo) {
     setToDoList((previousTodos) => {
       return previousTodos.map((todo) => {
         if (todo.id === editedTodo.id) {
@@ -148,6 +148,35 @@ export default function TodosPage({ token }) {
         return todo;
       });
     });
+    // patch request
+    const targetTodo = todoList.find((todo) => todo.id === editedTodo.id);
+
+    const options = {
+      headers: { 'X-CSRF-TOKEN': token },
+      body: {
+        title: editedTodo.title,
+        isCompleted: editedTodo.isCompleted,
+      },
+    };
+    try {
+      const response = await patch(`taskss/${editedTodo.id}`, options);
+      if (!response.ok) {
+        throw new Error(
+          'patch update for editting error' + '\n\t\t',
+          response.error && response.message
+        );
+      }
+    } catch (e) {
+      setError((prev) => [...prev, e]);
+      setToDoList((prev) =>
+        prev.map((todo) => {
+          if (todo.id === targetTodo.id) {
+            return { ...targetTodo };
+          }
+          return todo;
+        })
+      );
+    }
   }
 
   return (
