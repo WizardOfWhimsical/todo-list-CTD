@@ -16,6 +16,19 @@ export async function post(endPoint, options) {
     body: JSON.stringify(options.body),
   });
 }
+export async function patch(endPoint, options) {
+  console.log('working right!');
+  return await fetch(`${baseUrl}/${endPoint}`, {
+    ...DEFAULT_OPTIONS,
+    ...options,
+    method: 'PATCH',
+    headers: {
+      ...DEFAULT_OPTIONS.headers,
+      ...options.headers,
+    },
+    body: JSON.stringify(options.body),
+  });
+}
 
 export async function get(endPoint, options) {
   return await fetch(`${baseUrl}/${endPoint}`, {
@@ -26,7 +39,6 @@ export async function get(endPoint, options) {
       ...DEFAULT_OPTIONS.headers,
       ...options.headers,
     },
-    body: JSON.stringify(options.body),
   });
 }
 
