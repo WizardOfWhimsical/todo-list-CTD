@@ -4,17 +4,21 @@ const DEFAULT_OPTIONS = {
   headers: { 'Content-Type': 'application/json' },
 };
 export async function post(endPoint, options) {
-  console.log('working right!');
-  return await fetch(`${baseUrl}/${endPoint}`, {
-    ...DEFAULT_OPTIONS,
-    ...options,
-    method: 'POST',
-    headers: {
-      ...DEFAULT_OPTIONS.headers,
-      ...options.headers,
-    },
-    body: JSON.stringify(options.body),
-  });
+  try {
+    return await fetch(`${baseUrl}/${endPoint}`, {
+      ...DEFAULT_OPTIONS,
+      ...options,
+      method: 'POST',
+      headers: {
+        ...DEFAULT_OPTIONS.headers,
+        ...options.headers,
+      },
+      body: JSON.stringify(options.body),
+    });
+  } catch (e) {
+    console.log('post function catch\n\t', e);
+    throw new Error('Post Function call', e);
+  }
 }
 export async function patch(endPoint, options) {
   console.log('working right!');
@@ -36,15 +40,20 @@ export async function patch(endPoint, options) {
 }
 
 export async function get(endPoint, options) {
-  return await fetch(`${baseUrl}/${endPoint}`, {
-    ...DEFAULT_OPTIONS,
-    ...options,
-    method: 'GET',
-    headers: {
-      ...DEFAULT_OPTIONS.headers,
-      ...options.headers,
-    },
-  });
+  try {
+    return await fetch(`${baseUrl}/${endPoint}`, {
+      ...DEFAULT_OPTIONS,
+      ...options,
+      method: 'GET',
+      headers: {
+        ...DEFAULT_OPTIONS.headers,
+        ...options.headers,
+      },
+    });
+  } catch (e) {
+    console.log('get function catch\n\t', e);
+    throw new Error('Get Function call', e);
+  }
 }
 
 // const baseUrl = 'https://ctd-learns-node-l42tx.ondigitalocean.app';

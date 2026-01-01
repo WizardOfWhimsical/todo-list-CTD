@@ -119,18 +119,20 @@ export default function TodosPage({ token }) {
       },
     };
     try {
-      const response = await patch(`taskss/${todoId}`, options);
+      const response = await patch(`tasks/${todoId}`, options);
       if (!response.ok) {
         const err = await response.json();
         console.log('ERR', err);
         throw new Error(
-          `Patch update for isComplete failed because:
+          `Patch update for isComplete failed because:\n
           ${err.message}`
         );
       }
     } catch (e) {
       console.log('checking error shape', '\n\t\t', e);
+
       setError(e);
+
       setToDoList((prev) =>
         prev.map((todo) => {
           if (todo.id === targetTodo.id) {
