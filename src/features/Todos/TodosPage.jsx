@@ -2,7 +2,7 @@
 import ToDoList from './TodoList/ToDoList';
 import ToDoForm from './ToDoForm';
 import { useState, useEffect } from 'react';
-import { post, get } from '../../utils/api';
+import { post, patch, get } from '../../utils/api';
 //kept in for baseline
 // const todos = [
 //   { id: 1, title: 'review resources', isCompleted: false },
@@ -101,7 +101,7 @@ export default function TodosPage({ token }) {
     }
   }
 
-  function completeTodo(todoId) {
+  async function completeTodo(todoId) {
     setToDoList((previousTodos) => {
       return previousTodos.map((todo) => {
         if (todo.id === todoId) {
@@ -110,6 +110,33 @@ export default function TodosPage({ token }) {
         return todo;
       });
     });
+    // request
+    const targetTodo = todoList.find((todo) => todo.id === todoId);
+    const options = {
+      headers: { 'X-CSRF-TOKEN': token },
+      body: {
+        isCompleted: !targetTodo.isCompleted,
+      },
+    };
+    try {
+      const response = await patch(`tasks/${todoId}`, options);
+      if (!response.ok) {
+        throw new Error(
+          'patch update for is complete' + '\n\t\t',
+          response.error && response.message
+        );
+      }
+    } catch (e) {
+      setError((prev) => [...prev, e]);
+      setToDoList((prev) =>
+        prev.map((todo) => {
+          if (todo.id === targetTodo.id) {
+            return { ...targetTodo };
+          }
+          return todo;
+        })
+      );
+    }
   }
 
   function updateTodo(editedTodo) {
