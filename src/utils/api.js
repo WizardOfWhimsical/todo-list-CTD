@@ -27,7 +27,7 @@ async function fetchErrorHandling(endPoint, options) {
 }
 export async function post(endPoint, options) {
   try {
-    return await fetchErrorHandling(`${baseUrl}/${endPoint}`, {
+    return await fetchErrorHandling(`${endPoint}`, {
       ...options,
       method: 'POST',
       body: JSON.stringify(options.body),
@@ -38,7 +38,7 @@ export async function post(endPoint, options) {
 }
 export async function patch(endPoint, options) {
   try {
-    return await fetchErrorHandling(`${baseUrl}/${endPoint}`, {
+    return await fetchErrorHandling(`${endPoint}`, {
       ...options,
       method: 'PATCH',
       body: JSON.stringify(options.body),
@@ -50,7 +50,7 @@ export async function patch(endPoint, options) {
 
 export async function get(endPoint, options) {
   try {
-    return await fetchErrorHandling(`${baseUrl}/${endPoint}`, options);
+    return await fetchErrorHandling(`${endPoint}`, options);
   } catch (e) {
     console.log('get function catch\n\t', e);
   }

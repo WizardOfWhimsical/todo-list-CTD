@@ -26,20 +26,20 @@ export default function TodosPage({ token }) {
       };
       try {
         setIsTodoListLoading(true);
-        const response = await get(`taskss`, options);
-        if (response.status === 401) {
-          const err = await response.json();
-          console.log('401');
-          console.log(err);
-          throw new Error(`useEffect-401:\n ${err.message}`);
-        }
-        if (!response.ok) {
-          const err = await response.json();
-          console.log('!Ok');
-          console.log(err);
-          throw new Error(`Rresponse Not Ok:\n ${err.message}`);
-        }
-        const data = await response.json();
+        const response = await get(`tasks`, options);
+        // if (response.status === 401) {
+        //   const err = await response;
+        //   // console.log('401');
+        //   console.log(err);
+        //   // throw new Error(`useEffect-401:\n ${err.message}`);
+        // }
+        // if (!response.ok) {
+        //   const err = await response;
+        //   console.log('!Ok');
+        //   console.log(err);
+        //   throw new Error(`Rresponse Not Ok:\n ${err.message}`);
+        // }
+        const data = await response;
         console.log(data);
         if (!firstPost) {
           setToDoList((prev) => [...prev, ...data]);
@@ -81,11 +81,11 @@ export default function TodosPage({ token }) {
     try {
       const response = await post(`tasks`, options);
       if (!response.ok) {
-        const err = await response.json();
+        const err = await response;
         throw new Error('addToDo/POST', err.message);
       }
 
-      const data = await response.json();
+      const data = await response;
 
       setToDoList((previousTodos) => {
         // map throu to replace newTodo with data
@@ -129,7 +129,7 @@ export default function TodosPage({ token }) {
     try {
       const response = await patch(`tasks/${todoId}`, options);
       if (!response.ok) {
-        const err = await response.json();
+        const err = await response;
         throw new Error(
           `Patch update for isComplete failed because:\n
           ${err.message}`
@@ -173,7 +173,7 @@ export default function TodosPage({ token }) {
     try {
       const response = await patch(`tasks/${editedTodo.id}`, options);
       if (!response.ok) {
-        const err = await response.json();
+        const err = await response;
         throw new Error(
           'patch update for editting error' + '\n\t\t',
           err.message

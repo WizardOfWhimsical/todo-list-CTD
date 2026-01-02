@@ -15,18 +15,17 @@ export default function Logon({ onSetEmail, onSetToken }) {
         const response = await post('user/logon', {
           body: { email, password },
         });
-        const data = await response.json();
+        const data = response;
         console.log(data);
-        if (response.status === 200 && data.name && data.csrfToken) {
+        if (data.name && data.csrfToken) {
           onSetEmail(data.name);
           onSetToken(data.csrfToken);
         } else {
           setAuthError(`Authentication failed: ${data?.message}`);
-          console.log(authError);
         }
       } catch (error) {
         setAuthError(`Error: ${error.name} | ${error.message}`);
-        console.log(authError);
+        console.log(error);
       } finally {
         setIsLoggingOn(false);
       }
@@ -35,10 +34,9 @@ export default function Logon({ onSetEmail, onSetToken }) {
   }
   // https://ctd-learns-node-l42tx.ondigitalocean.app
 
-  // useEffect(() => {
-  //   console.log(`${baseUrl}/user/logon`);
-  //   logOn();
-  // }, [baseUrl, logOn]);
+  useEffect(() => {
+    console.log(authError);
+  }, [authError]);
 
   return (
     <>
