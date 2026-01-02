@@ -22,21 +22,5 @@ function App() {
     </>
   );
 }
-/**
- * return (
-     // watched {todo.length === 0 && "No Todos"}
-     // its called shortCircuting, represents a conditional??
-     <ul>
-       {filteredTodos.length <= 0
-         ? 'Add todo above to get started'
-         : filteredTodos.map((todo) => (
-             <ToDoListItem
-               onUpdateTodo={onUpdateTodo}
-               onCompleteTodo={onCompleteTodo}
-               key={todo.id}
-               todo={todo}
-             />
-           ))}
-     </ul>
- */
+
 export default App;
