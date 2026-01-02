@@ -2,57 +2,57 @@ const baseUrl = import.meta.env.VITE_BASE_URL;
 const DEFAULT_OPTIONS = {
   credentials: 'include',
   headers: { 'Content-Type': 'application/json' },
+  method: 'GET',
 };
-export async function post(endPoint, options) {
+
+async function fetchErrorHandling(endPoint, options) {
   try {
-    return await fetch(`${baseUrl}/${endPoint}`, {
+    const response = await fetch(`${baseUrl}/${endPoint}`, {
       ...DEFAULT_OPTIONS,
       ...options,
-      method: 'POST',
       headers: {
         ...DEFAULT_OPTIONS.headers,
         ...options.headers,
       },
+    });
+    if (!response.ok) {
+      const error = await response.json();
+      error.status = response.status;
+      throw error;
+    }
+    return response.json();
+  } catch (error) {
+    console.log('Fetch Error Handling:', error);
+  }
+}
+export async function post(endPoint, options) {
+  try {
+    return await fetchErrorHandling(`${baseUrl}/${endPoint}`, {
+      ...options,
+      method: 'POST',
       body: JSON.stringify(options.body),
     });
   } catch (e) {
     console.log('post function catch\n\t', e);
-    throw new Error('Post Function call', e);
   }
 }
 export async function patch(endPoint, options) {
-  console.log('working right!');
   try {
-    return await fetch(`${baseUrl}/${endPoint}`, {
-      ...DEFAULT_OPTIONS,
+    return await fetchErrorHandling(`${baseUrl}/${endPoint}`, {
       ...options,
       method: 'PATCH',
-      headers: {
-        ...DEFAULT_OPTIONS.headers,
-        ...options.headers,
-      },
       body: JSON.stringify(options.body),
     });
   } catch (e) {
     console.log('patch function catch\n\t', e);
-    throw new Error('Patch Function call', e);
   }
 }
 
 export async function get(endPoint, options) {
   try {
-    return await fetch(`${baseUrl}/${endPoint}`, {
-      ...DEFAULT_OPTIONS,
-      ...options,
-      method: 'GET',
-      headers: {
-        ...DEFAULT_OPTIONS.headers,
-        ...options.headers,
-      },
-    });
+    return await fetchErrorHandling(`${baseUrl}/${endPoint}`, options);
   } catch (e) {
     console.log('get function catch\n\t', e);
-    throw new Error('Get Function call', e);
   }
 }
 

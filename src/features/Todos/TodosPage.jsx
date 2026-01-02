@@ -171,11 +171,12 @@ export default function TodosPage({ token }) {
       },
     };
     try {
-      const response = await patch(`taskss/${editedTodo.id}`, options);
+      const response = await patch(`tasks/${editedTodo.id}`, options);
       if (!response.ok) {
+        const err = await response.json();
         throw new Error(
           'patch update for editting error' + '\n\t\t',
-          response.error && response.message
+          err.message
         );
       }
     } catch (e) {
