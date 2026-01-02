@@ -20,40 +20,28 @@ async function fetchErrorHandling(endPoint, options) {
       error.status = response.status;
       throw error;
     }
-    return response.json();
+    return response;
   } catch (error) {
     console.log('Fetch Error Handling:', error);
   }
 }
 export async function post(endPoint, options) {
-  try {
-    return await fetchErrorHandling(`${endPoint}`, {
-      ...options,
-      method: 'POST',
-      body: JSON.stringify(options.body),
-    });
-  } catch (e) {
-    console.log('post function catch\n\t', e);
-  }
+  return await fetchErrorHandling(`${endPoint}`, {
+    ...options,
+    method: 'POST',
+    body: JSON.stringify(options.body),
+  });
 }
 export async function patch(endPoint, options) {
-  try {
-    return await fetchErrorHandling(`${endPoint}`, {
-      ...options,
-      method: 'PATCH',
-      body: JSON.stringify(options.body),
-    });
-  } catch (e) {
-    console.log('patch function catch\n\t', e);
-  }
+  return await fetchErrorHandling(`${endPoint}`, {
+    ...options,
+    method: 'PATCH',
+    body: JSON.stringify(options.body),
+  });
 }
 
 export async function get(endPoint, options) {
-  try {
-    return await fetchErrorHandling(`${endPoint}`, options);
-  } catch (e) {
-    console.log('get function catch\n\t', e);
-  }
+  return await fetchErrorHandling(endPoint, options);
 }
 
 // const baseUrl = 'https://ctd-learns-node-l42tx.ondigitalocean.app';

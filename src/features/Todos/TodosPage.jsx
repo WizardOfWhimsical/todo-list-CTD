@@ -3,13 +3,6 @@ import ToDoList from './TodoList/ToDoList';
 import ToDoForm from './ToDoForm';
 import { useState, useEffect } from 'react';
 import { post, patch, get } from '../../utils/api';
-//kept in for baseline
-// const todos = [
-//   { id: 1, title: 'review resources', isCompleted: false },
-//   { id: 2, title: 'take notes', isCompleted: true },
-//   { id: 3, title: 'code out app', isCompleted: false },
-// ];
-// const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export default function TodosPage({ token }) {
   const [todoList, setToDoList] = useState([]);
@@ -18,7 +11,7 @@ export default function TodosPage({ token }) {
 
   useEffect(() => {
     if (!token) return;
-    // if (error) return;
+
     let firstPost = false;
     async function fetchTodos() {
       const options = {
@@ -27,20 +20,16 @@ export default function TodosPage({ token }) {
       try {
         setIsTodoListLoading(true);
         const response = await get(`tasks`, options);
-        // if (response.status === 401) {
-        //   const err = await response;
-        //   // console.log('401');
-        //   console.log(err);
-        //   // throw new Error(`useEffect-401:\n ${err.message}`);
-        // }
-        // if (!response.ok) {
-        //   const err = await response;
-        //   console.log('!Ok');
-        //   console.log(err);
-        //   throw new Error(`Rresponse Not Ok:\n ${err.message}`);
-        // }
-        const data = await response;
-        console.log(data);
+        if (response.status === 401) {
+          const err = await response.json();
+          throw err;
+        }
+        if (!response.ok) {
+          const err = await response.json();
+          throw err;
+        }
+        const data = await response.json();
+
         if (!firstPost) {
           setToDoList((prev) => [...prev, ...data]);
         }
@@ -81,14 +70,13 @@ export default function TodosPage({ token }) {
     try {
       const response = await post(`tasks`, options);
       if (!response.ok) {
-        const err = await response;
-        throw new Error('addToDo/POST', err.message);
+        const err = await response.json();
+        throw err;
       }
 
-      const data = await response;
+      const data = await response.json();
 
       setToDoList((previousTodos) => {
-        // map throu to replace newTodo with data
         return previousTodos.map((todo) => {
           if (todo.id === newToDo.id) {
             return data;
@@ -97,15 +85,13 @@ export default function TodosPage({ token }) {
         });
       });
     } catch (e) {
-      // chose to do this here for:
-      // trigger useEffect
       setError((prev) => [...prev, e]);
-      // to then clean this up here
+
       setToDoList((previousTodos) =>
         previousTodos.filter((todo) => todo.id !== newToDo.id)
       );
-      // this is important because if you trigger the useEffect unknowingly you can get duplicates of state
-      console.log('Catch for adding todo', e);
+
+      console.log('line 104', e);
     }
   }
 
@@ -118,8 +104,9 @@ export default function TodosPage({ token }) {
         return todo;
       });
     });
-    // request
+
     const targetTodo = todoList.find((todo) => todo.id === todoId);
+
     const options = {
       headers: { 'X-CSRF-TOKEN': token },
       body: {
@@ -129,14 +116,11 @@ export default function TodosPage({ token }) {
     try {
       const response = await patch(`tasks/${todoId}`, options);
       if (!response.ok) {
-        const err = await response;
-        throw new Error(
-          `Patch update for isComplete failed because:\n
-          ${err.message}`
-        );
+        const err = await response.json();
+        throw err;
       }
     } catch (e) {
-      console.log('checking error shape', '\n\t\t', e);
+      console.log('line 132', e);
 
       setError((prev) => [...prev, e]);
 
@@ -160,7 +144,7 @@ export default function TodosPage({ token }) {
         return todo;
       });
     });
-    // patch request
+
     const targetTodo = todoList.find((todo) => todo.id === editedTodo.id);
 
     const options = {
@@ -173,11 +157,8 @@ export default function TodosPage({ token }) {
     try {
       const response = await patch(`tasks/${editedTodo.id}`, options);
       if (!response.ok) {
-        const err = await response;
-        throw new Error(
-          'patch update for editting error' + '\n\t\t',
-          err.message
-        );
+        const err = await response.json();
+        throw err;
       }
     } catch (e) {
       setError((prev) => [...prev, e]);
