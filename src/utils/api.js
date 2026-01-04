@@ -15,12 +15,12 @@ async function fetchErrorHandling(endPoint, options) {
         ...options.headers,
       },
     });
-    if (!response.ok) {
+    if (!response.ok || response.status === 401) {
       const error = await response.json();
       error.status = response.status;
       throw error;
     }
-    return response;
+    return response.json();
   } catch (error) {
     console.log('Fetch Error Handling:', error);
   }

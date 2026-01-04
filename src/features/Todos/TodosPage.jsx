@@ -19,16 +19,7 @@ export default function TodosPage({ token }) {
       };
       try {
         setIsTodoListLoading(true);
-        const response = await get(`tasks`, options);
-        if (response.status === 401) {
-          const err = await response.json();
-          throw err;
-        }
-        if (!response.ok) {
-          const err = await response.json();
-          throw err;
-        }
-        const data = await response.json();
+        const data = await get(`tasks`, options);
 
         if (!firstPost) {
           setToDoList((prev) => [...prev, ...data]);
@@ -68,13 +59,7 @@ export default function TodosPage({ token }) {
     };
 
     try {
-      const response = await post(`tasks`, options);
-      if (!response.ok) {
-        const err = await response.json();
-        throw err;
-      }
-
-      const data = await response.json();
+      const data = await post(`tasks`, options);
 
       setToDoList((previousTodos) => {
         return previousTodos.map((todo) => {
@@ -114,11 +99,7 @@ export default function TodosPage({ token }) {
       },
     };
     try {
-      const response = await patch(`tasks/${todoId}`, options);
-      if (!response.ok) {
-        const err = await response.json();
-        throw err;
-      }
+      await patch(`tasks/${todoId}`, options);
     } catch (e) {
       console.log('line 132', e);
 
@@ -155,11 +136,7 @@ export default function TodosPage({ token }) {
       },
     };
     try {
-      const response = await patch(`tasks/${editedTodo.id}`, options);
-      if (!response.ok) {
-        const err = await response.json();
-        throw err;
-      }
+      await patch(`tasks/${editedTodo.id}`, options);
     } catch (e) {
       setError((prev) => [...prev, e]);
       setToDoList((prev) =>
