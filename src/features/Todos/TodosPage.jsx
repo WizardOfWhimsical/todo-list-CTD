@@ -1,18 +1,19 @@
 //TodosPage.jsx
 import ToDoList from './TodoList/ToDoList';
 import ToDoForm from './ToDoForm';
-import { useState, useEffect } from 'react';
+import { useReducer, useState, useEffect } from 'react';
 import { post, patch, get } from '../../utils/api';
 
 export default function TodosPage({ token }) {
-  const [todoList, setToDoList] = useState([]);
+  const [todoListOld, setToDoListOld] = useState([]);
   const [error, setError] = useState([]);
   const [isTodoListLoading, setIsTodoListLoading] = useState(false);
+  const [todoList, dispatch] = useReducer(todoReducer, []);
 
   useEffect(() => {
     if (!token) return;
-
     let firstPost = false;
+
     async function fetchTodos() {
       const options = {
         headers: { 'X-CSRF-TOKEN': token },
@@ -22,7 +23,7 @@ export default function TodosPage({ token }) {
         const data = await get(`tasks`, options);
 
         if (!firstPost) {
-          setToDoList((prev) => [...prev, ...data]);
+          dispatch({ data, type: 'GET_TODOS' });
         }
       } catch (er) {
         setError((prev) => [...prev, er]);
@@ -40,9 +41,9 @@ export default function TodosPage({ token }) {
 
   // to watch my list
   useEffect(() => {
-    console.log('Up to date to do list in useEffect' + '\n\t', todoList);
+    console.log('Up to date to do list in useEffect' + '\n\t', todoListOld);
     console.log('Errors updated State' + '\n\t', error);
-  }, [todoList, error]);
+  }, [todoListOld, error]);
 
   /**
    * @param {string} todoTitle
@@ -50,7 +51,7 @@ export default function TodosPage({ token }) {
   async function addToDo(todoTitle) {
     const newToDo = { id: Date.now(), title: todoTitle, isCompleted: false };
 
-    setToDoList((previousTodos) => [newToDo, ...previousTodos]);
+    dispatch({ type: 'ADD_TODO', title: todoTitle });
 
     // fetch post
     const options = {
@@ -61,18 +62,20 @@ export default function TodosPage({ token }) {
     try {
       const data = await post(`tasks`, options);
 
-      setToDoList((previousTodos) => {
-        return previousTodos.map((todo) => {
-          if (todo.id === newToDo.id) {
-            return data;
-          }
-          return todo;
-        });
-      });
+      dispatch({ type: 'SYNCHRONIZE_TODO', id: newToDo.id, data });
+
+      // setToDoListOld((previousTodos) => {
+      //   return previousTodos.map((todo) => {
+      //     if (todo.id === newToDo.id) {
+      //       return data;
+      //     }
+      //     return todo;
+      //   });
+      // });
     } catch (e) {
       setError((prev) => [...prev, e]);
 
-      setToDoList((previousTodos) =>
+      setToDoListOld((previousTodos) =>
         previousTodos.filter((todo) => todo.id !== newToDo.id)
       );
 
@@ -81,7 +84,7 @@ export default function TodosPage({ token }) {
   }
 
   async function completeTodo(todoId) {
-    setToDoList((previousTodos) => {
+    setToDoListOld((previousTodos) => {
       return previousTodos.map((todo) => {
         if (todo.id === todoId) {
           return { ...todo, isCompleted: !todo.isCompleted };
@@ -90,7 +93,7 @@ export default function TodosPage({ token }) {
       });
     });
 
-    const targetTodo = todoList.find((todo) => todo.id === todoId);
+    const targetTodo = todoListOld.find((todo) => todo.id === todoId);
 
     const options = {
       headers: { 'X-CSRF-TOKEN': token },
@@ -105,7 +108,7 @@ export default function TodosPage({ token }) {
 
       setError((prev) => [...prev, e]);
 
-      setToDoList((prev) =>
+      setToDoListOld((prev) =>
         prev.map((todo) => {
           if (todo.id === targetTodo.id) {
             return targetTodo;
@@ -117,7 +120,7 @@ export default function TodosPage({ token }) {
   }
 
   async function updateTodo(editedTodo) {
-    setToDoList((previousTodos) => {
+    setToDoListOld((previousTodos) => {
       return previousTodos.map((todo) => {
         if (todo.id === editedTodo.id) {
           return { ...todo, title: editedTodo.title };
@@ -126,7 +129,7 @@ export default function TodosPage({ token }) {
       });
     });
 
-    const targetTodo = todoList.find((todo) => todo.id === editedTodo.id);
+    const targetTodo = todoListOld.find((todo) => todo.id === editedTodo.id);
 
     const options = {
       headers: { 'X-CSRF-TOKEN': token },
@@ -139,7 +142,7 @@ export default function TodosPage({ token }) {
       await patch(`tasks/${editedTodo.id}`, options);
     } catch (e) {
       setError((prev) => [...prev, e]);
-      setToDoList((prev) =>
+      setToDoListOld((prev) =>
         prev.map((todo) => {
           if (todo.id === targetTodo.id) {
             return targetTodo;
@@ -183,4 +186,30 @@ export default function TodosPage({ token }) {
       )}
     </>
   );
+}
+
+function todoReducer(state, action) {
+  switch (action.type) {
+    case 'GET_TODOS': {
+      return [...action.data, ...state];
+    }
+    case 'ADD_TODO': {
+      const newToDo = {
+        id: Date.now(),
+        title: action.title,
+        isCompleted: false,
+      };
+
+      return [newToDo, ...state];
+    }
+    case 'SYNCHRONIZE_TODO': {
+      return state.map((todo) => {
+        if (todo.id === action.id) {
+          return action.data;
+        }
+        return todo;
+      });
+    }
+  }
+  return state;
 }
