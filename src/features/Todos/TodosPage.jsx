@@ -5,7 +5,6 @@ import { useReducer, useState, useEffect } from 'react';
 import { post, patch, get } from '../../utils/api';
 
 export default function TodosPage({ token }) {
-  const [todoListOld, setToDoListOld] = useState([]);
   const [error, setError] = useState([]);
   const [isTodoListLoading, setIsTodoListLoading] = useState(false);
   const [todoList, dispatch] = useReducer(todoReducer, []);
@@ -39,12 +38,6 @@ export default function TodosPage({ token }) {
     };
   }, [token]);
 
-  // to watch my list
-  useEffect(() => {
-    console.log('Up to date to do list in useEffect' + '\n\t', todoListOld);
-    console.log('Errors updated State' + '\n\t', error);
-  }, [todoListOld, error]);
-
   /**
    * @param {string} todoTitle
    */
@@ -53,7 +46,6 @@ export default function TodosPage({ token }) {
 
     dispatch({ type: 'ADD_TODO', title: todoTitle });
 
-    // fetch post
     const options = {
       headers: { 'X-CSRF-TOKEN': token },
       body: { title: newToDo.title, isCompleted: newToDo.isCompleted },
@@ -61,39 +53,17 @@ export default function TodosPage({ token }) {
 
     try {
       const data = await post(`tasks`, options);
-
       dispatch({ type: 'SYNCHRONIZE_TODO', id: newToDo.id, data });
-
-      // setToDoListOld((previousTodos) => {
-      //   return previousTodos.map((todo) => {
-      //     if (todo.id === newToDo.id) {
-      //       return data;
-      //     }
-      //     return todo;
-      //   });
-      // });
     } catch (e) {
       setError((prev) => [...prev, e]);
-
-      setToDoListOld((previousTodos) =>
-        previousTodos.filter((todo) => todo.id !== newToDo.id)
-      );
-
-      console.log('line 104', e);
+      dispatch({ type: 'REVERT_ADD_TODO', id: newToDo.id });
     }
   }
 
   async function completeTodo(todoId) {
-    setToDoListOld((previousTodos) => {
-      return previousTodos.map((todo) => {
-        if (todo.id === todoId) {
-          return { ...todo, isCompleted: !todo.isCompleted };
-        }
-        return todo;
-      });
-    });
+    dispatch({ type: 'COMPLETED_TODO', id: todoId });
 
-    const targetTodo = todoListOld.find((todo) => todo.id === todoId);
+    const targetTodo = todoList.find((todo) => todo.id === todoId);
 
     const options = {
       headers: { 'X-CSRF-TOKEN': token },
@@ -104,32 +74,19 @@ export default function TodosPage({ token }) {
     try {
       await patch(`tasks/${todoId}`, options);
     } catch (e) {
-      console.log('line 132', e);
-
       setError((prev) => [...prev, e]);
-
-      setToDoListOld((prev) =>
-        prev.map((todo) => {
-          if (todo.id === targetTodo.id) {
-            return targetTodo;
-          }
-          return todo;
-        })
-      );
+      dispatch({ type: 'REVERT_UPDATED_TODO', todo: targetTodo });
     }
   }
 
   async function updateTodo(editedTodo) {
-    setToDoListOld((previousTodos) => {
-      return previousTodos.map((todo) => {
-        if (todo.id === editedTodo.id) {
-          return { ...todo, title: editedTodo.title };
-        }
-        return todo;
-      });
+    dispatch({
+      type: 'UPDATE_TODO',
+      id: editedTodo.id,
+      title: editedTodo.title,
     });
 
-    const targetTodo = todoListOld.find((todo) => todo.id === editedTodo.id);
+    const targetTodo = todoList.find((todo) => todo.id === editedTodo.id);
 
     const options = {
       headers: { 'X-CSRF-TOKEN': token },
@@ -142,14 +99,7 @@ export default function TodosPage({ token }) {
       await patch(`tasks/${editedTodo.id}`, options);
     } catch (e) {
       setError((prev) => [...prev, e]);
-      setToDoListOld((prev) =>
-        prev.map((todo) => {
-          if (todo.id === targetTodo.id) {
-            return targetTodo;
-          }
-          return todo;
-        })
-      );
+      dispatch({ type: 'REVERT_UPDATED_TODO', todo: targetTodo });
     }
   }
 
@@ -210,6 +160,35 @@ function todoReducer(state, action) {
         return todo;
       });
     }
+    case 'REVERT_ADD_TODO': {
+      return state.filter((todo) => todo.id !== action.id);
+    }
+    case 'COMPLETED_TODO': {
+      return state.map((todo) => {
+        if (todo.id === action.id) {
+          return { ...todo, isCompleted: !todo.isCompleted };
+        }
+        return todo;
+      });
+    }
+    case 'REVERT_UPDATED_TODO': {
+      return state.map((todo) => {
+        if (todo.id === action.todo.id) {
+          return { ...action.todo };
+        }
+        return todo;
+      });
+    }
+    case 'UPDATE_TODO': {
+      return state.map((todo) => {
+        if (todo.id === action.id) {
+          return { ...todo, title: action.title };
+        }
+        return todo;
+      });
+    }
+    default: {
+      return state;
+    }
   }
-  return state;
 }

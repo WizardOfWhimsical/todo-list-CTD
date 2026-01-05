@@ -23,6 +23,7 @@ async function fetchErrorHandling(endPoint, options) {
     return response.json();
   } catch (error) {
     console.log('Fetch Error Handling:', error);
+    throw error;
   }
 }
 export async function post(endPoint, options) {

@@ -4,6 +4,7 @@ import { ToDoListItem } from './ToDoListItem';
 
 function ToDoList({ todos, onCompleteTodo, onUpdateTodo }) {
   const filteredTodos = todos.filter((todo) => todo.isCompleted === false);
+  // const filteredTodos = todos;
   return (
     <ul>
       {filteredTodos.length <= 0
