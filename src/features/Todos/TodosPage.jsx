@@ -61,9 +61,11 @@ export default function TodosPage({ token }) {
   }
 
   async function completeTodo(todoId) {
-    dispatch({ type: 'COMPLETED_TODO', id: todoId });
-
     const targetTodo = todoList.find((todo) => todo.id === todoId);
+    dispatch({
+      type: 'UPDATE_TODO',
+      todo: { ...targetTodo, isCompleted: true },
+    });
 
     const options = {
       headers: { 'X-CSRF-TOKEN': token },
@@ -75,15 +77,14 @@ export default function TodosPage({ token }) {
       await patch(`tasks/${todoId}`, options);
     } catch (e) {
       setError((prev) => [...prev, e]);
-      dispatch({ type: 'REVERT_UPDATED_TODO', todo: targetTodo });
+      dispatch({ type: 'UPDATE_TODO', todo: targetTodo });
     }
   }
 
   async function updateTodo(editedTodo) {
     dispatch({
       type: 'UPDATE_TODO',
-      id: editedTodo.id,
-      title: editedTodo.title,
+      todo: editedTodo,
     });
 
     const targetTodo = todoList.find((todo) => todo.id === editedTodo.id);
@@ -99,7 +100,7 @@ export default function TodosPage({ token }) {
       await patch(`tasks/${editedTodo.id}`, options);
     } catch (e) {
       setError((prev) => [...prev, e]);
-      dispatch({ type: 'REVERT_UPDATED_TODO', todo: targetTodo });
+      dispatch({ type: 'UPDATE_TODO', todo: targetTodo });
     }
   }
 
@@ -163,26 +164,10 @@ function todoReducer(state, action) {
     case 'REVERT_ADD_TODO': {
       return state.filter((todo) => todo.id !== action.id);
     }
-    case 'COMPLETED_TODO': {
-      return state.map((todo) => {
-        if (todo.id === action.id) {
-          return { ...todo, isCompleted: !todo.isCompleted };
-        }
-        return todo;
-      });
-    }
-    case 'REVERT_UPDATED_TODO': {
-      return state.map((todo) => {
-        if (todo.id === action.todo.id) {
-          return { ...action.todo };
-        }
-        return todo;
-      });
-    }
     case 'UPDATE_TODO': {
       return state.map((todo) => {
-        if (todo.id === action.id) {
-          return { ...todo, title: action.title };
+        if (todo.id === action.todo.id) {
+          return { ...todo, ...action.todo };
         }
         return todo;
       });
