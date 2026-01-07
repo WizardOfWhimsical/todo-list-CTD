@@ -73,13 +73,3 @@ export default function Logon({ onSetEmail, onSetToken }) {
     </>
   );
 }
-
-// {isTodoListLoading ? (
-//         <h1>Is Loading the List....</h1>
-//       ) : (
-//         <ToDoList
-//           onUpdateTodo={updateTodo}
-//           onCompleteTodo={completeTodo}
-//           todos={todoList}
-//         />
-//       )}

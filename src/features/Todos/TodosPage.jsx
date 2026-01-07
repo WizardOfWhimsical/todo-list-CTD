@@ -153,6 +153,7 @@ function todoReducer(state, action) {
 
       return [newToDo, ...state];
     }
+    // try to turn this into UPDATE_TODO
     case 'SYNCHRONIZE_TODO': {
       return state.map((todo) => {
         if (todo.id === action.id) {
