@@ -1,20 +1,23 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 function ToDoForm({ onAddTodo }) {
+  const [workingTodoTitle, setWorkingTodoTitle] = useState('');
   const inputRef = useRef();
 
   const handleAddTodo = (event) => {
     event.preventDefault();
 
-    console.log(event.target.todoTitle.value);
     //trim is always smart.
-    const todoTitle = event.target.todoTitle.value.trim();
+    const todoTitle = workingTodoTitle.trim();
     //check for empty string
     //theres form validation in here??
     if (todoTitle) {
       onAddTodo(todoTitle);
-      event.target.reset();
-      inputRef.current.focus(); //<-whats this do?
+      console.log('1st', event);
+
+      setWorkingTodoTitle('');
+      // inputRef.current.reset();
+      inputRef.current.focus(); //<-puts cursor into input
     }
   };
 
@@ -25,10 +28,14 @@ function ToDoForm({ onAddTodo }) {
         type="text"
         id="todoTitle"
         name="todoTitle"
+        value={workingTodoTitle}
+        onChange={(event) => setWorkingTodoTitle(event.target.value)}
         ref={inputRef}
         required
       />
-      <button type="submit">Add ToDo</button>
+      <button type="submit" disabled={!workingTodoTitle.trim()}>
+        Add ToDo
+      </button>
     </form>
   );
 }
