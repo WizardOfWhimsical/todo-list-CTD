@@ -12,6 +12,8 @@ export default function TodosPage({ token }) {
   const [sortBy, setSortBy] = useState('creationDate');
   const [sortDirection, setSortDirection] = useState('desc');
 
+  const params = new URLSearchParams({ sortBy, sortDirection });
+
   useEffect(() => {
     if (!token) return;
     let firstPost = false;
