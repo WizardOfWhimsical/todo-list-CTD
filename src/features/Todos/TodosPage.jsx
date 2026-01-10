@@ -9,6 +9,9 @@ export default function TodosPage({ token }) {
   const [isTodoListLoading, setIsTodoListLoading] = useState(false);
   const [todoList, dispatch] = useReducer(todoReducer, []);
 
+  const [sortBy, setSortBy] = useState('creationDate');
+  const [sortDirection, setSortDirection] = useState('desc');
+
   useEffect(() => {
     if (!token) return;
     let firstPost = false;
@@ -19,6 +22,7 @@ export default function TodosPage({ token }) {
       };
       try {
         setIsTodoListLoading(true);
+
         const data = await get(`tasks`, options);
 
         if (!firstPost) {
