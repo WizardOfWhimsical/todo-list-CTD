@@ -25,7 +25,7 @@ export default function TodosPage({ token }) {
       try {
         setIsTodoListLoading(true);
 
-        const data = await get(`tasks`, options);
+        const data = await get(`tasks?${params}`, options);
 
         if (!firstPost) {
           dispatch({ data, type: 'GET_TODOS' });
@@ -42,7 +42,7 @@ export default function TodosPage({ token }) {
       console.log('one render ran clean up');
       firstPost = true;
     };
-  }, [token]);
+  }, [token, params]);
 
   /**
    * @param {string} todoTitle
