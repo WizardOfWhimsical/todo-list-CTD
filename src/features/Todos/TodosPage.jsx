@@ -3,6 +3,7 @@ import ToDoList from './TodoList/ToDoList';
 import ToDoForm from './ToDoForm';
 import { useReducer, useState, useEffect } from 'react';
 import { post, patch, get } from '../../utils/api';
+import SortBy from '../../shared/SortBy';
 
 export default function TodosPage({ token }) {
   const [error, setError] = useState([]);
@@ -12,11 +13,11 @@ export default function TodosPage({ token }) {
   const [sortBy, setSortBy] = useState('creationDate');
   const [sortDirection, setSortDirection] = useState('desc');
 
-  const params = new URLSearchParams({ sortBy, sortDirection });
-
   useEffect(() => {
     if (!token) return;
     let firstPost = false;
+
+    const params = new URLSearchParams({ sortBy, sortDirection });
 
     async function fetchTodos() {
       const options = {
@@ -42,7 +43,7 @@ export default function TodosPage({ token }) {
       console.log('one render ran clean up');
       firstPost = true;
     };
-  }, [token, params]);
+  }, [token, sortBy, sortDirection]);
 
   /**
    * @param {string} todoTitle
@@ -131,6 +132,7 @@ export default function TodosPage({ token }) {
         })}
       <h2>My Todos</h2>
       <ToDoForm onAddTodo={addToDo} />
+      <SortBy />
 
       {isTodoListLoading ? (
         <h1>Is Loading the List....</h1>
