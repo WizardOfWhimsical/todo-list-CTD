@@ -6,19 +6,16 @@ export default function SortBy({
 }) {
   return (
     <>
-      <label for="hr-select">Your favorite food</label> <br />
-      <select name="foods" id="hr-select">
-        <option value="">Sort</option>
-        <hr />
-        <optgroup label="Sort By">
-          <option value="creationDate">Creation Date</option>
-          <option value="title">Title</option>
-        </optgroup>
-        <hr />
-        <optgroup label="Order">
-          <option value="asc">Ascending</option>
-          <option value="desc">Descending</option>
-        </optgroup>
+      {/* <label for="hr-select">Your favorite food</label> <br /> */}
+      <label htmlFor="sortBy">Sort By</label>
+      <select id="sortBy">
+        <option value="creationDate">Creation Date</option>
+        <option value="title">Title</option>
+      </select>
+      <label htmlFor="order">Order</label>
+      <select id="order">
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
       </select>
     </>
   );
