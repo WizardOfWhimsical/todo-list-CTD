@@ -1,7 +1,7 @@
 export default function todoReducer(state, action) {
   switch (action.type) {
     case 'GET_TODOS': {
-      return [...action.data];
+      return action.data;
     }
     case 'ADD_TODO': {
       const newToDo = {
