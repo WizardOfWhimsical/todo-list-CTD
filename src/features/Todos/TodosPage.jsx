@@ -116,6 +116,10 @@ export default function TodosPage({ token }) {
     console.log('handle', newValue);
     setSortBy(newValue);
   }
+  function handleSortByDirectionChange(newValue) {
+    console.log('sort direction', newValue);
+    setSortDirection(newValue);
+  }
 
   return (
     <>
@@ -138,7 +142,12 @@ export default function TodosPage({ token }) {
         })}
       <h2>My Todos</h2>
       <ToDoForm onAddTodo={addToDo} />
-      <SortBy onSortByChange={handleSortByChange} />
+      <SortBy
+        onSortByChange={handleSortByChange}
+        onSortDirectionChange={handleSortByDirectionChange}
+        sortBy={sortBy}
+        sortDirection={sortDirection}
+      />
 
       {isTodoListLoading ? (
         <h1>Is Loading the List....</h1>

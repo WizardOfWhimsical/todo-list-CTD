@@ -18,7 +18,12 @@ export default function SortBy({
       </select>
 
       <label htmlFor="order">Order</label>
-      <select name="order" id="order">
+      <select
+        value={sortDirection}
+        onChange={(e) => onSortDirectionChange(e.target.value)}
+        name="order"
+        id="order"
+      >
         <option value="asc">Ascending</option>
         <option value="desc">Descending</option>
       </select>
