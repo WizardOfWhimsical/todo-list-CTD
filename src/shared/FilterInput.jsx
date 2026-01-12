@@ -7,6 +7,7 @@ export function FilterInput({ filterTerm, onFilterChange }) {
         type="text"
         value={filterTerm}
         onChange={(e) => onFilterChange(e.target.value)}
+        placeholder="search todos here..."
       />
     </>
   );
