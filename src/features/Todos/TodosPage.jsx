@@ -156,6 +156,10 @@ export default function TodosPage({ token }) {
         })}
       <h2>My Todos</h2>
       <ToDoForm onAddTodo={addToDo} />
+      <FilterInput
+        filterTerm={filterterm}
+        onFilterChange={handlefilterChange}
+      />
       <SortBy
         onSortByChange={handleSortByChange}
         onSortDirectionChange={handleSortByDirectionChange}
