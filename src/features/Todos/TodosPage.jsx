@@ -1,25 +1,34 @@
 //TodosPage.jsx
+import { useReducer, useState, useEffect } from 'react';
 import ToDoList from './TodoList/ToDoList';
 import ToDoForm from './ToDoForm';
-import { useReducer, useState, useEffect } from 'react';
 import { post, patch, get } from '../../utils/api';
+import { FilterInput } from '../../shared/FilterInput';
 import SortBy from '../../shared/SortBy';
 import todoReducer from '../../hooks/todoReducer';
+import useDebounce from '../../hooks/useDebounce';
 
 export default function TodosPage({ token }) {
+  const [todoList, dispatch] = useReducer(todoReducer, []);
+
   const [error, setError] = useState([]);
   const [isTodoListLoading, setIsTodoListLoading] = useState(false);
-  const [todoList, dispatch] = useReducer(todoReducer, []);
 
   const [sortBy, setSortBy] = useState('creationDate');
   const [sortDirection, setSortDirection] = useState('desc');
+
+  const [filterterm, setFilterTerm] = useState('');
+  const debouncedFilter = useDebounce(filterterm, 500);
 
   useEffect(() => {
     if (!token) return;
     let firstPost = false;
 
-    const params = new URLSearchParams({ sortBy, sortDirection });
-
+    const paramsObj = { sortBy, sortDirection };
+    if (debouncedFilter) {
+      paramsObj.find = debouncedFilter;
+    }
+    const params = new URLSearchParams(paramsObj);
     async function fetchTodos() {
       const options = {
         headers: { 'X-CSRF-TOKEN': token },
@@ -45,7 +54,7 @@ export default function TodosPage({ token }) {
       console.log('one render ran clean up');
       firstPost = true;
     };
-  }, [token, sortBy, sortDirection]);
+  }, [token, sortBy, sortDirection, debouncedFilter]);
 
   /**
    * @param {string} todoTitle
@@ -120,6 +129,10 @@ export default function TodosPage({ token }) {
   function handleSortByDirectionChange(newValue) {
     console.log('sort direction', newValue);
     setSortDirection(newValue);
+  }
+
+  function handlefilterChange(newTerm) {
+    setFilterTerm(newTerm);
   }
 
   return (
