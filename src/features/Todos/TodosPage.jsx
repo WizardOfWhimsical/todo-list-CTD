@@ -160,6 +160,7 @@ export default function TodosPage({ token }) {
         filterTerm={filterterm}
         onFilterChange={handlefilterChange}
       />
+      <br />
       <SortBy
         onSortByChange={handleSortByChange}
         onSortDirectionChange={handleSortByDirectionChange}

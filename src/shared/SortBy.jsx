@@ -6,7 +6,7 @@ export default function SortBy({
 }) {
   return (
     <>
-      <label htmlFor="sortBy">Sort By</label>
+      <label htmlFor="sortBy">Sort By: </label>
       <select
         name="sortBy"
         id="sortBy"
@@ -17,7 +17,7 @@ export default function SortBy({
         <option value="title">Title</option>
       </select>
 
-      <label htmlFor="order">Order</label>
+      <label htmlFor="order">Order: </label>
       <select
         value={sortDirection}
         onChange={(e) => onSortDirectionChange(e.target.value)}
