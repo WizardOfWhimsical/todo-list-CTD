@@ -4,6 +4,7 @@ import ToDoForm from './ToDoForm';
 import { useReducer, useState, useEffect } from 'react';
 import { post, patch, get } from '../../utils/api';
 import SortBy from '../../shared/SortBy';
+import todoReducer from '../../hooks/todoReducer';
 
 export default function TodosPage({ token }) {
   const [error, setError] = useState([]);
@@ -111,6 +112,11 @@ export default function TodosPage({ token }) {
     }
   }
 
+  function handleSortByChange(newValue) {
+    console.log('handle', newValue);
+    setSortBy(newValue);
+  }
+
   return (
     <>
       {error &&
@@ -132,7 +138,7 @@ export default function TodosPage({ token }) {
         })}
       <h2>My Todos</h2>
       <ToDoForm onAddTodo={addToDo} />
-      <SortBy />
+      <SortBy onSortByChange={handleSortByChange} />
 
       {isTodoListLoading ? (
         <h1>Is Loading the List....</h1>
@@ -147,42 +153,42 @@ export default function TodosPage({ token }) {
   );
 }
 
-function todoReducer(state, action) {
-  switch (action.type) {
-    case 'GET_TODOS': {
-      return [...action.data, ...state];
-    }
-    case 'ADD_TODO': {
-      const newToDo = {
-        id: Date.now(),
-        title: action.title,
-        isCompleted: false,
-      };
+// function todoReducer(state, action) {
+//   switch (action.type) {
+//     case 'GET_TODOS': {
+//       return [...action.data];
+//     }
+//     case 'ADD_TODO': {
+//       const newToDo = {
+//         id: Date.now(),
+//         title: action.title,
+//         isCompleted: false,
+//       };
 
-      return [newToDo, ...state];
-    }
-    // try to turn this into UPDATE_TODO
-    case 'SYNCHRONIZE_TODO': {
-      return state.map((todo) => {
-        if (todo.id === action.id) {
-          return action.data;
-        }
-        return todo;
-      });
-    }
-    case 'REVERT_ADD_TODO': {
-      return state.filter((todo) => todo.id !== action.id);
-    }
-    case 'UPDATE_TODO': {
-      return state.map((todo) => {
-        if (todo.id === action.todo.id) {
-          return { ...todo, ...action.todo };
-        }
-        return todo;
-      });
-    }
-    default: {
-      return state;
-    }
-  }
-}
+//       return [newToDo, ...state];
+//     }
+//     // try to turn this into UPDATE_TODO
+//     case 'SYNCHRONIZE_TODO': {
+//       return state.map((todo) => {
+//         if (todo.id === action.id) {
+//           return action.data;
+//         }
+//         return todo;
+//       });
+//     }
+//     case 'REVERT_ADD_TODO': {
+//       return state.filter((todo) => todo.id !== action.id);
+//     }
+//     case 'UPDATE_TODO': {
+//       return state.map((todo) => {
+//         if (todo.id === action.todo.id) {
+//           return { ...todo, ...action.todo };
+//         }
+//         return todo;
+//       });
+//     }
+//     default: {
+//       return state;
+//     }
+//   }
+// }
