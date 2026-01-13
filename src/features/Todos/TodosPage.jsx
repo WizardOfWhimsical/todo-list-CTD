@@ -73,6 +73,7 @@ export default function TodosPage({ token }) {
     try {
       const data = await post(`tasks`, options);
       dispatch({ type: 'SYNCHRONIZE_TODO', id: newToDo.id, data });
+      invalidateCache();
     } catch (e) {
       setError((prev) => [...prev, e]);
       dispatch({ type: 'REVERT_ADD_TODO', id: newToDo.id });
@@ -94,6 +95,7 @@ export default function TodosPage({ token }) {
     };
     try {
       await patch(`tasks/${todoId}`, options);
+      invalidateCache();
     } catch (e) {
       setError((prev) => [...prev, e]);
       dispatch({ type: 'UPDATE_TODO', todo: targetTodo });
@@ -117,6 +119,7 @@ export default function TodosPage({ token }) {
     };
     try {
       await patch(`tasks/${editedTodo.id}`, options);
+      invalidateCache();
     } catch (e) {
       setError((prev) => [...prev, e]);
       dispatch({ type: 'UPDATE_TODO', todo: targetTodo });
