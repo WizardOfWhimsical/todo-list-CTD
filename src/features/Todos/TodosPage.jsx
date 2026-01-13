@@ -109,7 +109,7 @@ export default function TodosPage({ token }) {
     });
 
     const targetTodo = todoList.find((todo) => todo.id === editedTodo.id);
-
+    // i dont think this is updating right. i am geting an internal server response 500 when i add a new todo but try to update it, thats when the eroor occurs
     const options = {
       headers: { 'X-CSRF-TOKEN': token },
       body: {
