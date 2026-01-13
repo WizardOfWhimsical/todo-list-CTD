@@ -140,9 +140,12 @@ export default function TodosPage({ token }) {
   }
 
   const invalidateCache = useCallback(() => {
-    console.log('Invalidating Memo cache after todo mutation');
+    console.log(
+      'Invalidating Memo cache after todo mutation\n',
+      `Version${dataVersion}`
+    );
     setDataVersion((previous) => previous + 1);
-  }, []);
+  }, [dataVersion]);
 
   return (
     <>
