@@ -1,5 +1,5 @@
 //TodosPage.jsx
-import { useReducer, useState, useEffect } from 'react';
+import { useReducer, useState, useEffect, useCallback } from 'react';
 import ToDoList from './TodoList/ToDoList';
 import ToDoForm from './ToDoForm';
 import { post, patch, get } from '../../utils/api';
@@ -20,6 +20,8 @@ export default function TodosPage({ token }) {
   const [filterterm, setFilterTerm] = useState('');
   const debouncedFilter = useDebounce(filterterm, 500);
 
+  const [dataVersion, setDataVersion] = useState(0);
+
   useEffect(() => {
     if (!token) return;
     let firstPost = false;
@@ -37,7 +39,6 @@ export default function TodosPage({ token }) {
         setIsTodoListLoading(true);
 
         const data = await get(`tasks?${params}`, options);
-        // const data = await get(`tasks?sortBy=title&sortDirection=asc&find=learn`, options);
 
         if (!firstPost) {
           dispatch({ data, type: 'GET_TODOS' });
@@ -134,6 +135,10 @@ export default function TodosPage({ token }) {
   function handlefilterChange(newTerm) {
     setFilterTerm(newTerm);
   }
+
+  const invalidateCache = useCallback(() => {
+    setDataVersion((previous) => previous + 1);
+  });
 
   return (
     <>
