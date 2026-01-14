@@ -5,7 +5,7 @@ export default function todoReducer(state, action) {
     }
     case 'ADD_TODO': {
       const newToDo = {
-        id: Date.now(),
+        id: action.id,
         title: action.title,
         isCompleted: false,
       };
@@ -16,9 +16,10 @@ export default function todoReducer(state, action) {
     // try to turn this into UPDATE_TODO
     case 'SYNCHRONIZE_TODO': {
       console.log(action);
+      console.log(state);
       return state.map((todo) => {
         // ITS HERE
-        console.log('before conditional');
+        // its not replacing the todo with the one from the db
 
         if (todo.id === action.id) {
           console.log('running...', action);

@@ -72,8 +72,11 @@ export default function TodosPage({ token }) {
 
     try {
       const data = await post(`tasks`, options);
+
       console.log('returned item\n', data);
-      // maybe something here, it is not updating with the new retruned item, gotta be here because the current one updates
+
+      // RIGHT FKING HERE, WHY CANT I SEE IT
+      // its not replacing it?
       dispatch({ type: 'SYNCHRONIZE_TODO', id: newToDo.id, data });
 
       invalidateCache();
@@ -123,9 +126,9 @@ export default function TodosPage({ token }) {
     try {
       // i think this is the wrong id
       // also dont i need to return the data to be replace into the array?
-      console.log('target Todo\n', targetTodo);
-      console.log('Edited todo\n', editedTodo);
-
+      // console.log('target Todo\n', targetTodo);
+      // console.log('Edited todo\n', editedTodo);
+      // its getting the wrong id, FK
       await patch(`tasks/${editedTodo.id}`, options);
       // console.log(data);
       invalidateCache();
