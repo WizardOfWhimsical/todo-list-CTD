@@ -63,7 +63,7 @@ export default function TodosPage({ token }) {
   async function addToDo(todoTitle) {
     const newToDo = { id: Date.now(), title: todoTitle, isCompleted: false };
 
-    dispatch({ type: 'ADD_TODO', title: todoTitle });
+    dispatch({ type: 'ADD_TODO', title: todoTitle, id: newToDo.id });
 
     const options = {
       headers: { 'X-CSRF-TOKEN': token },
