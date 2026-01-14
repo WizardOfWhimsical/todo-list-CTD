@@ -187,6 +187,7 @@ export default function TodosPage({ token }) {
         <ToDoList
           onUpdateTodo={updateTodo}
           onCompleteTodo={completeTodo}
+          dataVersion={dataVersion}
           todos={todoList}
         />
       )}
