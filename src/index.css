@@ -1,0 +1,10 @@
+*{
+  box-sizing: border-box;
+  /* border: 1px solid red; */
+}
+h1{
+  margin-left: 0.6em;
+}
+h2{
+  margin-left: 2em;
+}
