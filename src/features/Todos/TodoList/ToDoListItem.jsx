@@ -1,5 +1,5 @@
-import TextInputWithLabel from '../../shared/TextInputWithLabel';
-import useEditableTitle from '../../hooks/useEditableTitle';
+import TextInputWithLabel from '../../../shared/TextInputWithLabel';
+import useEditableTitle from '../../../hooks/useEditableTitle';
 
 //ToDoListItem.jsx
 export function ToDoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
