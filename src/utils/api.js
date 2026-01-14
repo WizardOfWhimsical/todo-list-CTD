@@ -34,7 +34,7 @@ export async function post(endPoint, options) {
   });
 }
 export async function patch(endPoint, options) {
-  console.log(endPoint);
+  // console.log(endPoint);
   return await fetchErrorHandling(`${endPoint}`, {
     ...options,
     method: 'PATCH',

@@ -33,7 +33,7 @@ export default function Logon({ onSetEmail, onSetToken }) {
   }
 
   useEffect(() => {
-    console.log(authError);
+    console.log('Errors: ', authError);
   }, [authError]);
 
   return (

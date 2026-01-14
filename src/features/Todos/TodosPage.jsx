@@ -72,7 +72,10 @@ export default function TodosPage({ token }) {
 
     try {
       const data = await post(`tasks`, options);
+      console.log('returned item\n', data);
+      // maybe something here, it is not updating with the new retruned item, gotta be here because the current one updates
       dispatch({ type: 'SYNCHRONIZE_TODO', id: newToDo.id, data });
+
       invalidateCache();
     } catch (e) {
       setError((prev) => [...prev, e]);
@@ -118,7 +121,13 @@ export default function TodosPage({ token }) {
       },
     };
     try {
+      // i think this is the wrong id
+      // also dont i need to return the data to be replace into the array?
+      console.log('target Todo\n', targetTodo);
+      console.log('Edited todo\n', editedTodo);
+
       await patch(`tasks/${editedTodo.id}`, options);
+      // console.log(data);
       invalidateCache();
     } catch (e) {
       setError((prev) => [...prev, e]);
@@ -127,11 +136,11 @@ export default function TodosPage({ token }) {
   }
 
   function handleSortByChange(newValue) {
-    console.log('handle', newValue);
+    // console.log('handle', newValue);
     setSortBy(newValue);
   }
   function handleSortByDirectionChange(newValue) {
-    console.log('sort direction', newValue);
+    // console.log('sort direction', newValue);
     setSortDirection(newValue);
   }
 

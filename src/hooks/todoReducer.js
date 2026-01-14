@@ -12,15 +12,22 @@ export default function todoReducer(state, action) {
 
       return [newToDo, ...state];
     }
+
     // try to turn this into UPDATE_TODO
     case 'SYNCHRONIZE_TODO': {
+      console.log(action);
       return state.map((todo) => {
+        // ITS HERE
+        console.log('before conditional');
+
         if (todo.id === action.id) {
+          console.log('running...', action);
           return action.data;
         }
         return todo;
       });
     }
+
     case 'REVERT_ADD_TODO': {
       return state.filter((todo) => todo.id !== action.id);
     }
