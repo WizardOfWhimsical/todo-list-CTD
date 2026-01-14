@@ -15,14 +15,8 @@ export default function todoReducer(state, action) {
 
     // try to turn this into UPDATE_TODO
     case 'SYNCHRONIZE_TODO': {
-      console.log(action);
-      console.log(state);
       return state.map((todo) => {
-        // ITS HERE
-        // its not replacing the todo with the one from the db
-
         if (todo.id === action.id) {
-          console.log('running...', action);
           return action.data;
         }
         return todo;

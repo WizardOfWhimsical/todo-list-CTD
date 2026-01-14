@@ -73,10 +73,6 @@ export default function TodosPage({ token }) {
     try {
       const data = await post(`tasks`, options);
 
-      console.log('returned item\n', data);
-
-      // RIGHT FKING HERE, WHY CANT I SEE IT
-      // its not replacing it?
       dispatch({ type: 'SYNCHRONIZE_TODO', id: newToDo.id, data });
 
       invalidateCache();
@@ -115,7 +111,7 @@ export default function TodosPage({ token }) {
     });
 
     const targetTodo = todoList.find((todo) => todo.id === editedTodo.id);
-    // i dont think this is updating right. i am geting an internal server response 500 when i add a new todo but try to update it, thats when the eroor occurs
+
     const options = {
       headers: { 'X-CSRF-TOKEN': token },
       body: {
@@ -124,13 +120,8 @@ export default function TodosPage({ token }) {
       },
     };
     try {
-      // i think this is the wrong id
-      // also dont i need to return the data to be replace into the array?
-      // console.log('target Todo\n', targetTodo);
-      // console.log('Edited todo\n', editedTodo);
-      // its getting the wrong id, FK
+      // understand this fool!
       await patch(`tasks/${editedTodo.id}`, options);
-      // console.log(data);
       invalidateCache();
     } catch (e) {
       setError((prev) => [...prev, e]);
@@ -139,11 +130,9 @@ export default function TodosPage({ token }) {
   }
 
   function handleSortByChange(newValue) {
-    // console.log('handle', newValue);
     setSortBy(newValue);
   }
   function handleSortByDirectionChange(newValue) {
-    // console.log('sort direction', newValue);
     setSortDirection(newValue);
   }
 
