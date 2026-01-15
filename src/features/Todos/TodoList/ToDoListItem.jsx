@@ -30,18 +30,20 @@ export function ToDoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
     const finalTitle = finishEdit();
     onUpdateTodo({ ...todo, title: finalTitle });
   }
-
+  const escapeKey = (e) => {
+    if (e.key === 'Escape') cancelEdit();
+  };
   return (
     <li>
       <form onSubmit={handleUpdate}>
         {isEditing ? (
           <>
-            {inputRef.current?.focus()}
             <TextInputWithLabel
               labelText="Editing task: "
               value={workingTitle}
               onChange={handleEdit}
               ref={inputRef}
+              onKeyDown={escapeKey}
             />
             <button type="button" onClick={cancelEdit}>
               Cancel
