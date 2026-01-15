@@ -1,5 +1,6 @@
 import TextInputWithLabel from '../../../shared/TextInputWithLabel';
 import useEditableTitle from '../../../hooks/useEditableTitle';
+import { useEffect, useRef } from 'react';
 
 //ToDoListItem.jsx
 export function ToDoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
@@ -11,6 +12,13 @@ export function ToDoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
     finishEdit,
     cancelEdit,
   } = useEditableTitle(todo.title);
+  const inputRef = useRef();
+
+  useEffect(() => {
+    if (isEditing) {
+      inputRef.current.focus();
+    }
+  }, [isEditing]);
 
   function handleEdit(e) {
     updateTitle(e.target.value);
@@ -28,10 +36,12 @@ export function ToDoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
       <form onSubmit={handleUpdate}>
         {isEditing ? (
           <>
+            {inputRef.current?.focus()}
             <TextInputWithLabel
               labelText="Editing task: "
               value={workingTitle}
               onChange={handleEdit}
+              ref={inputRef}
             />
             <button type="button" onClick={cancelEdit}>
               Cancel
@@ -50,7 +60,13 @@ export function ToDoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
               />
             </label>
             <span>{todo.title}</span>
-            <button type="button" onClick={() => startEditing()}>
+            <button
+              type="button"
+              onClick={() => {
+                startEditing();
+                // inputRef.current?.focus();
+              }}
+            >
               EDIT
             </button>
           </>
