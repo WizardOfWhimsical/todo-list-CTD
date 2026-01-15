@@ -36,6 +36,14 @@ export default function Logon({ onSetEmail, onSetToken }) {
 
   return (
     <>
+      {authError && (
+        <div>
+          <p>{authError}</p>
+          <button type="button" onClick={() => setAuthError('')}>
+            Clear Authorization
+          </button>
+        </div>
+      )}
       {isLoggingOn ? (
         <h1>Is Logging Inn....</h1>
       ) : (
