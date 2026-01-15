@@ -11,24 +11,26 @@ import useDebounce from '../../hooks/useDebounce';
 export default function TodosPage({ token }) {
   const [todoList, dispatch] = useReducer(todoReducer, []);
 
-  const [error, setError] = useState([]);
+  const [errors, setErrors] = useState([]);
   const [isTodoListLoading, setIsTodoListLoading] = useState(false);
 
   const [sortBy, setSortBy] = useState('creationDate');
   const [sortDirection, setSortDirection] = useState('desc');
 
   const [filterterm, setFilterTerm] = useState('');
-  const debouncedFilter = useDebounce(filterterm, 500);
+  const debouncedFilterTerm = useDebounce(filterterm, 500);
 
   const [dataVersion, setDataVersion] = useState(0);
+
+  const [filterError, setFilterError] = useState('');
 
   useEffect(() => {
     if (!token) return;
     let firstPost = false;
 
     const paramsObj = { sortBy, sortDirection };
-    if (debouncedFilter) {
-      paramsObj.find = debouncedFilter;
+    if (debouncedFilterTerm) {
+      paramsObj.find = debouncedFilterTerm;
     }
     const params = new URLSearchParams(paramsObj);
     async function fetchTodos() {
@@ -43,19 +45,32 @@ export default function TodosPage({ token }) {
         if (!firstPost) {
           dispatch({ data, type: 'GET_TODOS' });
         }
+        setFilterError('');
       } catch (er) {
-        setError((prev) => [...prev, er]);
-        console.log(er);
+        setErrors((prev) => [...prev, er]);
+        if (
+          debouncedFilterTerm ||
+          sortBy !== 'creationDate' ||
+          sortDirection !== 'desc'
+        ) {
+          setFilterError(`Error filtering/sorting todos: ${errors.message}`);
+        } else {
+          setErrors((previous) => [
+            ...previous,
+            `Error fetching todos: ${errors.message}`,
+          ]);
+        }
       } finally {
         setIsTodoListLoading(false);
       }
     }
     fetchTodos();
+
     return () => {
       console.log('one render ran clean up');
       firstPost = true;
     };
-  }, [token, sortBy, sortDirection, debouncedFilter]);
+  }, [token, sortBy, sortDirection, debouncedFilterTerm, errors.message]);
 
   /**
    * @param {string} todoTitle
@@ -77,7 +92,7 @@ export default function TodosPage({ token }) {
 
       invalidateCache();
     } catch (e) {
-      setError((prev) => [...prev, e]);
+      setErrors((prev) => [...prev, e]);
       dispatch({ type: 'REVERT_ADD_TODO', id: newToDo.id });
     }
   }
@@ -99,7 +114,7 @@ export default function TodosPage({ token }) {
       await patch(`tasks/${todoId}`, options);
       invalidateCache();
     } catch (e) {
-      setError((prev) => [...prev, e]);
+      setErrors((prev) => [...prev, e]);
       dispatch({ type: 'UPDATE_TODO', todo: targetTodo });
     }
   }
@@ -124,7 +139,7 @@ export default function TodosPage({ token }) {
       await patch(`tasks/${editedTodo.id}`, options);
       invalidateCache();
     } catch (e) {
-      setError((prev) => [...prev, e]);
+      setErrors((prev) => [...prev, e]);
       dispatch({ type: 'UPDATE_TODO', todo: targetTodo });
     }
   }
@@ -150,14 +165,15 @@ export default function TodosPage({ token }) {
 
   return (
     <>
-      {error &&
-        error.map((err, index) => {
+      {errors &&
+        errors.map((err, index) => {
+          if (!err.message) return;
           return (
             <span key={index}>
               <p>{err.message}</p>
               <button
                 onClick={() =>
-                  setError((previousErrors) =>
+                  setErrors((previousErrors) =>
                     previousErrors.filter((error, i) => i !== index)
                   )
                 }
@@ -167,6 +183,14 @@ export default function TodosPage({ token }) {
             </span>
           );
         })}
+      {filterError && (
+        <div>
+          <p>{filterError}</p>
+          <button type="button" onClick={() => setFilterError('')}>
+            Clear Filter Error
+          </button>
+        </div>
+      )}
       <h2>My Todos</h2>
       <ToDoForm onAddTodo={addToDo} />
       <FilterInput
