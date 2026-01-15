@@ -163,6 +163,13 @@ export default function TodosPage({ token }) {
     setDataVersion((previous) => previous + 1);
   }, [dataVersion]);
 
+  function resetFilters() {
+    setFilterTerm('');
+    setSortBy('creationDate');
+    setSortDirection('desc');
+    setFilterError('');
+  }
+
   return (
     <>
       {errors &&
@@ -188,6 +195,9 @@ export default function TodosPage({ token }) {
           <p>{filterError}</p>
           <button type="button" onClick={() => setFilterError('')}>
             Clear Filter Error
+          </button>
+          <button type="button" onClick={() => resetFilters()}>
+            Reset Filters
           </button>
         </div>
       )}
