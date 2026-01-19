@@ -18,9 +18,18 @@ export const TODO_ACTIONS = {
 
 export function todoReducer(state, action) {
   switch (action.type) {
+    case 'FETCH_START': {
+      return { ...state, isTodoListLoading: true };
+    }
     //gets list-fetch_success
-    case 'GET_TODOS': {
+    case 'FETCH_SUCCESS': {
       return action.data;
+    }
+    case 'FETCH_ERROR': {
+      return {
+        ...state,
+        error: action.error,
+      };
     }
     // puts todo in list
     case 'ADD_TODO': {

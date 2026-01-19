@@ -5,7 +5,11 @@ import ToDoForm from './ToDoForm';
 import { post, patch, get } from '../../utils/api';
 import { FilterInput } from '../../shared/FilterInput';
 import SortBy from '../../shared/SortBy';
-import todoReducer from '../../hooks/todoReducer';
+import {
+  todoReducer,
+  initialTodoState,
+  TODO_ACTIONS,
+} from '../../hooks/todoReducer';
 import useDebounce from '../../hooks/useDebounce';
 
 export default function TodosPage({ token }) {
@@ -46,12 +50,13 @@ export default function TodosPage({ token }) {
         const data = await get(`tasks?${params}`, options);
         // fetch_success
         if (!firstPost) {
-          dispatch({ data, type: 'GET_TODOS' });
+          dispatch({ data, type: TODO_ACTIONS.FETCH_SUCCESS });
         }
         //clearing err
         setFilterError('');
       } catch (er) {
         //setting err->line 64 failSafe? seprate err
+        dispatch({ initialTodoState, type: TODO_ACTIONS.FETCH_ERROR });
         setErrors((prev) => [...prev, er]);
         //search/sort filterErr
         if (
