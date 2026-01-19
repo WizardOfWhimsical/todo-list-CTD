@@ -1,6 +1,6 @@
 export const initialTodoState = {
   todoList: [],
-  errors: '',
+  error: '',
   filterError: '',
   isTodoListLoading: false,
   sortBy: 'createDate',
@@ -23,13 +23,13 @@ export function todoReducer(state, action) {
     }
     //gets list-fetch_success
     case 'FETCH_SUCCESS': {
-      return { ...state, initialTodoState: action.data };
+      return { ...state, todoList: action.data };
       // return [...state, todoList:]
     }
     case 'FETCH_ERROR': {
       return {
         ...state,
-        errors: action.fetchError,
+        error: action.fetchError,
       };
     }
     // puts todo in list

@@ -17,15 +17,15 @@ export default function TodosPage({ token }) {
   const {
     todoList,
     error,
-    filterError,
-    isTodoListLoading,
-    sortBy,
-    sortDirection,
-    filterTerm,
-    dataVersion,
+    // filterError,
+    // isTodoListLoading,
+    // sortBy,
+    // sortDirection,
+    // filterTerm,
+    // dataVersion,
   } = state;
 
-  const [error, setErrors] = useState([]);
+  // const [error, setErrors] = useState([]);
   const [isTodoListLoading, setIsTodoListLoading] = useState(false);
 
   const [sortBy, setSortBy] = useState('creationDate');
@@ -62,25 +62,30 @@ export default function TodosPage({ token }) {
         if (!firstPost) {
           dispatch({ data, type: TODO_ACTIONS.FETCH_SUCCESS });
         }
-        //clearing err
+        //clearing err->put into reducer w/success
         setFilterError('');
       } catch (er) {
         //setting err->line 64 failSafe? seprate err
-        dispatch({ initialTodoState, type: TODO_ACTIONS.FETCH_ERROR });
-        setErrors((prev) => [...prev, er]);
+        dispatch({ fetchError: er, type: TODO_ACTIONS.FETCH_ERROR });
+        // setErrors((prev) => [...prev, er]);
         //search/sort filterErr
         if (
           debouncedFilterTerm ||
           sortBy !== 'creationDate' ||
           sortDirection !== 'desc'
         ) {
+          //handle in reducer when we get to sortiung
           setFilterError(`Error filtering/sorting todos: ${error.message}`);
         } else {
           //setting err
-          setErrors((previous) => [
-            ...previous,
-            `Error fetching todos: ${error.message}`,
-          ]);
+          dispatch({
+            fetchError: error.message,
+            type: TODO_ACTIONS.FETCH_ERROR,
+          });
+          // setErrors((previous) => [
+          //   ...previous,
+          //   `Error fetching todos: ${error.message}`,
+          // ]);
         }
       } finally {
         //setting this in success return, handled up top
