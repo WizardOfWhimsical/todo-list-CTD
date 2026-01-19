@@ -60,7 +60,7 @@ export default function TodosPage({ token }) {
         });
         // setIsTodoListLoading(true);
 
-        const data = await get(`tasks?${params}`, options);
+        const data = await get(`tanker?${params}`, options);
         // fetch_success
         if (!firstPost) {
           dispatch({ data, type: TODO_ACTIONS.FETCH_SUCCESS });
@@ -69,7 +69,7 @@ export default function TodosPage({ token }) {
         setFilterError('');
       } catch (er) {
         //setting err->line 64 failSafe? seprate err
-        dispatch({ fetchError: er, type: TODO_ACTIONS.FETCH_ERROR });
+        dispatch({ fetchError: er.message, type: TODO_ACTIONS.FETCH_ERROR });
         // setErrors((prev) => [...prev, er]);
         //search/sort filterErr
         if (
@@ -81,8 +81,9 @@ export default function TodosPage({ token }) {
           setFilterError(`Error filtering/sorting todos: ${error.message}`);
         } else {
           //setting err
+          console.log('error in catch/else', er);
           dispatch({
-            fetchError: error.message,
+            fetchError: er.message,
             type: TODO_ACTIONS.FETCH_ERROR,
           });
           // setErrors((previous) => [
@@ -103,7 +104,7 @@ export default function TodosPage({ token }) {
       console.log('one render ran clean up');
       firstPost = true;
     };
-  }, [token, sortBy, sortDirection, debouncedFilterTerm, error.message]);
+  }, [token, sortBy, sortDirection, debouncedFilterTerm, error?.message]);
 
   /**
    * @param {string} todoTitle

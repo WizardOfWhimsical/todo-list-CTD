@@ -33,6 +33,7 @@ export function todoReducer(state, action) {
       // return [...state, todoList:]
     }
     case 'FETCH_ERROR': {
+      // console.log()
       return {
         ...state,
         isTodoListLoading: false,
