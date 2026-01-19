@@ -17,8 +17,8 @@ export default function TodosPage({ token }) {
   const {
     todoList,
     error,
+    isTodoListLoading,
     // filterError,
-    // isTodoListLoading,
     // sortBy,
     // sortDirection,
     // filterTerm,
@@ -26,7 +26,7 @@ export default function TodosPage({ token }) {
   } = state;
 
   // const [error, setErrors] = useState([]);
-  const [isTodoListLoading, setIsTodoListLoading] = useState(false);
+  // const [isTodoListLoading, setIsTodoListLoading] = useState(false);
 
   const [sortBy, setSortBy] = useState('creationDate');
   const [sortDirection, setSortDirection] = useState('desc');
@@ -55,7 +55,10 @@ export default function TodosPage({ token }) {
       };
       try {
         //fetch_start?
-        setIsTodoListLoading(true);
+        dispatch({
+          type: TODO_ACTIONS.FETCH_START,
+        });
+        // setIsTodoListLoading(true);
 
         const data = await get(`tasks?${params}`, options);
         // fetch_success
@@ -87,11 +90,13 @@ export default function TodosPage({ token }) {
           //   `Error fetching todos: ${error.message}`,
           // ]);
         }
-      } finally {
-        //setting this in success return, handled up top
-        setIsTodoListLoading(false);
       }
+      // finally {
+      //   //setting this in success return, handled up top
+      //   setIsTodoListLoading(false);
+      // }
     }
+
     fetchTodos();
 
     return () => {
@@ -120,7 +125,11 @@ export default function TodosPage({ token }) {
 
       invalidateCache();
     } catch (e) {
-      setErrors((prev) => [...prev, e]);
+      dispatch({
+        fetchError: e,
+        type: TODO_ACTIONS.FETCH_ERROR,
+      });
+      // setErrors((prev) => [...prev, e]);
       dispatch({ type: 'REVERT_ADD_TODO', id: newToDo.id });
     }
   }
@@ -142,7 +151,12 @@ export default function TodosPage({ token }) {
       await patch(`tasks/${todoId}`, options);
       invalidateCache();
     } catch (e) {
-      setErrors((prev) => [...prev, e]);
+      //COMBINE? line 155-160
+      dispatch({
+        fetchError: e,
+        type: TODO_ACTIONS.FETCH_ERROR,
+      });
+      // setErrors((prev) => [...prev, e]);
       dispatch({ type: 'UPDATE_TODO', todo: targetTodo });
     }
   }
@@ -167,7 +181,11 @@ export default function TodosPage({ token }) {
       await patch(`tasks/${editedTodo.id}`, options);
       invalidateCache();
     } catch (e) {
-      setErrors((prev) => [...prev, e]);
+      dispatch({
+        fetchError: e,
+        type: TODO_ACTIONS.FETCH_ERROR,
+      });
+      // setErrors((prev) => [...prev, e]);
       dispatch({ type: 'UPDATE_TODO', todo: targetTodo });
     }
   }
@@ -200,24 +218,18 @@ export default function TodosPage({ token }) {
 
   return (
     <>
-      {error &&
-        error.map((err, index) => {
-          if (!err.message) return;
-          return (
-            <span key={index}>
-              <p>{err.message}</p>
-              <button
-                onClick={() =>
-                  setErrors((previousErrors) =>
-                    previousErrors.filter((error, i) => i !== index)
-                  )
-                }
-              >
-                Close
-              </button>
-            </span>
-          );
-        })}
+      {error && (
+        <div>
+          <p>{error}</p>
+          <button
+            type="button"
+            onClick={() => dispatch({ type: TODO_ACTIONS.ERROR_CLEAR })}
+          >
+            Clear Filter Error
+          </button>
+        </div>
+      )}
+      ;
       {filterError && (
         <div>
           <p>{filterError}</p>
@@ -242,7 +254,6 @@ export default function TodosPage({ token }) {
         sortBy={sortBy}
         sortDirection={sortDirection}
       />
-
       {isTodoListLoading ? (
         <h1>Is Loading the List....</h1>
       ) : (
