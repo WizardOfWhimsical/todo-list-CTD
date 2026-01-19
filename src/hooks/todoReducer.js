@@ -14,24 +14,35 @@ export const TODO_ACTIONS = {
   FETCH_START: 'FETCH_START',
   FETCH_SUCCESS: 'FETCH_SUCCESS',
   FETCH_ERROR: 'FETCH_ERROR',
+  ERROR_CLEAR: 'ERROR_CLEAR',
 };
 
 export function todoReducer(state, action) {
   switch (action.type) {
     case 'FETCH_START': {
-      return { ...state, isTodoListLoading: true };
+      return { ...state, isTodoListLoading: true, error: '' };
     }
     //gets list-fetch_success
     case 'FETCH_SUCCESS': {
-      return { ...state, todoList: action.data };
+      return {
+        ...state,
+        todoList: action.data,
+        error: '',
+        isTodoListLoading: false,
+      };
       // return [...state, todoList:]
     }
     case 'FETCH_ERROR': {
       return {
         ...state,
+        isTodoListLoading: false,
         error: action.fetchError,
       };
     }
+    case 'ERROR_CLEAR': {
+      return { ...state, error: '' };
+    }
+    //------------------------------------------
     // puts todo in list
     case 'ADD_TODO': {
       const newToDo = {
