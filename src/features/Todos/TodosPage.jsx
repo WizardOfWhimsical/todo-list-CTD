@@ -32,22 +32,28 @@ export default function TodosPage({ token }) {
     if (debouncedFilterTerm) {
       paramsObj.find = debouncedFilterTerm;
     }
+
     const params = new URLSearchParams(paramsObj);
+
     async function fetchTodos() {
       const options = {
         headers: { 'X-CSRF-TOKEN': token },
       };
       try {
+        //fetch_start?
         setIsTodoListLoading(true);
 
         const data = await get(`tasks?${params}`, options);
-
+        // fetch_success
         if (!firstPost) {
           dispatch({ data, type: 'GET_TODOS' });
         }
+        //clearing err
         setFilterError('');
       } catch (er) {
+        //setting err->line 64 failSafe? seprate err
         setErrors((prev) => [...prev, er]);
+        //search/sort filterErr
         if (
           debouncedFilterTerm ||
           sortBy !== 'creationDate' ||
@@ -55,6 +61,7 @@ export default function TodosPage({ token }) {
         ) {
           setFilterError(`Error filtering/sorting todos: ${errors.message}`);
         } else {
+          //setting err
           setErrors((previous) => [
             ...previous,
             `Error fetching todos: ${errors.message}`,

@@ -12,6 +12,7 @@ export function ToDoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
     finishEdit,
     cancelEdit,
   } = useEditableTitle(todo.title);
+
   const inputRef = useRef();
 
   useEffect(() => {

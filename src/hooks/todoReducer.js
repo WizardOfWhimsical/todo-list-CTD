@@ -1,6 +1,24 @@
-export default function todoReducer(state, action) {
+export const initialTodoState = {
+  todoList: [],
+  error: '',
+  filterError: '',
+  isTodoListLoading: false,
+  sortBy: 'createDate',
+  sortDirection: 'asc',
+  filterTerm: '',
+  dataVerion: 0,
+};
+
+export const TODO_ACTIONS = {
+  // fetcho operations
+  FETCH_START: 'FETCH_START',
+  FETCH_SUCCESS: 'FETCH_SUCCESS',
+  FETCH_ERROR: 'FETCH_ERROR',
+};
+
+export function todoReducer(state, action) {
   switch (action.type) {
-    //gets list
+    //gets list-fetch_success
     case 'GET_TODOS': {
       return action.data;
     }
