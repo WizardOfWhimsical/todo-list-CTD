@@ -28,7 +28,7 @@ export function todoReducer(state, action) {
     case 'FETCH_ERROR': {
       return {
         ...state,
-        error: action.error,
+        error: action.fetchError,
       };
     }
     // puts todo in list
