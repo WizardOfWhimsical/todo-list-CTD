@@ -13,16 +13,26 @@ import {
 import useDebounce from '../../hooks/useDebounce';
 
 export default function TodosPage({ token }) {
-  const [todoList, dispatch] = useReducer(todoReducer, []);
+  const [state, dispatch] = useReducer(todoReducer, initialTodoState);
+  const {
+    todoList,
+    error,
+    filterError,
+    isTodoListLoading,
+    sortBy,
+    sortDirection,
+    filterTerm,
+    dataVersion,
+  } = state;
 
-  const [errors, setErrors] = useState([]);
+  const [error, setErrors] = useState([]);
   const [isTodoListLoading, setIsTodoListLoading] = useState(false);
 
   const [sortBy, setSortBy] = useState('creationDate');
   const [sortDirection, setSortDirection] = useState('desc');
 
-  const [filterterm, setFilterTerm] = useState('');
-  const debouncedFilterTerm = useDebounce(filterterm, 500);
+  const [filterTerm, setFilterTerm] = useState('');
+  const debouncedFilterTerm = useDebounce(filterTerm, 500);
 
   const [dataVersion, setDataVersion] = useState(0);
 
@@ -64,15 +74,16 @@ export default function TodosPage({ token }) {
           sortBy !== 'creationDate' ||
           sortDirection !== 'desc'
         ) {
-          setFilterError(`Error filtering/sorting todos: ${errors.message}`);
+          setFilterError(`Error filtering/sorting todos: ${error.message}`);
         } else {
           //setting err
           setErrors((previous) => [
             ...previous,
-            `Error fetching todos: ${errors.message}`,
+            `Error fetching todos: ${error.message}`,
           ]);
         }
       } finally {
+        //setting this in success return, handled up top
         setIsTodoListLoading(false);
       }
     }
@@ -82,7 +93,7 @@ export default function TodosPage({ token }) {
       console.log('one render ran clean up');
       firstPost = true;
     };
-  }, [token, sortBy, sortDirection, debouncedFilterTerm, errors.message]);
+  }, [token, sortBy, sortDirection, debouncedFilterTerm, error.message]);
 
   /**
    * @param {string} todoTitle
@@ -184,8 +195,8 @@ export default function TodosPage({ token }) {
 
   return (
     <>
-      {errors &&
-        errors.map((err, index) => {
+      {error &&
+        error.map((err, index) => {
           if (!err.message) return;
           return (
             <span key={index}>
@@ -216,7 +227,7 @@ export default function TodosPage({ token }) {
       <h2>My Todos</h2>
       <ToDoForm onAddTodo={addToDo} />
       <FilterInput
-        filterTerm={filterterm}
+        filterTerm={filterTerm}
         onFilterChange={handlefilterChange}
       />
       <br />
