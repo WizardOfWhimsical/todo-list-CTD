@@ -12,7 +12,7 @@ function App() {
 
   return token ? (
     <>
-      <Header message={'Hopefully Do'} />
+      <Header message={'Going To Do...'} />
       <TodosPage token={token} />
     </>
   ) : (

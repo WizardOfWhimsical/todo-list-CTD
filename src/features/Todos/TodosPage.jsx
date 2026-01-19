@@ -18,7 +18,7 @@ export default function TodosPage({ token }) {
     todoList,
     error,
     isTodoListLoading,
-    // filterError,
+    filterError,
     // sortBy,
     // sortDirection,
     // filterTerm,
@@ -27,6 +27,7 @@ export default function TodosPage({ token }) {
 
   // const [error, setErrors] = useState([]);
   // const [isTodoListLoading, setIsTodoListLoading] = useState(false);
+  // const [filterError, setFilterError] = useState('');
 
   const [sortBy, setSortBy] = useState('creationDate');
   const [sortDirection, setSortDirection] = useState('desc');
@@ -35,8 +36,6 @@ export default function TodosPage({ token }) {
   const debouncedFilterTerm = useDebounce(filterTerm, 500);
 
   const [dataVersion, setDataVersion] = useState(0);
-
-  const [filterError, setFilterError] = useState('');
 
   useEffect(() => {
     if (!token) return;
@@ -60,16 +59,16 @@ export default function TodosPage({ token }) {
         });
         // setIsTodoListLoading(true);
 
-        const data = await get(`tanker?${params}`, options);
+        const data = await get(`tasks?${params}`, options);
         // fetch_success
         if (!firstPost) {
           dispatch({ data, type: TODO_ACTIONS.FETCH_SUCCESS });
         }
         //clearing err->put into reducer w/success
-        setFilterError('');
-      } catch (er) {
+        dispatch({ type: TODO_ACTIONS.FILTER_ERROR_CLEAR });
+      } catch (error) {
         //setting err->line 64 failSafe? seprate err
-        dispatch({ fetchError: er.message, type: TODO_ACTIONS.FETCH_ERROR });
+        dispatch({ fetchError: error.message, type: TODO_ACTIONS.FETCH_ERROR });
         // setErrors((prev) => [...prev, er]);
         //search/sort filterErr
         if (
@@ -77,13 +76,17 @@ export default function TodosPage({ token }) {
           sortBy !== 'creationDate' ||
           sortDirection !== 'desc'
         ) {
-          //handle in reducer when we get to sortiung
-          setFilterError(`Error filtering/sorting todos: ${error.message}`);
+          //handle in reducer when we get to sorting
+          dispatch({
+            sortError: error.message,
+            type: TODO_ACTIONS.FILTER_ERROR,
+          });
+          // setFilterError(`Error filtering/sorting todos: ${error.message}`);
         } else {
           //setting err
-          console.log('error in catch/else', er);
+          console.log('error in catch/else', error);
           dispatch({
-            fetchError: er.message,
+            fetchError: error.message,
             type: TODO_ACTIONS.FETCH_ERROR,
           });
           // setErrors((previous) => [
@@ -214,7 +217,8 @@ export default function TodosPage({ token }) {
     setFilterTerm('');
     setSortBy('creationDate');
     setSortDirection('desc');
-    setFilterError('');
+    dispatch({ type: TODO_ACTIONS.FILTER_ERROR_CLEAR });
+    // setFilterError('');
   }
 
   return (
@@ -226,7 +230,7 @@ export default function TodosPage({ token }) {
             type="button"
             onClick={() => dispatch({ type: TODO_ACTIONS.ERROR_CLEAR })}
           >
-            Clear Filter Error
+            Clear Error
           </button>
         </div>
       )}
@@ -234,7 +238,10 @@ export default function TodosPage({ token }) {
       {filterError && (
         <div>
           <p>{filterError}</p>
-          <button type="button" onClick={() => setFilterError('')}>
+          <button
+            type="button"
+            onClick={() => dispatch({ type: TODO_ACTIONS.FILTER_ERROR_CLEAR })}
+          >
             Clear Filter Error
           </button>
           <button type="button" onClick={() => resetFilters()}>

@@ -10,11 +10,14 @@ export const initialTodoState = {
 };
 
 export const TODO_ACTIONS = {
-  // fetcho operations
+  // fetch operations
   FETCH_START: 'FETCH_START',
   FETCH_SUCCESS: 'FETCH_SUCCESS',
   FETCH_ERROR: 'FETCH_ERROR',
   ERROR_CLEAR: 'ERROR_CLEAR',
+  // filter operations
+  FILTER_ERROR: 'FILTER_ERROR',
+  FILTER_ERROR_CLEAR: 'FILTER_ERROR_CLEAR',
 };
 
 export function todoReducer(state, action) {
@@ -33,7 +36,6 @@ export function todoReducer(state, action) {
       // return [...state, todoList:]
     }
     case 'FETCH_ERROR': {
-      // console.log()
       return {
         ...state,
         isTodoListLoading: false,
@@ -42,6 +44,13 @@ export function todoReducer(state, action) {
     }
     case 'ERROR_CLEAR': {
       return { ...state, error: '' };
+    }
+    //------------------------------------------
+    case 'FILTER_ERROR': {
+      return { ...state, filterError: action.sortError };
+    }
+    case 'FILTER_ERROR_CLEAR': {
+      return { ...state, filterError: '' };
     }
     //------------------------------------------
     // puts todo in list
