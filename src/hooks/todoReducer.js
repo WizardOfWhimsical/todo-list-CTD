@@ -3,7 +3,7 @@ export const initialTodoState = {
   error: '',
   filterError: '',
   isTodoListLoading: false,
-  sortBy: 'createDate',
+  sortBy: 'title',
   sortDirection: 'asc',
   filterTerm: '',
   dataVerion: 0,
@@ -16,6 +16,8 @@ export const TODO_ACTIONS = {
   FETCH_ERROR: 'FETCH_ERROR',
   ERROR_CLEAR: 'ERROR_CLEAR',
   // filter operations
+  SET_SORT_BY: 'SET_SORT_BY',
+  SET_SORT_DIRECTION: 'SET_SORT_DIRECTION',
   FILTER_ERROR: 'FILTER_ERROR',
   FILTER_ERROR_CLEAR: 'FILTER_ERROR_CLEAR',
 };
@@ -43,14 +45,26 @@ export function todoReducer(state, action) {
       };
     }
     case 'ERROR_CLEAR': {
-      return { ...state, error: '' };
+      return { ...state, error: '', isTodoListLoading: false };
     }
     //------------------------------------------
+    case 'SET_SORT_BY': {
+      console.log('hitting switch', action.sortBy);
+      return { ...state, sortBy: action.sortBy, filterError: '' };
+    }
+    case 'SET_SORT_DIRECTION': {
+      return { ...state, filterError: '', sortDirection: action.sortDirection };
+    }
     case 'FILTER_ERROR': {
-      return { ...state, filterError: action.sortError };
+      return { ...state, sortBy: 'createDate', filterError: action.sortError };
     }
     case 'FILTER_ERROR_CLEAR': {
-      return { ...state, filterError: '' };
+      return {
+        ...state,
+        sortBy: 'createDate',
+        sortDirection: 'desc',
+        filterError: '',
+      };
     }
     //------------------------------------------
     // puts todo in list
@@ -60,29 +74,38 @@ export function todoReducer(state, action) {
         title: action.title,
         isCompleted: false,
       };
-      return [newToDo, ...state];
+      return { ...state, todoList: [newToDo, ...state.todoList] };
     }
     // used for isComplete/isEditing
     case 'UPDATE_TODO': {
-      return state.map((todo) => {
-        if (todo.id === action.todo.id) {
-          return { ...todo, ...action.todo };
-        }
-        return todo;
-      });
+      return {
+        ...state,
+        todoList: state.todoList.map((todo) => {
+          if (todo.id === action.todo.id) {
+            return { ...todo, ...action.todo };
+          }
+          return todo;
+        }),
+      };
     }
     // adds successful db updating to list
     case 'SYNCHRONIZE_TODO': {
-      return state.map((todo) => {
-        if (todo.id === action.id) {
-          return action.data;
-        }
-        return todo;
-      });
+      return {
+        ...state,
+        todoList: state.todoList.map((todo) => {
+          if (todo.id === action.id) {
+            return action.data;
+          }
+          return todo;
+        }),
+      };
     }
     // removes upon failure to update db
     case 'REVERT_ADD_TODO': {
-      return state.filter((todo) => todo.id !== action.id);
+      return {
+        ...state,
+        todoList: state.todoList.filter((todo) => todo.id !== action.id),
+      };
     }
     default: {
       return state;

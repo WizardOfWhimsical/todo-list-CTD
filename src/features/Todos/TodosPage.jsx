@@ -19,7 +19,7 @@ export default function TodosPage({ token }) {
     error,
     isTodoListLoading,
     filterError,
-    // sortBy,
+    sortBy,
     // sortDirection,
     // filterTerm,
     // dataVersion,
@@ -29,7 +29,7 @@ export default function TodosPage({ token }) {
   // const [isTodoListLoading, setIsTodoListLoading] = useState(false);
   // const [filterError, setFilterError] = useState('');
 
-  const [sortBy, setSortBy] = useState('creationDate');
+  // const [sortBy, setSortBy] = useState('creationDate');
   const [sortDirection, setSortDirection] = useState('desc');
 
   const [filterTerm, setFilterTerm] = useState('');
@@ -47,7 +47,7 @@ export default function TodosPage({ token }) {
     }
 
     const params = new URLSearchParams(paramsObj);
-
+    console.log(params.toString());
     async function fetchTodos() {
       const options = {
         headers: { 'X-CSRF-TOKEN': token },
@@ -194,13 +194,24 @@ export default function TodosPage({ token }) {
     }
   }
 
+  /**
+   * @param {string} newValue
+   */
   function handleSortByChange(newValue) {
-    setSortBy(newValue);
+    console.log('sort by before', sortBy);
+    dispatch({ type: TODO_ACTIONS.SET_SORT_BY, sortBy: newValue });
+    console.log('sort by after', sortBy);
+    // setSortBy(newValue);
   }
+  /**
+   * @param {string} newValue
+   */
   function handleSortByDirectionChange(newValue) {
     setSortDirection(newValue);
   }
-
+  /**
+   * @param {string} newTerm
+   */
   function handlefilterChange(newTerm) {
     setFilterTerm(newTerm);
   }
@@ -215,9 +226,10 @@ export default function TodosPage({ token }) {
 
   function resetFilters() {
     setFilterTerm('');
-    setSortBy('creationDate');
-    setSortDirection('desc');
+    //convers all below initially
     dispatch({ type: TODO_ACTIONS.FILTER_ERROR_CLEAR });
+    // setSortBy('creationDate');
+    setSortDirection('desc');
     // setFilterError('');
   }
 
@@ -234,7 +246,6 @@ export default function TodosPage({ token }) {
           </button>
         </div>
       )}
-      ;
       {filterError && (
         <div>
           <p>{filterError}</p>
