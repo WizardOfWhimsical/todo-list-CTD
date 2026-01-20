@@ -33,9 +33,8 @@ export default function TodosPage({ token }) {
   // const [sortDirection, setSortDirection] = useState('desc');
 
   // const [filterTerm, setFilterTerm] = useState('');
-  const debouncedFilterTerm = useDebounce(filterTerm, 500);
-
   const [dataVersion, setDataVersion] = useState(0);
+  const debouncedFilterTerm = useDebounce(filterTerm, 500);
 
   useEffect(() => {
     if (!token) return;
@@ -114,7 +113,7 @@ export default function TodosPage({ token }) {
   async function addToDo(todoTitle) {
     const newToDo = { id: Date.now(), title: todoTitle, isCompleted: false };
 
-    dispatch({ type: 'ADD_TODO', title: todoTitle, id: newToDo.id });
+    dispatch({ type: TODO_ACTIONS.ADD_TODO, title: todoTitle, id: newToDo.id });
 
     const options = {
       headers: { 'X-CSRF-TOKEN': token },
@@ -124,7 +123,7 @@ export default function TodosPage({ token }) {
     try {
       const data = await post(`tasks`, options);
 
-      dispatch({ type: 'SYNCHRONIZE_TODO', id: newToDo.id, data });
+      dispatch({ type: TODO_ACTIONS.SYNCHRONIZE_TODO, id: newToDo.id, data });
 
       invalidateCache();
     } catch (e) {
@@ -140,7 +139,7 @@ export default function TodosPage({ token }) {
   async function completeTodo(todoId) {
     const targetTodo = todoList.find((todo) => todo.id === todoId);
     dispatch({
-      type: 'UPDATE_TODO',
+      type: TODO_ACTIONS.UPDATE_TODO,
       todo: { ...targetTodo, isCompleted: true },
     });
 
@@ -160,13 +159,13 @@ export default function TodosPage({ token }) {
         type: TODO_ACTIONS.FETCH_ERROR,
       });
       // setErrors((prev) => [...prev, e]);
-      dispatch({ type: 'UPDATE_TODO', todo: targetTodo });
+      dispatch({ type: TODO_ACTIONS.UPDATE_TODO, todo: targetTodo });
     }
   }
 
   async function updateTodo(editedTodo) {
     dispatch({
-      type: 'UPDATE_TODO',
+      type: TODO_ACTIONS.UPDATE_TODO,
       todo: editedTodo,
     });
 
@@ -189,7 +188,7 @@ export default function TodosPage({ token }) {
         type: TODO_ACTIONS.FETCH_ERROR,
       });
       // setErrors((prev) => [...prev, e]);
-      dispatch({ type: 'UPDATE_TODO', todo: targetTodo });
+      dispatch({ type: TODO_ACTIONS.UPDATE_TODO, todo: targetTodo });
     }
   }
 
@@ -233,7 +232,7 @@ export default function TodosPage({ token }) {
     // setSortBy('creationDate');
     dispatch({ type: TODO_ACTIONS.SET_SORT_DIRECTION, sortDirection: 'desc' });
     // setSortDirection('desc');
-    dispatch({ type: TODO_ACTIONS.FILTER_ERROR_CLEAR });
+    dispatch({ type: TODO_ACTIONS.FILTER_ERROR, filterError: '' });
     // setFilterError('');
   }
 
@@ -244,7 +243,9 @@ export default function TodosPage({ token }) {
           <p>{error}</p>
           <button
             type="button"
-            onClick={() => dispatch({ type: TODO_ACTIONS.ERROR_CLEAR })}
+            onClick={() =>
+              dispatch({ type: TODO_ACTIONS.FETCH_ERROR, fetchError: '' })
+            }
           >
             Clear Error
           </button>
@@ -255,7 +256,9 @@ export default function TodosPage({ token }) {
           <p>{filterError}</p>
           <button
             type="button"
-            onClick={() => dispatch({ type: TODO_ACTIONS.FILTER_ERROR_CLEAR })}
+            onClick={() =>
+              dispatch({ type: TODO_ACTIONS.FILTER_ERROR, filterError: '' })
+            }
           >
             Clear Filter Error
           </button>
