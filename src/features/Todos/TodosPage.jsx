@@ -84,7 +84,6 @@ export default function TodosPage({ token }) {
           // setFilterError(`Error filtering/sorting todos: ${error.message}`);
         } else {
           //setting err
-          console.log('error in catch/else', error);
           dispatch({
             fetchError: error.message,
             type: TODO_ACTIONS.FETCH_ERROR,
@@ -268,9 +267,7 @@ export default function TodosPage({ token }) {
       />
       <br />
       <SortBy
-        onSortByChange={(newValue) => {
-          handleSortByChange(newValue);
-        }}
+        onSortByChange={handleSortByChange}
         onSortDirectionChange={handleSortByDirectionChange}
         sortBy={sortBy}
         sortDirection={sortDirection}
