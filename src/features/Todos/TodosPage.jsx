@@ -22,8 +22,10 @@ export default function TodosPage({ token }) {
     sortBy,
     sortDirection,
     filterTerm,
-    // dataVersion,
+    dataVersion,
   } = state;
+
+  console.log('data verion start count state', dataVersion);
 
   // const [error, setErrors] = useState([]);
   // const [isTodoListLoading, setIsTodoListLoading] = useState(false);
@@ -33,7 +35,7 @@ export default function TodosPage({ token }) {
   // const [sortDirection, setSortDirection] = useState('desc');
 
   // const [filterTerm, setFilterTerm] = useState('');
-  const [dataVersion, setDataVersion] = useState(0);
+  // const [dataVersion, setDataVersion] = useState(0);
   const debouncedFilterTerm = useDebounce(filterTerm, 500);
 
   useEffect(() => {
@@ -222,7 +224,11 @@ export default function TodosPage({ token }) {
       'Invalidating Memo cache after todo mutation\n',
       `Version${dataVersion}`
     );
-    setDataVersion((previous) => previous + 1);
+    dispatch({
+      type: TODO_ACTIONS.DATA_VERSION_COUNT,
+      // dataVersion: dataVersion,
+    });
+    // setDataVersion((previous) => previous + 1);
   }, [dataVersion]);
 
   function resetFilters() {

@@ -1,3 +1,13 @@
+/**
+ * @param {Array} todoList
+ * @param {string} error
+ * @param {string} filterError
+ * @param {boolean} isTodoListLoading
+ * @param {string} sortBy
+ * @param {string} sortDirection
+ * @param {string} filterTerm
+ * @param {number} dataVerion
+ */
 export const initialTodoState = {
   todoList: [],
   error: '',
@@ -6,9 +16,11 @@ export const initialTodoState = {
   sortBy: 'createDate',
   sortDirection: 'asc',
   filterTerm: '',
-  dataVerion: 0,
+  dataVersion: 0,
 };
-
+/**
+ * @param {string} TODO_ACTIONS
+ */
 export const TODO_ACTIONS = {
   // fetch operations
   FETCH_START: 'FETCH_START',
@@ -24,10 +36,20 @@ export const TODO_ACTIONS = {
   UPDATE_TODO: 'UPDATE_TODO',
   SYNCHRONIZE_TODO: 'SYNCHRONIZE_TODO',
   REVERT_ADD_TODO: 'REVERT_ADD_TODO',
+  //version count
+  DATA_VERSION_COUNT: 'DATA_VERSION_COUNT',
 };
-
+/**
+ *
+ * @param {Object} state
+ * @param {Object} action
+ * @returns {Object}
+ */
 export function todoReducer(state, action) {
   switch (action.type) {
+    case 'DATA_VERSION_COUNT': {
+      return { ...state, dataVersion: state.dataVersion + 1 };
+    }
     case TODO_ACTIONS.FETCH_START: {
       return { ...state, isTodoListLoading: true, error: '' };
     }
