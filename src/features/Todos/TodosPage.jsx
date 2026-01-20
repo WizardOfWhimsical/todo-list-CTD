@@ -2,9 +2,13 @@
 import { useReducer, useEffect, useCallback } from 'react';
 import ToDoList from './TodoList/ToDoList';
 import ToDoForm from './ToDoForm';
+
+import { useAuth } from '../../context/AuthContext';
+
 import { addTodo, patch, get } from '../../utils/api';
 import { FilterInput } from '../../shared/FilterInput';
 import SortBy from '../../shared/SortBy';
+
 import {
   todoReducer,
   initialTodoState,
@@ -12,7 +16,7 @@ import {
 } from '../../hooks/todoReducer';
 import useDebounce from '../../hooks/useDebounce';
 
-export default function TodosPage({ token }) {
+export default function TodosPage() {
   const [state, dispatch] = useReducer(todoReducer, initialTodoState);
   const {
     todoList,
@@ -24,6 +28,8 @@ export default function TodosPage({ token }) {
     filterTerm,
     dataVersion,
   } = state;
+
+  const { token } = useAuth();
 
   console.log('data verion start count state', dataVersion);
 

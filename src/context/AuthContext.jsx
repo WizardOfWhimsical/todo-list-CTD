@@ -36,6 +36,7 @@ export function AuthProvider({ children }) {
         return {
           success: true,
           message: `${userEmail} Successfully logged In`,
+          error: null,
         };
       } else {
         const error = data;
@@ -59,16 +60,20 @@ export function AuthProvider({ children }) {
       const logoffData = await post('user/logoff', {
         headers: { 'X-CSRF-TOKEN': token },
       });
-      if (!logoffData) {
-        const error = { ...logoffData };
-        // error.status = logoffData.status;
-        error.message = `Athentication failed: ${logoffData?.message}`;
-        throw error;
-      }
+
       console.log(logoffData);
+
+      setToken('');
+      setEmail('');
+
+      return {
+        success: true,
+        message: `${email} Successfully logged off`,
+        error: null,
+      };
     } catch (error) {
       return {
-        message: `Somethign went wrong logging off: ${error.message}`,
+        message: `Something went wrong logging off: ${error.message}`,
         error,
       };
     }
@@ -78,6 +83,7 @@ export function AuthProvider({ children }) {
   const value = {
     email,
     token,
+    // If the token exists, we're authenticated
     isAuthenticated: !!token,
     login,
     logout,

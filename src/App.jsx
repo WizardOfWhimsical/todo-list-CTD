@@ -1,24 +1,25 @@
-//App.jsx
-import './App.css';
 import TodosPage from './features/Todos/TodosPage';
 import Header from './shared/Header';
 import Logon from './features/Logon';
-import { useState } from 'react';
+
+import { useAuth } from './context/AuthContext';
+
+import './App.css';
 
 function App() {
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [email, setEmail] = useState('');
-  const [token, setToken] = useState('');
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);`
+
+  const { token } = useAuth();
 
   return token ? (
     <>
       <Header message={'Going To Do...'} />
-      <TodosPage token={token} />
+      <TodosPage />
     </>
   ) : (
     <>
       <Header message={'Please Log In'} />
-      <Logon onSetEmail={setEmail} onSetToken={setToken} />
+      <Logon />
     </>
   );
 }
