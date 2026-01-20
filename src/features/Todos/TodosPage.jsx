@@ -2,7 +2,7 @@
 import { useReducer, useEffect, useCallback } from 'react';
 import ToDoList from './TodoList/ToDoList';
 import ToDoForm from './ToDoForm';
-import { post, patch, get } from '../../utils/api';
+import { addTodo, patch, get } from '../../utils/api';
 import { FilterInput } from '../../shared/FilterInput';
 import SortBy from '../../shared/SortBy';
 import {
@@ -54,7 +54,7 @@ export default function TodosPage({ token }) {
         if (!firstPost) {
           dispatch({ data, type: TODO_ACTIONS.FETCH_SUCCESS });
         }
-        dispatch({ type: TODO_ACTIONS.FILTER_ERROR_CLEAR });
+        dispatch({ type: TODO_ACTIONS.FILTER_ERROR, sortError: '' });
       } catch (error) {
         dispatch({ fetchError: error.message, type: TODO_ACTIONS.FETCH_ERROR });
         if (
@@ -92,13 +92,8 @@ export default function TodosPage({ token }) {
 
     dispatch({ type: TODO_ACTIONS.ADD_TODO, title: todoTitle, id: newToDo.id });
 
-    const options = {
-      headers: { 'X-CSRF-TOKEN': token },
-      body: { title: newToDo.title, isCompleted: newToDo.isCompleted },
-    };
-
     try {
-      const data = await post(`tasks`, options);
+      const data = await addTodo(newToDo, token);
 
       dispatch({ type: TODO_ACTIONS.SYNCHRONIZE_TODO, id: newToDo.id, data });
 

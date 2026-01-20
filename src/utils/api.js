@@ -44,3 +44,10 @@ export async function patch(endPoint, options) {
 export async function get(endPoint, options) {
   return await fetchErrorHandling(endPoint, options);
 }
+export async function addTodo(todo, token) {
+  return await fetchErrorHandling('tasks', {
+    method: 'POST',
+    headers: { 'X-CSRF-TOKEN': token },
+    body: JSON.stringify({ title: todo.title, isCompleted: todo.isCompleted }),
+  });
+}

@@ -116,6 +116,7 @@ export function todoReducer(state, action) {
       };
     }
     default: {
+      console.log('default', action);
       throw new Error(`Unknown action type: ${action.type}`);
     }
   }
