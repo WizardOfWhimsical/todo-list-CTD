@@ -56,13 +56,11 @@ export function todoReducer(state, action) {
       return { ...state, filterError: '', sortDirection: action.sortDirection };
     }
     case 'FILTER_ERROR': {
-      return { ...state, sortBy: 'createDate', filterError: action.sortError };
+      return { ...state, filterError: action.sortError };
     }
     case 'FILTER_ERROR_CLEAR': {
       return {
         ...state,
-        sortBy: 'createDate',
-        sortDirection: 'desc',
         filterError: '',
       };
     }

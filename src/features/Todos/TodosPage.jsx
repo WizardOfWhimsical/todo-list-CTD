@@ -268,7 +268,9 @@ export default function TodosPage({ token }) {
       />
       <br />
       <SortBy
-        onSortByChange={handleSortByChange}
+        onSortByChange={(newValue) => {
+          handleSortByChange(newValue);
+        }}
         onSortDirectionChange={handleSortByDirectionChange}
         sortBy={sortBy}
         sortDirection={sortDirection}
