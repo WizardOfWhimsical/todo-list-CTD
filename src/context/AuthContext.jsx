@@ -7,6 +7,7 @@ const AuthContext = createContext();
 // custom hook with error checking
 export function useAuth() {
   const context = useContext(AuthContext);
+  console.log('Auth context:', context);
   if (!context) {
     throw new Error('useAuth must be used within an AuthProvider');
   }
@@ -47,6 +48,28 @@ export function AuthProvider({ children }) {
         success: false,
         error,
         message: 'Network error during login',
+      };
+    }
+  }
+
+  async function logout(token) {
+    if (!token) setToken('') && setEmail('');
+
+    try {
+      const logoffData = await post('user/logoff', {
+        headers: { 'X-CSRF-TOKEN': token },
+      });
+      if (!logoffData) {
+        const error = { ...logoffData };
+        // error.status = logoffData.status;
+        error.message = `Athentication failed: ${logoffData?.message}`;
+        throw error;
+      }
+      console.log(logoffData);
+    } catch (error) {
+      return {
+        message: `Somethign went wrong logging off: ${error.message}`,
+        error,
       };
     }
   }
