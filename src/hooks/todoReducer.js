@@ -18,6 +18,7 @@ export const TODO_ACTIONS = {
   // filter operations
   SET_SORT_BY: 'SET_SORT_BY',
   SET_SORT_DIRECTION: 'SET_SORT_DIRECTION',
+  SET_S_E_O: 'SET_S_E_O',
   FILTER_ERROR: 'FILTER_ERROR',
   FILTER_ERROR_CLEAR: 'FILTER_ERROR_CLEAR',
 };
@@ -54,6 +55,9 @@ export function todoReducer(state, action) {
     }
     case 'SET_SORT_DIRECTION': {
       return { ...state, filterError: '', sortDirection: action.sortDirection };
+    }
+    case 'SET_S_E_O': {
+      return { ...state, filterTerm: action.filterTerm };
     }
     case 'FILTER_ERROR': {
       return { ...state, filterError: action.sortError };

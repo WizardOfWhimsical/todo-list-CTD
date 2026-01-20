@@ -20,8 +20,8 @@ export default function TodosPage({ token }) {
     isTodoListLoading,
     filterError,
     sortBy,
-    // sortDirection,
-    // filterTerm,
+    sortDirection,
+    filterTerm,
     // dataVersion,
   } = state;
 
@@ -30,9 +30,9 @@ export default function TodosPage({ token }) {
   // const [filterError, setFilterError] = useState('');
 
   // const [sortBy, setSortBy] = useState('creationDate');
-  const [sortDirection, setSortDirection] = useState('desc');
+  // const [sortDirection, setSortDirection] = useState('desc');
 
-  const [filterTerm, setFilterTerm] = useState('');
+  // const [filterTerm, setFilterTerm] = useState('');
   const debouncedFilterTerm = useDebounce(filterTerm, 500);
 
   const [dataVersion, setDataVersion] = useState(0);
@@ -197,22 +197,25 @@ export default function TodosPage({ token }) {
    * @param {string} newValue
    */
   function handleSortByChange(newValue) {
-    console.log('sort by before', sortBy);
     dispatch({ type: TODO_ACTIONS.SET_SORT_BY, sortBy: newValue });
-    console.log('sort by after', sortBy);
     // setSortBy(newValue);
   }
   /**
    * @param {string} newValue
    */
   function handleSortByDirectionChange(newValue) {
-    setSortDirection(newValue);
+    dispatch({
+      type: TODO_ACTIONS.SET_SORT_DIRECTION,
+      sortDirection: newValue,
+    });
+    // setSortDirection(newValue);
   }
   /**
    * @param {string} newTerm
    */
   function handlefilterChange(newTerm) {
-    setFilterTerm(newTerm);
+    dispatch({ type: TODO_ACTIONS.SET_S_E_O, filterTerm: newTerm });
+    // setFilterTerm(newTerm);
   }
 
   const invalidateCache = useCallback(() => {
@@ -224,11 +227,13 @@ export default function TodosPage({ token }) {
   }, [dataVersion]);
 
   function resetFilters() {
-    setFilterTerm('');
-    //convers all below initially
-    dispatch({ type: TODO_ACTIONS.FILTER_ERROR_CLEAR });
+    dispatch({ type: TODO_ACTIONS.SET_S_E_O, filterTerm: '' });
+    // setFilterTerm('');
+    dispatch({ type: TODO_ACTIONS.SET_SORT_BY, sortBy: 'createDate' });
     // setSortBy('creationDate');
-    setSortDirection('desc');
+    dispatch({ type: TODO_ACTIONS.SET_SORT_DIRECTION, sortDirection: 'desc' });
+    // setSortDirection('desc');
+    dispatch({ type: TODO_ACTIONS.FILTER_ERROR_CLEAR });
     // setFilterError('');
   }
 
