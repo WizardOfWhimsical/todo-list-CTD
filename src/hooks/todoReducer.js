@@ -22,21 +22,17 @@ export const initialTodoState = {
  * @param {string} TODO_ACTIONS
  */
 export const TODO_ACTIONS = {
-  // fetch operations
   FETCH_START: 'FETCH_START',
   FETCH_SUCCESS: 'FETCH_SUCCESS',
   FETCH_ERROR: 'FETCH_ERROR',
-  // filter operations
   SET_SORT_BY: 'SET_SORT_BY',
   SET_SORT_DIRECTION: 'SET_SORT_DIRECTION',
   SET_S_E_O: 'SET_S_E_O',
   FILTER_ERROR: 'FILTER_ERROR',
-  //todo verbs
   ADD_TODO: 'ADD_TODO',
   UPDATE_TODO: 'UPDATE_TODO',
   SYNCHRONIZE_TODO: 'SYNCHRONIZE_TODO',
   REVERT_ADD_TODO: 'REVERT_ADD_TODO',
-  //version count
   DATA_VERSION_COUNT: 'DATA_VERSION_COUNT',
 };
 /**
@@ -53,7 +49,6 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.FETCH_START: {
       return { ...state, isTodoListLoading: true, error: '' };
     }
-    //gets list-fetch_success
     case TODO_ACTIONS.FETCH_SUCCESS: {
       return {
         ...state,
@@ -61,7 +56,6 @@ export function todoReducer(state, action) {
         error: '',
         isTodoListLoading: false,
       };
-      // return [...state, todoList:]
     }
     case TODO_ACTIONS.FETCH_ERROR: {
       return {
@@ -85,7 +79,6 @@ export function todoReducer(state, action) {
       return { ...state, filterError: action.sortError };
     }
     //------------------------------------------
-    // puts todo in list
     case TODO_ACTIONS.ADD_TODO: {
       const newToDo = {
         id: action.id,
@@ -94,7 +87,6 @@ export function todoReducer(state, action) {
       };
       return { ...state, todoList: [newToDo, ...state.todoList] };
     }
-    // used for isComplete/isEditing
     case TODO_ACTIONS.UPDATE_TODO: {
       return {
         ...state,
@@ -106,7 +98,6 @@ export function todoReducer(state, action) {
         }),
       };
     }
-    // adds successful db updating to list
     case TODO_ACTIONS.SYNCHRONIZE_TODO: {
       return {
         ...state,
@@ -118,7 +109,6 @@ export function todoReducer(state, action) {
         }),
       };
     }
-    // removes upon failure to update db
     case TODO_ACTIONS.REVERT_ADD_TODO: {
       return {
         ...state,
@@ -126,7 +116,7 @@ export function todoReducer(state, action) {
       };
     }
     default: {
-      return state;
+      throw new Error(`Unknown action type: ${action.type}`);
     }
   }
 }
