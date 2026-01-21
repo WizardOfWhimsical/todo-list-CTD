@@ -1,6 +1,8 @@
 import TextInputWithLabel from '../../../shared/TextInputWithLabel';
 import useEditableTitle from '../../../hooks/useEditableTitle';
 import { useEffect, useRef } from 'react';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 //ToDoListItem.jsx
 export function ToDoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
@@ -36,7 +38,7 @@ export function ToDoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
   };
   return (
     <li>
-      <form onSubmit={handleUpdate}>
+      <Form onSubmit={handleUpdate}>
         {isEditing ? (
           <>
             <TextInputWithLabel
@@ -46,24 +48,24 @@ export function ToDoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
               ref={inputRef}
               onKeyDown={handleEscape}
             />
-            <button type="button" onClick={cancelEdit}>
+            <Button type="button" onClick={cancelEdit}>
               Cancel
-            </button>
-            <button key="submit" type="submit">
+            </Button>
+            <Button key="submit" type="submit">
               Update
-            </button>
+            </Button>
           </>
         ) : (
-          <>
-            <label>
-              <input
+          <Form.Group>
+            <Form.Label>
+              <Form.Control
                 type="checkbox"
                 onChange={() => onCompleteTodo(todo.id)}
                 checked={todo.isCompleted}
               />
-            </label>
+            </Form.Label>
             <span>{todo.title}</span>
-            <button
+            <Button
               type="button"
               onClick={() => {
                 startEditing();
@@ -71,10 +73,10 @@ export function ToDoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
               }}
             >
               EDIT
-            </button>
-          </>
+            </Button>
+          </Form.Group>
         )}
-      </form>
+      </Form>
     </li>
   );
 }
