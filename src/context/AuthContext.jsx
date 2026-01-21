@@ -62,10 +62,6 @@ export function AuthProvider({ children }) {
       });
 
       console.log(logoffData);
-
-      setToken('');
-      setEmail('');
-
       return {
         success: true,
         message: `${email} Successfully logged off`,
@@ -76,6 +72,10 @@ export function AuthProvider({ children }) {
         message: `Something went wrong logging off: ${error.message}`,
         error,
       };
+    } finally {
+      //whether success/fail this needs to happen
+      setToken('');
+      setEmail('');
     }
   }
 
