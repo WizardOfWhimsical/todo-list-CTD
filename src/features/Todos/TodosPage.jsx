@@ -209,30 +209,30 @@ export default function TodosPage() {
       {error && (
         <div>
           <p>{error}</p>
-          <button
+          <Button
             type="button"
             onClick={() =>
               dispatch({ type: TODO_ACTIONS.FETCH_ERROR, fetchError: '' })
             }
           >
             Clear Error
-          </button>
+          </Button>
         </div>
       )}
       {filterError && (
         <div>
           <p>{filterError}</p>
-          <button
+          <Button
             type="button"
             onClick={() =>
               dispatch({ type: TODO_ACTIONS.FILTER_ERROR, filterError: '' })
             }
           >
             Clear Filter Error
-          </button>
-          <button type="button" onClick={() => resetFilters()}>
+          </Button>
+          <Button type="button" onClick={() => resetFilters()}>
             Reset Filters
-          </button>
+          </Button>
         </div>
       )}
       <h2>My Todos</h2>
