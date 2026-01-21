@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 export default function Logon() {
   const [email, setEmail] = useState('');
@@ -26,17 +28,17 @@ export default function Logon() {
       {authError && (
         <div>
           <p>{authError}</p>
-          <button type="button" onClick={() => setAuthError('')}>
+          <Button type="button" onClick={() => setAuthError('')}>
             Clear Authorization
-          </button>
+          </Button>
         </div>
       )}
       {isLoggingOn ? (
         <h1>Is Logging Inn....</h1>
       ) : (
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="email">Email: </label>
-          <input
+        <Form onSubmit={handleSubmit}>
+          <Form.Label htmlFor="email">Email: </Form.Label>
+          <Form.Control
             type="email"
             id="email"
             value={email}
@@ -45,8 +47,8 @@ export default function Logon() {
             autoComplete="email"
           />
           <br />
-          <label htmlFor="password">Password: </label>
-          <input
+          <Form.Label htmlFor="password">Password: </Form.Label>
+          <Form.Control
             type="password"
             id="password"
             value={password}
@@ -54,14 +56,14 @@ export default function Logon() {
             required
           />
 
-          <button
+          <Button
             type="submit"
             disabled={!email || !password}
             onClick={handleSubmit}
           >
             LogIn
-          </button>
-        </form>
+          </Button>
+        </Form>
       )}
     </>
   );
