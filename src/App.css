@@ -1,11 +1,7 @@
 *{
   box-sizing: border-box;
   list-style-type: none;
-  /* margin: 4px -8px !important; */
 }
-/* phone view */
-@media (max-width: 385px) {
-/* 5. Banner image (dummy) at top of body */
 body::before {
   content: "";
   display: block;
@@ -23,7 +19,7 @@ body::after {
   z-index: 1;
   top: 0; left: 0; right: 0; bottom: 0;
   pointer-events: none;
-  background: rgba(245, 229, 180, 0.35); /* warm yellowish-tan */
+  /* background: rgba(245, 229, 180, 0.35); warm yellowish-tan */
   /* adjust opacity as desired */
 }
 
@@ -33,12 +29,11 @@ body {
   width: 100vw;
   margin: 0;
   padding: 0.66em;
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;         /* Stack children vertically */
   justify-content: center;        /* Center vertically */
   align-items: center;            /* Center horizontally */
-  background: #fdfaf4;            /* Optional: soft neutral background */
+  /* background: #fdfaf4;             */
   /* background: url('https://dummyimage.com/1200x800/cccccc/222222&text=Banner+Placeholder') center center/cover no-repeat; */
   position: relative;
   font-size: 1.25em;  /* bump up font size for everything */
@@ -47,22 +42,26 @@ body {
 /* 1. Input text: rounded, bigger line, spacing */
 input[type="text"] {
   border-radius: 10px;
-  line-height: 1.5em;
+  line-height: 1.25em;
   font-size: 1.1em;
-  padding: 0.75em 1em;
+  padding: 0.66em;
   border: 1px solid #aaa;
   box-sizing: border-box;
   margin-bottom: 0.75em;
   /* Optional: wider for touch */
-  min-width: 200px;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  /* min-width: 200px; */
+  /* transition: border-color 0.2s, box-shadow 0.2s; */
 }
 
 /* 2. Input focus: visual cue */
 input[type="text"]:focus {
   outline: none;
-  border-color: #e0b04a;
-  box-shadow: 0 0 0 2px #fffbe6, 0 0 0 4px #e0b04a80;
+  /* border-color: #e0b04a; */
+  /* box-shadow: 0 0 0 2px #fffbe6, 0 0 0 4px #e0b04a80; */
+}
+input[type="checkbox"]{
+  scale:2;
+
 }
 
 /* 3. Buttons: rounded, spaced, padded */
@@ -72,18 +71,18 @@ button {
   margin: 5px;
   font-size: 1.1em;
   cursor: pointer;
-  border: 1px black solid;
+  border: 1px rgb(68, 67, 67) solid;
   /* background: #6c5b3b; */
-   background: linear-gradient(90deg, #c39056 0%, #8d6422 100%);
-   box-shadow: 0 4px 12px rgba(140, 100, 30, 0.18), 0 1.5px 4px rgba(140, 100, 30, 0.12);
+   background: #000000;
+   /* box-shadow: 0 4px 12px rgba(140, 100, 30, 0.18), 0 1.5px 4px rgba(140, 100, 30, 0.12); */
   color: #fff;
 }
 
 /* Button hover effect */
 button:hover {
   /* background: #9b7e3c; */
-  background: linear-gradient(90deg, #e6b96d 0%, #b77e2e 100%);
-  box-shadow: 0 8px 18px rgba(140, 100, 30, 0.25), 0 3px 10px rgba(140, 100, 30, 0.17);
+  /* background: linear-gradient(90deg, #e6b96d 0%, #b77e2e 100%); */
+  /* box-shadow: 0 8px 18px rgba(140, 100, 30, 0.25), 0 3px 10px rgba(140, 100, 30, 0.17); */
   outline: none;
   cursor: grab;
 }
@@ -136,43 +135,13 @@ option {
   font-size: 1.1em; /* Browsers limit this but it will usually help */
 }
 
-}
 
+/* 
 @media (min-width: 386px) and (max-width: 575px){
-  ul{
-    border: 1px green solid;
-    width: 100%;
-    margin: 4px -8px !important;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-
 }
 
 @media (min-width: 576px) and (max-width: 991px){
-  ul{
-    border: 1px blue solid;
-    width: 100%;
-    margin: 4px -8px !important;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
 }
-
 
 @media (min-width: 992px){
-  ul{
-    margin: 4px -8px !important;
-    border: 1px yellow solid;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-}
+} */

@@ -32,7 +32,7 @@ export default function TodosPage() {
     dataVersion,
   } = state;
 
-  const { token } = useAuth();
+  const { token, logout } = useAuth();
 
   console.log('data verion start count state', dataVersion);
 
@@ -207,6 +207,19 @@ export default function TodosPage() {
     dispatch({ type: TODO_ACTIONS.FILTER_ERROR, filterError: '' });
   }
 
+  async function handleLogOut(token) {
+    const data = await logout(token);
+    console.log(data);
+  }
+
+  // async function handleSubmit(event) {
+  //   event.preventDefault();
+
+  //   setIsLoggingOn(true);
+  //   await login(email, password);
+  //   setIsLoggingOn(false);
+  // }
+
   return (
     <>
       {error && (
@@ -261,6 +274,9 @@ export default function TodosPage() {
           todos={todoList}
         />
       )}
+      <Button type="button" onClick={() => handleLogOut(token)}>
+        Log Off
+      </Button>
     </>
   );
 }
