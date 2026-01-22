@@ -5,7 +5,7 @@ const DEFAULT_OPTIONS = {
   method: 'GET',
 };
 
-async function fetchErrorHandling(endPoint, options) {
+export async function fetchErrorHandling(endPoint, options) {
   try {
     const response = await fetch(`${baseUrl}/${endPoint}`, {
       ...DEFAULT_OPTIONS,
@@ -15,12 +15,15 @@ async function fetchErrorHandling(endPoint, options) {
         ...options.headers,
       },
     });
+
     if (!response.ok || response.status === 401) {
       const error = await response.json();
       error.status = response.status;
       throw error;
     }
-    return response.json();
+
+    console.log('inside fetchErrorHandling:\n', response);
+    return typeof response === 'string' ? response : response.json();
   } catch (error) {
     console.log('Fetch Error Handling:', error);
     throw error;
@@ -33,6 +36,7 @@ export async function post(endPoint, options) {
     body: JSON.stringify(options.body),
   });
 }
+
 export async function patch(endPoint, options) {
   return await fetchErrorHandling(`${endPoint}`, {
     ...options,
@@ -44,6 +48,7 @@ export async function patch(endPoint, options) {
 export async function get(endPoint, options) {
   return await fetchErrorHandling(endPoint, options);
 }
+
 export async function addTodo(todo, token) {
   return await fetchErrorHandling('tasks', {
     method: 'POST',

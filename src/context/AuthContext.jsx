@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from 'react';
-import { post } from '../utils/api';
+import { post, fetchErrorHandling } from '../utils/api';
 
 //create context
 const AuthContext = createContext();
@@ -57,19 +57,25 @@ export function AuthProvider({ children }) {
     if (!token) setToken('') && setEmail('');
 
     try {
+      // need t ouse the basic form of this because response is a string??
+      // const logoffData = await fetchErrorHandling('user/logoff', {
+      //   headers: { method: 'POST', 'X-CSRF-TOKEN': token },
+      // });
+
       const logoffData = await post('user/logoff', {
         headers: { 'X-CSRF-TOKEN': token },
       });
 
-      console.log(logoffData);
+      console.log('before success in logout function\n', logoffData);
       return {
         success: true,
         message: `${email} Successfully logged off`,
         error: null,
       };
     } catch (error) {
+      console.log('before failure in logout function\n', error);
       return {
-        message: `Something went wrong logging off: ${error.message}`,
+        message: `Something went wrong logging off: ${error}`,
         error,
       };
     } finally {
