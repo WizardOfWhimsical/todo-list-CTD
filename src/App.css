@@ -5,10 +5,138 @@
 }
 /* phone view */
 @media (max-width: 385px) {
-ul{
-  border: 1px red solid;
-  margin: 4px -8px !important;
+
+/* 1. Input text: rounded, bigger line, spacing */
+input[type="text"] {
+  border-radius: 10px;
+  line-height: 1.5em;
+  font-size: 1.1em;
+  padding: 0.75em 1em;
+  border: 1px solid #aaa;
+  box-sizing: border-box;
+  margin-bottom: 0.75em;
+  /* Optional: wider for touch */
+  min-width: 200px;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
+
+/* 2. Input focus: visual cue */
+input[type="text"]:focus {
+  outline: none;
+  border-color: #e0b04a;
+  box-shadow: 0 0 0 2px #fffbe6, 0 0 0 4px #e0b04a80;
+}
+
+/* 3. Buttons: rounded, spaced, padded */
+button {
+  border-radius: 10px;
+  padding: 5px 16px;
+  margin: 5px;
+  font-size: 1.1em;
+  cursor: pointer;
+  border: none;
+  background: #6c5b3b;
+  color: #fff;
+}
+
+/* Button hover effect */
+button:hover {
+  background: #9b7e3c;
+  outline: none;
+}
+
+/* 4. Labels: italics, margin, padding, line height */
+label {
+  font-style: italic;
+  line-height: 1.3em;
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+  display: inline-block;
+  /* Makes stacked vertical space clean */
+}
+
+/* 5. Banner image (dummy) at top of body */
+body::before {
+  content: "";
+  display: block;
+  width: 100vw;
+  max-width: 100%;
+  /* height: 120px; */
+  /* background: url('https://dummyimage.com/1280x120/cccccc/222222&text=Banner+Placeholder') center/cover no-repeat; */
+  margin-bottom: 1.5em;
+}
+
+/* 6. Slightly yellow-tan transparent overlay */
+body::after {
+  content: "";
+  position: fixed;
+  z-index: 1;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  background: rgba(245, 229, 180, 0.35); /* warm yellowish-tan */
+  /* adjust opacity as desired */
+}
+
+/* 7. Stack everything "above" the overlay (z-index > 1) */
+body > * {
+  position: relative;
+  
+}
+
+/* Make body a flex column, center everything vertically & horizontally */
+body {
+  min-height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0.66em;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;         /* Stack children vertically */
+  justify-content: center;        /* Center vertically */
+  align-items: center;            /* Center horizontally */
+  background: #fdfaf4;            /* Optional: soft neutral background */
+  /* background: url('https://dummyimage.com/1200x800/cccccc/222222&text=Banner+Placeholder') center center/cover no-repeat; */
+  position: relative;
+  font-size: 1.25em;  /* bump up font size for everything */
+  z-index: 2;
+}
+
+/* Make ul take full width, center its content */
+ul {
+  width: 100%;
+  max-width: 450px;      /* Optional: limit max width for aesthetics */
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* Center li children horizontally */
+  justify-content: center; /* (Vertical, if ever needed) */
+  margin: 1em 0;
+  padding: 0;
+  /* list-style: none;    */
+  /* box-sizing: border-box; */
+}
+
+/* Center content inside each li as well */
+ul > li {
+  width: 100%;
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;    /* Center contents horizontally */
+  justify-content: center;
+  margin-bottom: 0.5em;   /* Space between items */
+}
+select {
+  font-size: 1em;
+  padding: 0.5em 1em;
+  border-radius: 8px;
+  margin: 0.33em;
+}
+
+option {
+  font-size: 1.1em; /* Browsers limit this but it will usually help */
+}
+
 }
 
 @media (min-width: 386px) and (max-width: 575px){
