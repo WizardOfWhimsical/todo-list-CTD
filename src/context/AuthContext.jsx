@@ -19,13 +19,7 @@ export function AuthProvider({ children }) {
   const [email, setEmail] = useState('');
   const [token, setToken] = useState('');
 
-  /**
-   * code (functions) goes here...
-   * Found what they want me to add here, i will need to move it into api.js, its a fetch
-   */
-
   async function login(userEmail, password) {
-    // setIsLoggingOn(true);
     try {
       const data = await post('user/logon', {
         body: { email: userEmail, password },
@@ -57,7 +51,7 @@ export function AuthProvider({ children }) {
     if (!token) setToken('') && setEmail('');
 
     try {
-      // need t ouse the basic form of this because response is a string??
+      // need to use the basic form of this because response is a string??
       // const logoffData = await fetchErrorHandling('user/logoff', {
       //   headers: { method: 'POST', 'X-CSRF-TOKEN': token },
       // });

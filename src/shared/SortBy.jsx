@@ -7,7 +7,7 @@ export default function SortBy({
   onSortDirectionChange,
 }) {
   return (
-    <>
+    <Form.Group className="sort-container">
       <Form.Label htmlFor="sortBy">Sort By: </Form.Label>
       <Form.Select
         aria-label="sort by"
@@ -31,6 +31,6 @@ export default function SortBy({
         <option value="asc">Ascending</option>
         <option value="desc">Descending</option>
       </Form.Select>
-    </>
+    </Form.Group>
   );
 }
