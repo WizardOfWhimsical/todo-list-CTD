@@ -1,20 +1,20 @@
 //TodosPage.jsx
 import { useReducer, useEffect, useCallback } from 'react';
-import ToDoList from './TodoList/ToDoList';
-import ToDoForm from './ToDoForm';
+import ToDoList from '../features/Todos/TodoList/ToDoList';
+import ToDoForm from '../features/Todos/ToDoForm';
 
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 
-import { addTodo, patch, get } from '../../utils/api';
-import { FilterInput } from '../../shared/FilterInput';
-import SortBy from '../../shared/SortBy';
+import { addTodo, patch, get } from '../utils/api';
+import { FilterInput } from '../shared/FilterInput';
+import SortBy from '../shared/SortBy';
 
 import {
   todoReducer,
   initialTodoState,
   TODO_ACTIONS,
-} from '../../hooks/todoReducer';
-import useDebounce from '../../hooks/useDebounce';
+} from '../hooks/todoReducer';
+import useDebounce from '../hooks/useDebounce';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';

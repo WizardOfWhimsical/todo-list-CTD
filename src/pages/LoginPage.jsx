@@ -11,15 +11,16 @@ export default function LoginPage() {
   const [authError, setAuthError] = useState('');
   const [isLoggingOn, setIsLoggingOn] = useState(false);
 
-  const { login, isAuthenticatd } = useAuth();
+  const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
+  // const from = '/todos';
   const from = location.state?.from?.pathname || '/todos';
 
   useEffect(() => {
-    if (isAuthenticatd) navigate(from, { replace: true });
-  }, [isAuthenticatd, navigate, from]);
+    if (isAuthenticated) navigate(from, { replace: true });
+  }, [isAuthenticated, navigate, from]);
 
   useEffect(() => {
     console.log('Errors: ', authError);
@@ -29,7 +30,9 @@ export default function LoginPage() {
     event.preventDefault();
 
     setIsLoggingOn(true);
-    await login(email, password);
+    const result = await login(email, password);
+    if (!result.success) console.log('failed...');
+    else console.log('should have redirected...');
     setIsLoggingOn(false);
   }
 
