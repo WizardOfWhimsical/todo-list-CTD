@@ -21,6 +21,10 @@ export default function LoginPage() {
     if (isAuthenticatd) navigate(from, { replace: true });
   }, [isAuthenticatd, navigate, from]);
 
+  useEffect(() => {
+    console.log('Errors: ', authError);
+  }, [authError]);
+
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -28,10 +32,6 @@ export default function LoginPage() {
     await login(email, password);
     setIsLoggingOn(false);
   }
-
-  useEffect(() => {
-    console.log('Errors: ', authError);
-  }, [authError]);
 
   return (
     <>
