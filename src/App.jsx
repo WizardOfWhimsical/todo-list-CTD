@@ -32,10 +32,17 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/login" element={LOGINPAGE} />
         <Route path="/todos" element={<RequireAuth>{TODOSPAGE}</RequireAuth>} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
+        <Route
+          path="/profile"
+          element={
+            <RequireAuth>
+              <ProfilePage />
+            </RequireAuth>
+          }
+        />
         {/* <Route path="*" element={} /> */}
       </Routes>
     </>

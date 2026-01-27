@@ -115,7 +115,10 @@ export default function TodosPage() {
       dispatch({ type: 'REVERT_ADD_TODO', id: newToDo.id });
     }
   }
-
+  /**
+   *
+   * @param {number} todoId
+   */
   async function completeTodo(todoId) {
     const targetTodo = todoList.find((todo) => todo.id === todoId);
     dispatch({
@@ -140,7 +143,10 @@ export default function TodosPage() {
       dispatch({ type: TODO_ACTIONS.UPDATE_TODO, todo: targetTodo });
     }
   }
-
+  /**
+   *
+   * @param {string} editedTodo
+   */
   async function updateTodo(editedTodo) {
     dispatch({
       type: TODO_ACTIONS.UPDATE_TODO,

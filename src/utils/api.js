@@ -6,6 +6,7 @@ const DEFAULT_OPTIONS = {
 };
 
 export async function fetchErrorHandling(endPoint, options = DEFAULT_OPTIONS) {
+  // i have to give credit to Ej for this
   const mergedOptions =
     options === DEFAULT_OPTIONS
       ? DEFAULT_OPTIONS
@@ -26,7 +27,7 @@ export async function fetchErrorHandling(endPoint, options = DEFAULT_OPTIONS) {
       throw error;
     }
 
-    console.log('inside fetchErrorHandling:\n', response);
+    // console.log('inside fetchErrorHandling:\n', response);
     return typeof response === 'string' ? response : response.json();
   } catch (error) {
     console.log('Fetch Error Handling:', error);
