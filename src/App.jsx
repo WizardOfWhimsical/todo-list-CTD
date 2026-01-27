@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import AboutPage from './pages/AboutPage';
 import ProfilePage from './pages/ProfilePage';
+import ErrorPage from './pages/ErrorPage';
 
 import Header from './shared/Header';
 import RequireAuth from './shared/RequireAuth';
@@ -43,7 +44,7 @@ function App() {
             </RequireAuth>
           }
         />
-        {/* <Route path="*" element={} /> */}
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
   );
