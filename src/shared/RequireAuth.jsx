@@ -9,7 +9,7 @@ export default function RequireAuth({ children }) {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate('/login', { replace: true, state: location });
+      navigate('/login', { replace: true });
     }
   });
   return children;
