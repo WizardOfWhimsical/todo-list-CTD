@@ -6,6 +6,8 @@ import AboutPage from './pages/AboutPage';
 import ProfilePage from './pages/ProfilePage';
 import ErrorPage from './pages/ErrorPage';
 
+import Navigation from './shared/Navigation';
+
 import Header from './shared/Header';
 import RequireAuth from './shared/RequireAuth';
 // import Logon from './features/Logon';
@@ -31,21 +33,27 @@ function App() {
 
   return (
     <>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/login" element={LOGINPAGE} />
-        <Route path="/todos" element={<RequireAuth>{TODOSPAGE}</RequireAuth>} />
-        <Route
-          path="/profile"
-          element={
-            <RequireAuth>
-              <ProfilePage />
-            </RequireAuth>
-          }
-        />
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
+      <Navigation />
+      <div className="routes-container">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/login" element={LOGINPAGE} />
+          <Route
+            path="/todos"
+            element={<RequireAuth>{TODOSPAGE}</RequireAuth>}
+          />
+          <Route
+            path="/profile"
+            element={
+              <RequireAuth>
+                <ProfilePage />
+              </RequireAuth>
+            }
+          />
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
+      </div>
     </>
   );
 }
