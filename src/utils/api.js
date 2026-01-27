@@ -5,16 +5,20 @@ const DEFAULT_OPTIONS = {
   method: 'GET',
 };
 
-export async function fetchErrorHandling(endPoint, options) {
+export async function fetchErrorHandling(endPoint, options = DEFAULT_OPTIONS) {
+  const mergedOptions =
+    options === DEFAULT_OPTIONS
+      ? DEFAULT_OPTIONS
+      : {
+          ...DEFAULT_OPTIONS,
+          ...options,
+          headers: {
+            ...DEFAULT_OPTIONS.headers,
+            ...options.headers,
+          },
+        };
   try {
-    const response = await fetch(`${baseUrl}/${endPoint}`, {
-      ...DEFAULT_OPTIONS,
-      ...options,
-      headers: {
-        ...DEFAULT_OPTIONS.headers,
-        ...options.headers,
-      },
-    });
+    const response = await fetch(`${baseUrl}/${endPoint}`, mergedOptions);
 
     if (!response.ok || response.status === 401) {
       const error = await response.json();
