@@ -1,48 +1,44 @@
-*{
+* {
   box-sizing: border-box;
   list-style-type: none;
 }
 
-body {
-  min-height: 100vh;
-  width: 100vw;
-  margin: 0;
-  padding: 0.66em;
-  display: flex;
-  flex-direction: column;     
-  justify-content: center;     
-  align-items: center;           
-  font-size: 1.25em; 
-  z-index: 2;
+html {
+  font-size: 62.5%;
 }
-h1, h2{
+
+body {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+h1,
+h2 {
   text-align: center;
 }
-/* inputs */
-.form-control{
+
+select {
+  font-size: 1em;
   border-radius: 10px;
-  line-height: 1.25em;
-  font-size: 1.1em;
-  padding: 0.33em 0.66em;
+  margin-bottom: 12px;
+  line-height: 1.25;
+  padding: 6px 12px;
   border: 1px solid #aaa;
-  box-sizing: border-box;
-  margin-bottom: 0.75em;
+  width: 10;
 }
-/* Labels */
-label{
-  /* width: 0; */
+
+label {
   font-size: 1.25em;
   font-style: italic;
   line-height: 1.3em;
-  padding: 0 0.3em;
-  margin: 0.25em 0;
+  padding: 0 4px;
+  margin: 4px 0;
   display: inline-block;
 }
-input[type="checkbox"]{
-  scale:2;
+input[type='checkbox'] {
+  scale: 2;
 }
 
-/*buttons*/
 button {
   border-radius: 10px;
   padding: 5px 16px;
@@ -54,47 +50,97 @@ button {
   color: #fff;
 }
 
-/* Button hover effect */
 button:hover {
   cursor: grab;
 }
-button:active{
+
+button:active {
   cursor: grabbing;
 }
 
-/* Make ul take full width, center its content */
-ul {
+#root {
+  height: 100dvh;
+  width: 100dvw;
+  display: flex;
+  flex-direction: column;
+}
+
+.routes-container {
+  margin: 0;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.25em;
+}
+
+.form-control {
+  border-radius: 10px;
+  line-height: 1.25em;
+  font-size: 1.1em;
+  padding: 6px 12px;
+  border: 1px solid #aaa;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+}
+
+.todo-list-container {
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;  
-  justify-content: center; 
-  margin: 1em 0;
+  align-items: center;
+  justify-content: center;
+  margin: 16px 0;
   padding: 0;
 }
 
-/* Center content inside each li as well */
-ul > li {
+.todo-list-item {
   width: 100%;
   display: flex;
-  align-items: center;   
+  align-items: center;
   justify-content: center;
-  margin-bottom: 0.5em;  
+  margin-bottom: 8px;
 }
-.sort-container{
+
+.sort-container {
   display: flex;
   flex-direction: column;
 }
-select {
-  font-size: 1em;
-  border-radius: 10px;
-  margin-bottom: 0.75em;
-  line-height: 1.25em;
-  padding: 0.33em 0.66em;
-  border: 1px solid #aaa;
-  width:10em;
+
+.nav {
+  background-color: rgb(67, 60, 60);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 32px;
+  padding: 0 16px;
 }
 
+.nav a {
+  color: inherit;
+  text-decoration: none;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+}
+
+.link-container {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 16px;
+}
+
+.site-title {
+  font-size: 2em;
+}
+
+.active {
+  background-color: #aaa;
+}
 /* @media (max-width: 385px){
 .sort-container{
   display: flex;

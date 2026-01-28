@@ -38,7 +38,7 @@ export function ToDoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
     if (e.key === 'Escape') cancelEdit();
   };
   return (
-    <li>
+    <li className="todo-list-item">
       <Form onSubmit={handleUpdate}>
         {isEditing ? (
           <>

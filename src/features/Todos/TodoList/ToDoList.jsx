@@ -13,7 +13,7 @@ function ToDoList({ todos, onCompleteTodo, onUpdateTodo, dataVersion }) {
   }, [dataVersion, todos]);
 
   return (
-    <ul>
+    <ul className="todo-list-container">
       {filteredTodoList.todos.length <= 0
         ? 'Add todo above to get started'
         : filteredTodoList.todos.map((todo) => (

@@ -8,7 +8,7 @@ export default function Navigation() {
       <NavLink to="/" className="site-title">
         Lewis Labs
       </NavLink>
-      <ul>
+      <ul className="link-container">
         <li>
           <NavLink to="/login">Login</NavLink>
         </li>
