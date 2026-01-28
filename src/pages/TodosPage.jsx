@@ -2,6 +2,11 @@
 import { useReducer, useEffect, useCallback } from 'react';
 import ToDoList from '../features/Todos/TodoList/ToDoList';
 import ToDoForm from '../features/Todos/ToDoForm';
+import ErrorDisplay from '../shared/ErrorDisplay';
+
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Logoff from '../features/Logoff';
 
 import { useAuth } from '../context/AuthContext';
 
@@ -15,10 +20,6 @@ import {
   TODO_ACTIONS,
 } from '../hooks/todoReducer';
 import useDebounce from '../hooks/useDebounce';
-
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Logoff from '../features/Logoff';
 
 export default function TodosPage() {
   const [state, dispatch] = useReducer(todoReducer, initialTodoState);
