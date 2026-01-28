@@ -33,9 +33,9 @@ export default function TodosPage() {
     dataVersion,
   } = state;
 
-  const { token, logout } = useAuth();
+  const { token } = useAuth();
 
-  console.log('data verion start count state', dataVersion);
+  // console.log('data verion start count state', dataVersion);
 
   const debouncedFilterTerm = useDebounce(filterTerm, 500);
 
