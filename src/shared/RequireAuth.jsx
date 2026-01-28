@@ -9,12 +9,13 @@ export default function RequireAuth({ children }) {
 
   // forced it to work but i get some kind of throttle warning in the console. i dont like it
   // from is profile!! wtf did i have to hard code it then??
-  const from = location.state?.from?.pathname || '/todos';
-  console.log('consoleLog from inside requireAuth\n', from);
+  // const from = location.state?.from?.pathname;
+  // const from = location.state?.from?.pathname || '/todos';
+  console.log('consoleLog from inside requireAuth\n', location);
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate(from, { replace: true });
+      navigate('/login', { replace: true, state: { from: location.pathname } });
     }
-  }, [isAuthenticated, navigate, from]);
+  }, [isAuthenticated, navigate, location]);
   return children;
 }

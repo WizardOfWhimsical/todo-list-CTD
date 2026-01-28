@@ -2,7 +2,7 @@ import { NavLink } from 'react-router';
 import { useAuth } from '../context/AuthContext';
 
 export default function Navigation() {
-  // const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useAuth();
   return (
     <nav className="nav">
       <NavLink to="/" className="site-title">
@@ -15,12 +15,18 @@ export default function Navigation() {
         <li>
           <NavLink to="/about">About</NavLink>
         </li>
-        <li>
-          <NavLink to="/profile">Profile</NavLink>
-        </li>
-        <li>
-          <NavLink to="/todos">To-Dos List</NavLink>
-        </li>
+        {isAuthenticated ? (
+          <>
+            <li>
+              <NavLink to="/profile">Profile</NavLink>
+            </li>
+            <li>
+              <NavLink to="/todos">To-Dos List</NavLink>
+            </li>
+          </>
+        ) : (
+          ''
+        )}
       </ul>
     </nav>
   );
