@@ -24,7 +24,7 @@ select {
   line-height: 1.25;
   padding: 6px 12px;
   border: 1px solid #aaa;
-  width: 10;
+  width: 10em;
 }
 
 label {
@@ -103,7 +103,11 @@ button:active {
   margin-bottom: 8px;
 }
 
-.sort-container {
+/* .sort-container {
+  display: flex;
+  flex-direction: column;
+} */
+.flex-column {
   display: flex;
   flex-direction: column;
 }

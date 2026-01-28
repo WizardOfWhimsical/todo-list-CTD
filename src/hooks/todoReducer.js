@@ -14,7 +14,7 @@ export const initialTodoState = {
   filterError: '',
   isTodoListLoading: false,
   sortBy: 'createDate',
-  sortDirection: 'asc',
+  sortDirection: 'desc',
   filterTerm: '',
   dataVersion: 0,
 };
@@ -47,7 +47,11 @@ export function todoReducer(state, action) {
       return { ...state, dataVersion: state.dataVersion + 1 };
     }
     case TODO_ACTIONS.FETCH_START: {
-      return { ...state, isTodoListLoading: true, error: '' };
+      return {
+        ...state,
+        isTodoListLoading: true,
+        error: '',
+      };
     }
     case TODO_ACTIONS.FETCH_SUCCESS: {
       return {

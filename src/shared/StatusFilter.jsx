@@ -2,8 +2,8 @@ import { useSearchParams } from 'react-router';
 import { Form } from 'react-bootstrap';
 
 export default function StatusFilter() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const currentStatus = setSearchParams.length('status') || 'all';
+  const [searchParams, setSearchParams] = useSearchParams('');
+  const currentStatus = searchParams.get('status') || 'all';
 
   function handleStatusChange(status) {
     if (status === 'all') {
@@ -15,7 +15,7 @@ export default function StatusFilter() {
   }
 
   return (
-    <Form.Group className="filter-container">
+    <Form.Group className="flex-column">
       <Form.Label htmlFor="statusFilter">Show:</Form.Label>
       <Form.Select
         id="statusFilter"

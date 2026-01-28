@@ -7,7 +7,7 @@ export default function SortBy({
   onSortDirectionChange,
 }) {
   return (
-    <Form.Group className="sort-container">
+    <Form.Group className="flex-column">
       <Form.Label htmlFor="sortBy">Sort By: </Form.Label>
       <Form.Select
         aria-label="sort by"

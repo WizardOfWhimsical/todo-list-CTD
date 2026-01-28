@@ -5,7 +5,6 @@ import ToDoForm from '../features/Todos/ToDoForm';
 import ErrorDisplay from '../shared/ErrorDisplay';
 import StatusFilter from '../shared/StatusFilter';
 
-import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Logoff from '../features/Logoff';
 
@@ -38,8 +37,6 @@ export default function TodosPage() {
     dataVersion,
   } = state;
 
-  // console.log('data verion start count state', dataVersion);
-
   const statusFilter = searchParams.get('status') || 'all'; //<--seem redundent, had this in the component
   const debouncedFilterTerm = useDebounce(filterTerm, 500);
 
@@ -53,7 +50,7 @@ export default function TodosPage() {
     }
 
     const params = new URLSearchParams(paramsObj);
-    console.log(params.toString());
+
     async function fetchTodos() {
       //i made token to tokens to throw error but it never showed on the page. revisit
       const options = {
@@ -64,18 +61,17 @@ export default function TodosPage() {
           type: TODO_ACTIONS.FETCH_START,
         });
 
-        const data = await get(`taskss?${params}`, options);
+        const data = await get(`tasks?${params}`, options);
 
         if (!firstPost) {
           dispatch({ data, type: TODO_ACTIONS.FETCH_SUCCESS });
         }
-        // dispatch({ type: TODO_ACTIONS.FILTER_ERROR, sortError: '' });
       } catch (error) {
         console.log(error);
         dispatch({ fetchError: error.message, type: TODO_ACTIONS.FETCH_ERROR });
         if (
           debouncedFilterTerm ||
-          sortBy !== 'creationDate' ||
+          sortBy !== 'createDate' ||
           sortDirection !== 'desc'
         ) {
           dispatch({
@@ -83,7 +79,6 @@ export default function TodosPage() {
             type: TODO_ACTIONS.FILTER_ERROR,
           });
         } else {
-          //setting err
           dispatch({
             fetchError: error.message,
             type: TODO_ACTIONS.FETCH_ERROR,
@@ -219,29 +214,19 @@ export default function TodosPage() {
     dispatch({ type: TODO_ACTIONS.SET_SORT_DIRECTION, sortDirection: 'desc' });
     dispatch({ type: TODO_ACTIONS.FILTER_ERROR, filterError: '' });
   }
-
+  console.log('Lewis', typeof error);
   return (
     <>
       {error && (
-        //   <ErrorDisplay
-        //     error={error}
-        //     onClick={dispatch({
-        //       type: TODO_ACTIONS.FETCH_ERROR,
-        //       fetchError: '',
-        //     })}
-        //   />
-        // )
-        <div>
-          <p>{error}</p>
-          <Button
-            type="button"
-            onClick={() =>
-              dispatch({ type: TODO_ACTIONS.FETCH_ERROR, fetchError: '' })
-            }
-          >
-            Clear Error
-          </Button>
-        </div>
+        <ErrorDisplay
+          error={error}
+          onClick={() =>
+            dispatch({
+              type: TODO_ACTIONS.FETCH_ERROR,
+              fetchError: '',
+            })
+          }
+        />
       )}
       {filterError && (
         <div>
