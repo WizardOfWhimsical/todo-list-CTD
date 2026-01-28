@@ -214,12 +214,6 @@ export default function TodosPage() {
     dispatch({ type: TODO_ACTIONS.FILTER_ERROR, filterError: '' });
   }
 
-  // it clear the state but doesnt rerender to login??
-  // async function handleLogOut(token) {
-  //   const data = await logout(token);
-  //   console.log(data);
-  // }
-
   return (
     <>
       {error && (
