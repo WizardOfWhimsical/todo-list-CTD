@@ -71,8 +71,8 @@ export default function TodosPage() {
         dispatch({ fetchError: error.message, type: TODO_ACTIONS.FETCH_ERROR });
         if (
           debouncedFilterTerm ||
-          sortBy !== 'createDate' ||
-          sortDirection !== 'desc'
+          sortBy !== initialTodoState.sortBy ||
+          sortDirection !== initialTodoState.sortDirection
         ) {
           dispatch({
             sortError: error.message,
@@ -229,20 +229,7 @@ export default function TodosPage() {
         />
       )}
       {filterError && (
-        <div>
-          <p>{filterError}</p>
-          <Button
-            type="button"
-            onClick={() =>
-              dispatch({ type: TODO_ACTIONS.FILTER_ERROR, filterError: '' })
-            }
-          >
-            Clear Filter Error
-          </Button>
-          <Button type="button" onClick={() => resetFilters()}>
-            Reset Filters
-          </Button>
-        </div>
+        <ErrorDisplay error={filterError} onClick={() => resetFilters()} />
       )}
       <h2>My Todos</h2>
       <ToDoForm onAddTodo={addToDo} />

@@ -29,10 +29,9 @@ export async function fetchErrorHandling(endPoint, options = DEFAULT_OPTIONS) {
 
     const contentType = response.headers.get('content-type');
     console.log('checking header\n', contentType);
-    const data =
-      contentType && contentType.includes('application/json')
-        ? await response.json()
-        : await response.text();
+    const data = contentType?.includes('application/json')
+      ? await response.json()
+      : await response.text();
     console.log(data);
     return data;
   } catch (error) {
@@ -80,15 +79,15 @@ export async function logoff(endPoint, options = DEFAULT_OPTIONS) {
       error.status = response.status;
       throw error;
     }
+    console.log(response);
+    // const contentType = response.headers.get('content-type');
+    // console.log('checking header\n', contentType);
+    // const data =
+    //   contentType && contentType.includes('application/json')
+    //     ? await response.json()
+    //     : await response.text();
 
-    const contentType = response.headers.get('content-type');
-    console.log('checking header\n', contentType);
-    const data =
-      contentType && contentType.includes('application/json')
-        ? await response.json()
-        : await response.text();
-
-    return data;
+    return;
   } catch (error) {
     console.log('Fetch Error Handling:', error);
     throw error;
