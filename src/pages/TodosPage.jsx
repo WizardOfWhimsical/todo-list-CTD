@@ -18,6 +18,7 @@ import useDebounce from '../hooks/useDebounce';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Logoff from '../features/Logoff';
 
 export default function TodosPage() {
   const [state, dispatch] = useReducer(todoReducer, initialTodoState);
@@ -273,9 +274,7 @@ export default function TodosPage() {
           todos={todoList}
         />
       )}
-      <Button type="button" onClick={() => handleLogOut(token)}>
-        Log Off
-      </Button>
+      <Logoff />
     </>
   );
 }

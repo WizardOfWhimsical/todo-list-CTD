@@ -27,8 +27,9 @@ export async function fetchErrorHandling(endPoint, options = DEFAULT_OPTIONS) {
       throw error;
     }
 
-    // console.log('inside fetchErrorHandling:\n', response);
-    return typeof response === 'string' ? response : response.json();
+    // console.log('inside fetchErrorHandling:checking logout function\n', response);
+    // console.log(typeof response === 'string' ? response : )
+    return response.json();
   } catch (error) {
     console.log('Fetch Error Handling:', error);
     throw error;
@@ -52,6 +53,34 @@ export async function patch(endPoint, options) {
 
 export async function get(endPoint, options) {
   return await fetchErrorHandling(endPoint, options);
+}
+
+export async function logoff(endPoint, options = DEFAULT_OPTIONS) {
+  const mergedOptions =
+    options === DEFAULT_OPTIONS
+      ? DEFAULT_OPTIONS
+      : {
+          ...DEFAULT_OPTIONS,
+          ...options,
+          headers: {
+            ...DEFAULT_OPTIONS.headers,
+            ...options.headers,
+          },
+        };
+  try {
+    const response = await fetch(`${baseUrl}/${endPoint}`, mergedOptions);
+
+    if (!response.ok || response.status === 401) {
+      const error = await response.json();
+      error.status = response.status;
+      throw error;
+    }
+    console.log(response);
+    return;
+  } catch (error) {
+    console.log('Fetch Error Handling:', error);
+    throw error;
+  }
 }
 
 export async function addTodo(todo, token) {
