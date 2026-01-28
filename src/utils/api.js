@@ -27,9 +27,14 @@ export async function fetchErrorHandling(endPoint, options = DEFAULT_OPTIONS) {
       throw error;
     }
 
-    // console.log('inside fetchErrorHandling:checking logout function\n', response);
-    // console.log(typeof response === 'string' ? response : )
-    return response.json();
+    const contentType = response.headers.get('content-type');
+    console.log('checking header\n', contentType);
+    const data =
+      contentType && contentType.includes('application/json')
+        ? await response.json()
+        : await response.text();
+    console.log(data);
+    return data;
   } catch (error) {
     console.log('Fetch Error Handling:', error);
     throw error;
@@ -75,8 +80,15 @@ export async function logoff(endPoint, options = DEFAULT_OPTIONS) {
       error.status = response.status;
       throw error;
     }
-    // console.log(response);
-    return response;
+
+    const contentType = response.headers.get('content-type');
+    console.log('checking header\n', contentType);
+    const data =
+      contentType && contentType.includes('application/json')
+        ? await response.json()
+        : await response.text();
+
+    return data;
   } catch (error) {
     console.log('Fetch Error Handling:', error);
     throw error;

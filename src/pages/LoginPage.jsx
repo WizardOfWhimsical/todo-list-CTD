@@ -30,10 +30,18 @@ export default function LoginPage() {
     event.preventDefault();
 
     setIsLoggingOn(true);
-    const result = await login(email, password);
-    if (!result.success) console.log('failed...');
-    else console.log('should have redirected...');
-    setIsLoggingOn(false);
+    try {
+      const result = await login(email, password);
+      if (!result.success) {
+        const error = result?.error?.message + '\n' + result?.message;
+        throw error;
+        setAuthError();
+      } else console.log('should have redirected...');
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoggingOn(false);
+    }
   }
 
   return (
