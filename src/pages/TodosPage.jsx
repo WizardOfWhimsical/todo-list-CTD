@@ -215,10 +215,10 @@ export default function TodosPage() {
   }
 
   // it clear the state but doesnt rerender to login??
-  async function handleLogOut(token) {
-    const data = await logout(token);
-    console.log(data);
-  }
+  // async function handleLogOut(token) {
+  //   const data = await logout(token);
+  //   console.log(data);
+  // }
 
   return (
     <>

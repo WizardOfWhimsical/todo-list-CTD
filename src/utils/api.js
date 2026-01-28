@@ -75,8 +75,8 @@ export async function logoff(endPoint, options = DEFAULT_OPTIONS) {
       error.status = response.status;
       throw error;
     }
-    console.log(response);
-    return;
+    // console.log(response);
+    return response;
   } catch (error) {
     console.log('Fetch Error Handling:', error);
     throw error;
