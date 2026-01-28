@@ -3,6 +3,7 @@ import { useReducer, useEffect, useCallback } from 'react';
 import ToDoList from '../features/Todos/TodoList/ToDoList';
 import ToDoForm from '../features/Todos/ToDoForm';
 import ErrorDisplay from '../shared/ErrorDisplay';
+import StatusFilter from '../shared/StatusFilter';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -20,8 +21,11 @@ import {
   TODO_ACTIONS,
 } from '../hooks/todoReducer';
 import useDebounce from '../hooks/useDebounce';
+import { useSearchParams } from 'react-router';
 
 export default function TodosPage() {
+  const { token } = useAuth();
+  const [searchParams] = useSearchParams();
   const [state, dispatch] = useReducer(todoReducer, initialTodoState);
   const {
     todoList,
@@ -34,10 +38,9 @@ export default function TodosPage() {
     dataVersion,
   } = state;
 
-  const { token } = useAuth();
-
   // console.log('data verion start count state', dataVersion);
 
+  const statusFilter = searchParams.get('status') || 'all'; //<--seem redundent, had this in the component
   const debouncedFilterTerm = useDebounce(filterTerm, 500);
 
   useEffect(() => {
@@ -52,6 +55,7 @@ export default function TodosPage() {
     const params = new URLSearchParams(paramsObj);
     console.log(params.toString());
     async function fetchTodos() {
+      //i made token to tokens to throw error but it never showed on the page. revisit
       const options = {
         headers: { 'X-CSRF-TOKEN': token },
       };
@@ -60,13 +64,14 @@ export default function TodosPage() {
           type: TODO_ACTIONS.FETCH_START,
         });
 
-        const data = await get(`tasks?${params}`, options);
+        const data = await get(`taskss?${params}`, options);
 
         if (!firstPost) {
           dispatch({ data, type: TODO_ACTIONS.FETCH_SUCCESS });
         }
-        dispatch({ type: TODO_ACTIONS.FILTER_ERROR, sortError: '' });
+        // dispatch({ type: TODO_ACTIONS.FILTER_ERROR, sortError: '' });
       } catch (error) {
+        console.log(error);
         dispatch({ fetchError: error.message, type: TODO_ACTIONS.FETCH_ERROR });
         if (
           debouncedFilterTerm ||
@@ -218,6 +223,14 @@ export default function TodosPage() {
   return (
     <>
       {error && (
+        //   <ErrorDisplay
+        //     error={error}
+        //     onClick={dispatch({
+        //       type: TODO_ACTIONS.FETCH_ERROR,
+        //       fetchError: '',
+        //     })}
+        //   />
+        // )
         <div>
           <p>{error}</p>
           <Button
@@ -259,6 +272,7 @@ export default function TodosPage() {
         sortBy={sortBy}
         sortDirection={sortDirection}
       />
+      <StatusFilter />
       {isTodoListLoading ? (
         <h1>Is Loading the List....</h1>
       ) : (
@@ -267,6 +281,7 @@ export default function TodosPage() {
           onCompleteTodo={completeTodo}
           dataVersion={dataVersion}
           todos={todoList}
+          statusFilter={statusFilter}
         />
       )}
       <Logoff />
