@@ -35,10 +35,9 @@ export default function LoginPage() {
       if (!result.success) {
         const error = result?.error?.message + '\n' + result?.message;
         throw error;
-      } else console.log(`should have redirected...${from}`);
+      }
     } catch (error) {
       setAuthError(error);
-      console.log(error);
     } finally {
       setIsLoggingOn(false);
     }

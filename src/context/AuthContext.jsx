@@ -1,13 +1,11 @@
 import { createContext, useContext, useState } from 'react';
-import { post, logoff } from '../utils/api';
+import { post } from '../utils/api';
 
-//create context
 const AuthContext = createContext();
 
-// custom hook with error checking
 export function useAuth() {
   const context = useContext(AuthContext);
-  // console.log('Auth context:', context);
+
   if (!context) {
     throw new Error('useAuth must be used within an AuthProvider');
   }
@@ -15,7 +13,6 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  //set state
   const [email, setEmail] = useState('');
   const [token, setToken] = useState('');
 
@@ -51,35 +48,30 @@ export function AuthProvider({ children }) {
     if (!token) setToken('') && setEmail('');
 
     try {
-      const logoffData = await logoff('user/logoff', {
+      await post('user/logoff', {
         method: 'POST',
         headers: { 'X-CSRF-TOKEN': token },
       });
 
-      console.log('before success in logout function\n', logoffData);
       return {
         success: true,
         message: `${email} Successfully logged off`,
         error: null,
       };
     } catch (error) {
-      console.log('before failure in logout function\n', error);
       return {
         message: `Something went wrong logging off: ${error}`,
         error,
       };
     } finally {
-      //whether success/fail this needs to happen
       setToken('');
       setEmail('');
     }
   }
 
-  //context value obj
   const value = {
     email,
     token,
-    // If the token exists, we're authenticated
     isAuthenticated: !!token,
     login,
     logout,

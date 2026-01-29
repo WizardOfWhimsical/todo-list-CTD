@@ -67,7 +67,6 @@ export default function TodosPage() {
           dispatch({ data, type: TODO_ACTIONS.FETCH_SUCCESS });
         }
       } catch (error) {
-        console.log(error);
         dispatch({ fetchError: error.message, type: TODO_ACTIONS.FETCH_ERROR });
         if (
           debouncedFilterTerm ||
@@ -214,7 +213,7 @@ export default function TodosPage() {
     dispatch({ type: TODO_ACTIONS.SET_SORT_DIRECTION, sortDirection: 'desc' });
     dispatch({ type: TODO_ACTIONS.FILTER_ERROR, filterError: '' });
   }
-  console.log('Lewis', typeof error);
+
   return (
     <>
       {error && (

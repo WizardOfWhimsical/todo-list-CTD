@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useAuth } from '../context/AuthContext';
 import Button from 'react-bootstrap/Button';
+import ErrorDisplay from '../shared/ErrorDisplay';
 
 export default function Logoff() {
   const [error, setError] = useState('');
@@ -15,7 +16,6 @@ export default function Logoff() {
     setError('');
     try {
       const result = await logout();
-      console.log('logging out component\n', result);
       if (result.success) {
         navigate('/login', { replace: true });
       } else {
@@ -24,22 +24,14 @@ export default function Logoff() {
         const error = result.error;
         throw error;
       }
-    } catch (e) {
-      console.log('error handling in logoff component\n', e);
-      throw e;
+    } catch (error) {
+      setError(error.message);
     }
   }
 
   return (
     <>
-      {error && (
-        <div>
-          <p>{error}</p>
-          <Button type="button" onClick={() => setError('')}>
-            Clear Error
-          </Button>
-        </div>
-      )}
+      {error && <ErrorDisplay error={error} onclick={() => setError('')} />}
 
       {isLoggingOff ? (
         <h1>You have successfully logged off....</h1>

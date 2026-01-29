@@ -7,7 +7,6 @@ export default function RequireAuth({ children }) {
   const location = useLocation();
   const navigate = useNavigate();
 
-  console.log('consoleLog from inside requireAuth\n', location);
   useEffect(() => {
     if (!isAuthenticated) {
       navigate('/login', { replace: true, state: { from: location.pathname } });

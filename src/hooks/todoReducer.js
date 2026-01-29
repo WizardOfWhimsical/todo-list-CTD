@@ -70,7 +70,6 @@ export function todoReducer(state, action) {
     }
     //------------------------------------------
     case TODO_ACTIONS.SET_SORT_BY: {
-      console.log('hitting switch', action.sortBy);
       return { ...state, sortBy: action.sortBy, filterError: '' };
     }
     case TODO_ACTIONS.SET_SORT_DIRECTION: {
@@ -120,7 +119,6 @@ export function todoReducer(state, action) {
       };
     }
     default: {
-      console.log('default', action);
       throw new Error(`Unknown action type: ${action.type}`);
     }
   }
