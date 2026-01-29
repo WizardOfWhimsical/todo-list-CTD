@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { get } from '../utils/api';
 import { useAuth } from '../context/AuthContext';
 import BarChart from '../utils/BarChart';
+import ProfileStats from '../utils/ProfileStats';
 import ErrorDisplay from '../shared/ErrorDisplay';
 
 export default function ProfilePage() {
@@ -61,6 +62,13 @@ export default function ProfilePage() {
           name={email}
         />
       )}
+      <hr />
+      <ProfileStats
+        name={email}
+        total={total}
+        active={active}
+        completed={completed}
+      />
     </>
   );
 }
