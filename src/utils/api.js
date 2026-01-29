@@ -32,7 +32,7 @@ export async function fetchErrorHandling(endPoint, options = DEFAULT_OPTIONS) {
     const data = contentType?.includes('application/json')
       ? await response.json()
       : await response.text();
-    console.log(data);
+    // console.log(data);
     return data;
   } catch (error) {
     console.log('Fetch Error Handling:', error);

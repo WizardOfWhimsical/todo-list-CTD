@@ -22,8 +22,8 @@ export default function StatusFilter() {
         value={currentStatus}
         onChange={(e) => handleStatusChange(e.target.value)}
       >
-        <option value="all">All To-Dos</option>
         <option value="active">Active To-Dos</option>
+        <option value="all">All To-Dos</option>
         <option value="completed">Completed To-Dos</option>
       </Form.Select>
     </Form.Group>
