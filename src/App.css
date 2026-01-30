@@ -50,14 +50,6 @@ button {
   color: #fff;
 }
 
-button:hover {
-  cursor: grab;
-}
-
-button:active {
-  cursor: grabbing;
-}
-
 #root {
   height: 100dvh;
   width: 100dvw;
