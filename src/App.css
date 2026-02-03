@@ -8,16 +8,6 @@
   font-size: 1.25em;
 }
 
-.form-control {
-  border-radius: 10px;
-  line-height: 1.25em;
-  font-size: 1.1em;
-  padding: 6px 12px;
-  border: 1px solid #aaa;
-  box-sizing: border-box;
-  margin-bottom: 12px;
-}
-
 .todo-list-container {
   width: 100%;
   display: flex;
@@ -26,14 +16,6 @@
   justify-content: center;
   margin: 16px 0;
   padding: 0;
-}
-
-.todo-list-item {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 8px;
 }
 
 .flex-column {
