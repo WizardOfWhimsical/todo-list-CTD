@@ -8,16 +8,6 @@
   font-size: 1.25em;
 }
 
-.todo-list-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 16px 0;
-  padding: 0;
-}
-
 /* @media (max-width: 385px){
 .sort-container{
   display: flex;
