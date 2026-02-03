@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 //ToDoListItem.jsx
-export function ToDoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
+export default function ToDoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
   const {
     startEditing,
     workingTitle,
