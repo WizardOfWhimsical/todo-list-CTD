@@ -1,4 +1,5 @@
 import { useId } from 'react';
+import Form from 'react-bootstrap/Form';
 
 export default function TextInputWithLabel({
   labelText,
@@ -9,9 +10,9 @@ export default function TextInputWithLabel({
 }) {
   const id = useId();
   return (
-    <>
-      <label htmlFor={id}>{labelText}</label>
-      <input
+    <Form.Group>
+      <Form.Label htmlFor={id}>{labelText}</Form.Label>
+      <Form.Control
         type="text"
         id={id}
         value={value}
@@ -19,6 +20,6 @@ export default function TextInputWithLabel({
         onChange={onChange}
         onKeyDown={onKeyDown}
       />
-    </>
+    </Form.Group>
   );
 }
