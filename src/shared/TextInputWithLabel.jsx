@@ -5,12 +5,20 @@ export default function TextInputWithLabel({
   value,
   ref,
   onChange,
+  onKeyDown,
 }) {
   const id = useId();
   return (
     <>
       <label htmlFor={id}>{labelText}</label>
-      <input type="text" id={id} value={value} ref={ref} onChange={onChange} />
+      <input
+        type="text"
+        id={id}
+        value={value}
+        ref={ref}
+        onChange={onChange}
+        onKeyDown={onKeyDown}
+      />
     </>
   );
 }

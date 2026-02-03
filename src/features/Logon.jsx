@@ -15,7 +15,6 @@ export default function Logon({ onSetEmail, onSetToken }) {
         const data = await post('user/logon', {
           body: { email, password },
         });
-        console.log(data);
         if (data.name && data.csrfToken) {
           onSetEmail(data.name);
           onSetToken(data.csrfToken);
@@ -24,7 +23,6 @@ export default function Logon({ onSetEmail, onSetToken }) {
         }
       } catch (error) {
         setAuthError(`Error: ${error.name} | ${error.message}`);
-        console.log(error);
       } finally {
         setIsLoggingOn(false);
       }
@@ -33,11 +31,19 @@ export default function Logon({ onSetEmail, onSetToken }) {
   }
 
   useEffect(() => {
-    console.log(authError);
+    console.log('Errors: ', authError);
   }, [authError]);
 
   return (
     <>
+      {authError && (
+        <div>
+          <p>{authError}</p>
+          <button type="button" onClick={() => setAuthError('')}>
+            Clear Authorization
+          </button>
+        </div>
+      )}
       {isLoggingOn ? (
         <h1>Is Logging Inn....</h1>
       ) : (

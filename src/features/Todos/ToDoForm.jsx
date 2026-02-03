@@ -22,7 +22,7 @@ export default function ToDoForm({ onAddTodo }) {
       <TextInputWithLabel
         htmlFor="todoTitle"
         id="todoTitle"
-        labelText={'To Do:'}
+        labelText={'To Do: '}
         value={workingTodoTitle}
         onChange={(e) => setWorkingTodoTitle(e.target.value)}
         ref={inputRef}
