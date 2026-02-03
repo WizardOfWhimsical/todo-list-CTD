@@ -1,7 +1,7 @@
 //TodosPage.jsx
 import { useReducer, useEffect, useCallback } from 'react';
-import ToDoList from '../features/Todos/TodoList/ToDoList';
-import ToDoForm from '../features/Todos/ToDoForm';
+import ToDoList from '../features/ToDoList';
+import ToDoForm from '../features/ToDoForm';
 import ErrorDisplay from '../shared/ErrorDisplay';
 import StatusFilter from '../shared/StatusFilter';
 
