@@ -95,10 +95,6 @@ button {
   margin-bottom: 8px;
 }
 
-/* .sort-container {
-  display: flex;
-  flex-direction: column;
-} */
 .flex-column {
   display: flex;
   flex-direction: column;
