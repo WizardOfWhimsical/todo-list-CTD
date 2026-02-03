@@ -1,33 +1,20 @@
 import { useEffect, useState } from 'react';
-import { post } from '../utils/api';
+import { useAuth } from '../context/AuthContext';
 
-export default function Logon({ onSetEmail, onSetToken }) {
+export default function Logon() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [authError, setAuthError] = useState('');
   const [isLoggingOn, setIsLoggingOn] = useState(false);
 
-  function handleSubmit(event) {
+  const { login } = useAuth();
+
+  async function handleSubmit(event) {
     event.preventDefault();
-    async function logOn() {
-      setIsLoggingOn(true);
-      try {
-        const data = await post('user/logon', {
-          body: { email, password },
-        });
-        if (data.name && data.csrfToken) {
-          onSetEmail(data.name);
-          onSetToken(data.csrfToken);
-        } else {
-          setAuthError(`Authentication failed: ${data?.message}`);
-        }
-      } catch (error) {
-        setAuthError(`Error: ${error.name} | ${error.message}`);
-      } finally {
-        setIsLoggingOn(false);
-      }
-    }
-    logOn();
+
+    setIsLoggingOn(true);
+    await login(email, password);
+    setIsLoggingOn(false);
   }
 
   useEffect(() => {

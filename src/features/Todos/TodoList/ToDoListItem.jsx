@@ -12,6 +12,7 @@ export function ToDoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
     finishEdit,
     cancelEdit,
   } = useEditableTitle(todo.title);
+
   const inputRef = useRef();
 
   useEffect(() => {
@@ -30,7 +31,7 @@ export function ToDoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
     const finalTitle = finishEdit();
     onUpdateTodo({ ...todo, title: finalTitle });
   }
-  const escapeKey = (e) => {
+  const handleEscape = (e) => {
     if (e.key === 'Escape') cancelEdit();
   };
   return (
@@ -43,7 +44,7 @@ export function ToDoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
               value={workingTitle}
               onChange={handleEdit}
               ref={inputRef}
-              onKeyDown={escapeKey}
+              onKeyDown={handleEscape}
             />
             <button type="button" onClick={cancelEdit}>
               Cancel
