@@ -1,7 +1,7 @@
 //ToDoList.jsx
 
 import { useMemo } from 'react';
-import { ToDoListItem } from './ToDoListItem';
+import { ToDoListItem } from './ToDoListItem/ToDoListItem';
 
 function ToDoList({
   todos,
