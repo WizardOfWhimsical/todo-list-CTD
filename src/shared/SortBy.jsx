@@ -1,3 +1,5 @@
+import Form from 'react-bootstrap/Form';
+
 export default function SortBy({
   sortBy,
   sortDirection,
@@ -5,9 +7,10 @@ export default function SortBy({
   onSortDirectionChange,
 }) {
   return (
-    <>
-      <label htmlFor="sortBy">Sort By: </label>
-      <select
+    <Form.Group className="flex-column">
+      <Form.Label htmlFor="sortBy">Sort By: </Form.Label>
+      <Form.Select
+        aria-label="sort by"
         name="sortBy"
         id="sortBy"
         value={sortBy}
@@ -15,10 +18,11 @@ export default function SortBy({
       >
         <option value="creationDate">Creation Date</option>
         <option value="title">Title</option>
-      </select>
+      </Form.Select>
 
-      <label htmlFor="order">Order: </label>
-      <select
+      <Form.Label htmlFor="order">Order: </Form.Label>
+      <Form.Select
+        arai-label="sort direction"
         value={sortDirection}
         onChange={(e) => onSortDirectionChange(e.target.value)}
         name="order"
@@ -26,7 +30,7 @@ export default function SortBy({
       >
         <option value="asc">Ascending</option>
         <option value="desc">Descending</option>
-      </select>
-    </>
+      </Form.Select>
+    </Form.Group>
   );
 }

@@ -1,25 +1,59 @@
-import TodosPage from './features/Todos/TodosPage';
-import Header from './shared/Header';
-import Logon from './features/Logon';
+import { Routes, Route } from 'react-router';
+import TodosPage from './pages/TodosPage';
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import AboutPage from './pages/AboutPage';
+import ProfilePage from './pages/ProfilePage';
+import ErrorPage from './pages/ErrorPage';
 
-import { useAuth } from './context/AuthContext';
+import Navigation from './shared/Navigation';
+
+import Header from './shared/Header';
+import RequireAuth from './shared/RequireAuth';
+// import Logon from './features/Logon';
+
+// import { useAuth } from './context/AuthContext';
 
 import './App.css';
 
 function App() {
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);`
-
-  const { token } = useAuth();
-
-  return token ? (
+  // const { isAuthenticated } = useAuth();
+  const TODOSPAGE = (
     <>
       <Header message={'Going To Do...'} />
       <TodosPage />
     </>
-  ) : (
+  );
+  const LOGINPAGE = (
     <>
       <Header message={'Please Log In'} />
-      <Logon />
+      <LoginPage />
+    </>
+  );
+
+  return (
+    <>
+      <Navigation />
+      <div className="routes-container">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/login" element={LOGINPAGE} />
+          <Route
+            path="/todos"
+            element={<RequireAuth>{TODOSPAGE}</RequireAuth>}
+          />
+          <Route
+            path="/profile"
+            element={
+              <RequireAuth>
+                <ProfilePage />
+              </RequireAuth>
+            }
+          />
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
+      </div>
     </>
   );
 }

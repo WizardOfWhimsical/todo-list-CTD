@@ -1,13 +1,11 @@
 import { createContext, useContext, useState } from 'react';
 import { post } from '../utils/api';
 
-//create context
 const AuthContext = createContext();
 
-// custom hook with error checking
 export function useAuth() {
   const context = useContext(AuthContext);
-  console.log('Auth context:', context);
+
   if (!context) {
     throw new Error('useAuth must be used within an AuthProvider');
   }
@@ -15,17 +13,10 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  //set state
   const [email, setEmail] = useState('');
   const [token, setToken] = useState('');
 
-  /**
-   * code (functions) goes here...
-   * Found what they want me to add here, i will need to move it into api.js, its a fetch
-   */
-
   async function login(userEmail, password) {
-    // setIsLoggingOn(true);
     try {
       const data = await post('user/logon', {
         body: { email: userEmail, password },
@@ -53,18 +44,14 @@ export function AuthProvider({ children }) {
     }
   }
 
-  async function logout(token) {
+  async function logout() {
     if (!token) setToken('') && setEmail('');
 
     try {
-      const logoffData = await post('user/logoff', {
+      await post('user/logoff', {
+        method: 'POST',
         headers: { 'X-CSRF-TOKEN': token },
       });
-
-      console.log(logoffData);
-
-      setToken('');
-      setEmail('');
 
       return {
         success: true,
@@ -73,17 +60,18 @@ export function AuthProvider({ children }) {
       };
     } catch (error) {
       return {
-        message: `Something went wrong logging off: ${error.message}`,
+        message: `Something went wrong logging off: ${error}`,
         error,
       };
+    } finally {
+      setToken('');
+      setEmail('');
     }
   }
 
-  //context value obj
   const value = {
     email,
     token,
-    // If the token exists, we're authenticated
     isAuthenticated: !!token,
     login,
     logout,

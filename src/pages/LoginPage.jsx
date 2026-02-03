@@ -1,27 +1,47 @@
 import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router';
 import { useAuth } from '../context/AuthContext';
+
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-export default function Logon() {
+export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [authError, setAuthError] = useState('');
   const [isLoggingOn, setIsLoggingOn] = useState(false);
 
-  const { login } = useAuth();
+  const { login, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // const from = '/todos';
+  const from = location.state?.from?.pathname || '/todos';
+
+  useEffect(() => {
+    if (isAuthenticated) navigate(from, { replace: true });
+  }, [isAuthenticated, navigate, from]);
+
+  useEffect(() => {
+    console.log('Errors: ', authError);
+  }, [authError]);
 
   async function handleSubmit(event) {
     event.preventDefault();
 
     setIsLoggingOn(true);
-    await login(email, password);
-    setIsLoggingOn(false);
+    try {
+      const result = await login(email, password);
+      if (!result.success) {
+        const error = result?.error?.message + '\n' + result?.message;
+        throw error;
+      }
+    } catch (error) {
+      setAuthError(error);
+    } finally {
+      setIsLoggingOn(false);
+    }
   }
-
-  useEffect(() => {
-    console.log('Errors: ', authError);
-  }, [authError]);
 
   return (
     <>
