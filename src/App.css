@@ -18,9 +18,6 @@
   padding: 0;
 }
 
-.active {
-  background-color: #aaa;
-}
 /* @media (max-width: 385px){
 .sort-container{
   display: flex;

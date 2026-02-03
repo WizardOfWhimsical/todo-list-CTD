@@ -58,6 +58,9 @@ button {
   flex-direction: column;
 }
 
+/* 
+All implecite classes that need to be global
+*/
 .form-control {
   border-radius: 10px;
   line-height: 1.25em;
@@ -71,4 +74,8 @@ button {
 .flex-column {
   display: flex;
   flex-direction: column;
+}
+
+.active {
+  background-color: #aaa;
 }
