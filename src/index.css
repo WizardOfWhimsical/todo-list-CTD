@@ -67,3 +67,8 @@ button {
   box-sizing: border-box;
   margin-bottom: 12px;
 }
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
