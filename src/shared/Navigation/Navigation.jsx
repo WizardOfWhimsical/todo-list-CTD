@@ -1,14 +1,15 @@
 import { NavLink } from 'react-router';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
+import styles from './Navigation.module.css';
 
 export default function Navigation() {
   const { isAuthenticated } = useAuth();
   return (
-    <nav className="nav">
-      <NavLink to="/" className="site-title">
+    <nav className={styles.nav}>
+      <NavLink to="/" className={styles.siteTitle}>
         Lewis Labs
       </NavLink>
-      <ul className="link-container">
+      <ul className={styles.linkContainer}>
         <li>
           <NavLink to="/login">Login</NavLink>
         </li>
