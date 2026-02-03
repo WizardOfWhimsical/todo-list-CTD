@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
-import TextInputWithLabel from '../../shared/TextInputWithLabel';
-import { isValidTodoTitle } from '../../utils/todoValidation';
+import TextInputWithLabel from '../shared/TextInputWithLabel';
+import { isValidTodoTitle } from '../utils/todoValidation';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';

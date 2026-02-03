@@ -1,5 +1,5 @@
-import TextInputWithLabel from '../../../../shared/TextInputWithLabel';
-import useEditableTitle from '../../../../hooks/useEditableTitle';
+import TextInputWithLabel from '../../shared/TextInputWithLabel';
+import useEditableTitle from '../../hooks/useEditableTitle';
 import { useEffect, useRef } from 'react';
 
 import Form from 'react-bootstrap/Form';
