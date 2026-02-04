@@ -1,11 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Inter|Poppins');
 
 :root {
+  /* used for buttons, links, highlights */
   --primary: #2563eb;
+  /* nav, secondary buttons */
   --secondary: #64748b;
+  /* warnings, call to action, maybe success/error */
   --accent: #f59e42;
+  /* app background */
   --background: #f8fafc;
+  /* Card or modal background */
   --surface: #fff;
+  /* default text color and disabled */
   --text-main: #22223b;
   --text-muted: #64748b;
 }
