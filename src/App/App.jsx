@@ -1,20 +1,22 @@
 import { Routes, Route } from 'react-router';
-import TodosPage from './pages/TodosPage';
-import HomePage from './pages/HomePage';
-import LoginPage from './pages/LoginPage';
-import AboutPage from './pages/AboutPage';
-import ProfilePage from './pages/ProfilePage';
-import ErrorPage from './pages/ErrorPage';
+import TodosPage from '../pages/TodosPage';
+import HomePage from '../pages/HomePage';
+import LoginPage from '../pages/LoginPage';
+import AboutPage from '../pages/AboutPage';
+import ProfilePage from '../pages/ProfilePage';
+import ErrorPage from '../pages/ErrorPage';
 
-import Navigation from './shared/Navigation';
+import Navigation from '../shared/Navigation';
 
-import Header from './shared/Header';
-import RequireAuth from './shared/RequireAuth';
+import Header from '../shared/Header';
+import RequireAuth from '../shared/RequireAuth';
+
+import styles from './App.module.css';
 // import Logon from './features/Logon';
 
 // import { useAuth } from './context/AuthContext';
 
-import './App.css';
+// import './App.css';
 
 function App() {
   // const { isAuthenticated } = useAuth();
@@ -34,7 +36,7 @@ function App() {
   return (
     <>
       <Navigation />
-      <div className="routes-container">
+      <div className={styles.routesContainer}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
