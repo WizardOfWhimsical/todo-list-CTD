@@ -2,24 +2,15 @@ import { useId } from 'react';
 import Form from 'react-bootstrap/Form';
 
 export default function TextInputWithLabel({
+  className = 'flex-column',
   labelText,
-  value,
-  ref,
-  onChange,
-  onKeyDown,
+  ...controlProps
 }) {
   const id = useId();
   return (
-    <Form.Group>
+    <Form.Group className={className}>
       <Form.Label htmlFor={id}>{labelText}</Form.Label>
-      <Form.Control
-        type="text"
-        id={id}
-        value={value}
-        ref={ref}
-        onChange={onChange}
-        onKeyDown={onKeyDown}
-      />
+      <Form.Control type="text" id={id} {...controlProps} />
     </Form.Group>
   );
 }

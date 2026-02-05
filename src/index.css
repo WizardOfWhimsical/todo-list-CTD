@@ -13,6 +13,7 @@
   --surface: #fff;
   /* default text color and disabled */
   --text-main: #22223b;
+  /* i thought this was stupid but i figure you can make it make sense to me */
   --text-muted: #64748b;
 }
 
@@ -55,6 +56,14 @@ label {
   padding: 0 4px;
   margin: 4px 0;
   display: inline-block;
+
+  & > input[type='checkbox'] {
+    margin-right: 12px;
+  }
+}
+
+input {
+  max-width: 300px;
 }
 
 input[type='checkbox'] {
@@ -70,6 +79,11 @@ button {
   border: 1px black solid;
   background: rgb(67, 60, 60);
   color: #fff;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
 }
 
 #root {

@@ -65,8 +65,9 @@ export default function ToDoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
                 onChange={() => onCompleteTodo(todo.id)}
                 checked={todo.isCompleted}
               />
+              <span>{todo.title}</span>
             </Form.Label>
-            <span>{todo.title}</span>
+
             <Button
               type="button"
               onClick={() => {

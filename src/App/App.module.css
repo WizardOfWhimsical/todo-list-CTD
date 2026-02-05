@@ -1,10 +1,10 @@
 .routes-container {
-  margin: 0;
+  width: 60dvw;
+  margin: 0 auto;
   padding: 12px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: start;
   font-size: 1.25em;
 }
 

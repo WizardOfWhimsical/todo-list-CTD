@@ -6,3 +6,8 @@
   margin-bottom: 8px;
   padding: 4px 0;
 }
+
+.todo-list-item label + button {
+  display: block;
+  margin-left: 40px;
+}
