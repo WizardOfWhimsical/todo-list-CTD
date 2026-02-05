@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useAuth } from '../context/AuthContext';
 import Button from 'react-bootstrap/Button';
-import ErrorDisplay from '../shared/ErrorDisplay';
+import ErrorDisplay from '../shared/ErrorDisplay/ErrorDisplay';
 
 export default function Logoff() {
   const [error, setError] = useState('');

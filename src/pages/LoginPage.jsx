@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { useAuth } from '../context/AuthContext';
+import ErrorDisplay from '../shared/ErrorDisplay';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -30,28 +31,30 @@ export default function LoginPage() {
     event.preventDefault();
 
     setIsLoggingOn(true);
-    try {
-      const result = await login(email, password);
-      if (!result.success) {
-        const error = result?.error?.message + '\n' + result?.message;
-        throw error;
-      }
-    } catch (error) {
-      setAuthError(error);
-    } finally {
-      setIsLoggingOn(false);
-    }
+    setAuthError('fake Error');
+    // try {
+    //   const result = await login(email, password);
+    //   if (!result.success) {
+    //     const error = result?.error?.message + '\n' + result?.message;
+    //     throw error;
+    //   }
+    // } catch (error) {
+    //   setAuthError(error);
+    // } finally {
+    //   setIsLoggingOn(false);
+    // }
   }
 
   return (
     <>
       {authError && (
-        <div>
-          <p>{authError}</p>
-          <Button type="button" onClick={() => setAuthError('')}>
-            Clear Authorization
-          </Button>
-        </div>
+        <ErrorDisplay error={authError} onClick={() => setAuthError('')} />
+        // <div>
+        //   <p>{authError}</p>
+        //   <Button type="button" onClick={() => setAuthError('')}>
+        //     Clear Authorization
+        //   </Button>
+        // </div>
       )}
       {isLoggingOn ? (
         <h1>Is Logging Inn....</h1>

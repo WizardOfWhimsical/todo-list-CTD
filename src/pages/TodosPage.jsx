@@ -2,7 +2,7 @@
 import { useReducer, useEffect, useCallback } from 'react';
 import ToDoList from '../features/ToDoList';
 import ToDoForm from '../features/ToDoForm';
-import ErrorDisplay from '../shared/ErrorDisplay';
+import ErrorDisplay from '../shared/ErrorDisplay/ErrorDisplay';
 import StatusFilter from '../shared/StatusFilter';
 
 import Button from 'react-bootstrap/Button';
