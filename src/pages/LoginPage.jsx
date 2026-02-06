@@ -6,6 +6,9 @@ import ErrorDisplay from '../shared/ErrorDisplay';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
+import isValid from '../utils/todoValidation';
+import sanitizeInput from '../utils/sanitizeInput';
+
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -30,19 +33,28 @@ export default function LoginPage() {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    setIsLoggingOn(true);
-
-    try {
-      const result = await login(email, password);
-      if (!result.success) {
-        const error = result?.error?.message + '\n' + result?.message;
-        throw error;
+    if (isValid(email) && isValid(password)) {
+      console.log('continues to sanitation');
+      if (sanitizeInput(email) === '' /*|| sanitizeInput(password) === ''*/) {
+        // throw new Error('Only non-malious chracters');
+        console.log('saniEmail', sanitizeInput(email));
+        return setAuthError('Only non-malious chracters');
       }
-    } catch (error) {
-      setAuthError(error);
-    } finally {
-      setIsLoggingOn(false);
     }
+
+    // setIsLoggingOn(true);
+
+    // try {
+    //   const result = await login(email, password);
+    //   if (!result.success) {
+    //     const error = result?.error?.message + '\n' + result?.message;
+    //     throw error;
+    //   }
+    // } catch (error) {
+    //   setAuthError(error);
+    // } finally {
+    //   setIsLoggingOn(false);
+    // }
   }
 
   return (
@@ -61,6 +73,8 @@ export default function LoginPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            pattern="^([a-zA-Z0-9._-]+)@([a-zA-Z0-9.-]+)\\.([a-zA-Z]{2,})$"
+            title="Please enter a valid email address"
             autoComplete="email"
           />
           <br />
@@ -71,6 +85,8 @@ export default function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            pattern="^[A-Za-z0-9._-]+$"
+            title="Please enter a valid password"
           />
 
           <Button
