@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { useAuth } from '../context/AuthContext';
 import ErrorDisplay from '../shared/ErrorDisplay';
@@ -14,6 +14,8 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [authError, setAuthError] = useState('');
   const [isLoggingOn, setIsLoggingOn] = useState(false);
+
+  const formRef = useRef(null);
 
   const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
@@ -32,6 +34,11 @@ export default function LoginPage() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+
+    if (!formRef.current.checkValidity()) {
+      formRef.current.reportValidity();
+      return;
+    }
 
     if (isValid(email) && isValid(password)) {
       console.log('continues to sanitation');
@@ -64,7 +71,8 @@ export default function LoginPage() {
       {isLoggingOn ? (
         <h1>Is Logging Inn....</h1>
       ) : (
-        <Form onSubmit={handleSubmit}>
+        // my pattern recog. isnt triggering form validation via the browser?
+        <Form ref={formRef} onSubmit={handleSubmit}>
           <Form.Label htmlFor="email">Email: </Form.Label>
           <Form.Control
             type="email"
@@ -84,7 +92,7 @@ export default function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            pattern="^[A-Za-z0-9._-]+$"
+            pattern="^([A-Za-z0-9._-]+)$"
             title="Please enter a valid password"
           />
 
