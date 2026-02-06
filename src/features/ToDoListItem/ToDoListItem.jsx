@@ -72,7 +72,6 @@ export default function ToDoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
               type="button"
               onClick={() => {
                 startEditing();
-                // inputRef.current?.focus();
               }}
             >
               EDIT
