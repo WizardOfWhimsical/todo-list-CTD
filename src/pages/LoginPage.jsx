@@ -36,7 +36,8 @@ export default function LoginPage() {
     if (isValid(email) && isValid(password)) {
       console.log('continues to sanitation');
       if (sanitizeInput(email) === '' || sanitizeInput(password) === '') {
-        return setAuthError('Only non-malious chracters');
+        setAuthError('Only non-malious chracters');
+        return;
       }
     }
 

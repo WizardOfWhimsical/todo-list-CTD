@@ -106,6 +106,7 @@ export default function TodosPage() {
           fetchError: 'Only non-malious chracters',
           type: TODO_ACTIONS.FETCH_ERROR,
         });
+        return;
       }
     }
     const newToDo = { id: Date.now(), title: todoTitle, isCompleted: false };
@@ -159,6 +160,17 @@ export default function TodosPage() {
    * @param {string} editedTodo
    */
   async function updateTodo(editedTodo) {
+    if (isValid(editedTodo)) {
+      console.log('continues to sanitation');
+      if (sanitizeInput(editedTodo) === '') {
+        dispatch({
+          fetchError: 'Only non-malious chracters',
+          type: TODO_ACTIONS.FETCH_ERROR,
+        });
+        return;
+      }
+    }
+
     dispatch({
       type: TODO_ACTIONS.UPDATE_TODO,
       todo: editedTodo,
