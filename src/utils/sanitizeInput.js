@@ -14,5 +14,6 @@ export default function sanitizeInput(input) {
   if (cleanInput === '' || cleanInput === ' ') {
     return 'Only non-malious chracters';
   }
+
   return cleanInput;
 }
