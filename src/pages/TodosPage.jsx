@@ -5,10 +5,11 @@ import ToDoForm from '../features/ToDoForm';
 import ErrorDisplay from '../shared/ErrorDisplay/ErrorDisplay';
 import StatusFilter from '../shared/StatusFilter';
 
-import Button from 'react-bootstrap/Button';
 import Logoff from '../features/Logoff';
 
 import { useAuth } from '../context/AuthContext';
+import isValid from '../utils/todoValidation';
+import sanitizeInput from '../utils/sanitizeInput';
 
 import { addTodo, patch, get } from '../utils/api';
 import { FilterInput } from '../shared/FilterInput';
@@ -98,6 +99,15 @@ export default function TodosPage() {
    * @param {string} todoTitle
    */
   async function addToDo(todoTitle) {
+    if (isValid(todoTitle)) {
+      console.log('continues to sanitation');
+      if (sanitizeInput(todoTitle) === '') {
+        dispatch({
+          fetchError: 'Only non-malious chracters',
+          type: TODO_ACTIONS.FETCH_ERROR,
+        });
+      }
+    }
     const newToDo = { id: Date.now(), title: todoTitle, isCompleted: false };
 
     dispatch({ type: TODO_ACTIONS.ADD_TODO, title: todoTitle, id: newToDo.id });

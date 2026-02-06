@@ -33,11 +33,12 @@ export default function ToDoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
     event.preventDefault();
     if (!isEditing) return;
     const finalTitle = finishEdit();
+
     onUpdateTodo({ ...todo, title: finalTitle });
   }
-  const handleEscape = (e) => {
+  function handleEscape(e) {
     if (e.key === 'Escape') cancelEdit();
-  };
+  }
   return (
     <li className={styles.todoListItem}>
       <Form onSubmit={handleUpdate}>

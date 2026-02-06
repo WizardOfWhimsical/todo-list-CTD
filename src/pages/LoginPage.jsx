@@ -35,26 +35,24 @@ export default function LoginPage() {
 
     if (isValid(email) && isValid(password)) {
       console.log('continues to sanitation');
-      if (sanitizeInput(email) === '' /*|| sanitizeInput(password) === ''*/) {
-        // throw new Error('Only non-malious chracters');
-        console.log('saniEmail', sanitizeInput(email));
+      if (sanitizeInput(email) === '' || sanitizeInput(password) === '') {
         return setAuthError('Only non-malious chracters');
       }
     }
 
-    // setIsLoggingOn(true);
+    setIsLoggingOn(true);
 
-    // try {
-    //   const result = await login(email, password);
-    //   if (!result.success) {
-    //     const error = result?.error?.message + '\n' + result?.message;
-    //     throw error;
-    //   }
-    // } catch (error) {
-    //   setAuthError(error);
-    // } finally {
-    //   setIsLoggingOn(false);
-    // }
+    try {
+      const result = await login(email, password);
+      if (!result.success) {
+        const error = result?.error?.message + '\n' + result?.message;
+        throw error;
+      }
+    } catch (error) {
+      setAuthError(error);
+    } finally {
+      setIsLoggingOn(false);
+    }
   }
 
   return (

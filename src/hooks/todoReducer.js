@@ -61,6 +61,7 @@ export function todoReducer(state, action) {
         isTodoListLoading: false,
       };
     }
+    // want to change this to Error later
     case TODO_ACTIONS.FETCH_ERROR: {
       return {
         ...state,

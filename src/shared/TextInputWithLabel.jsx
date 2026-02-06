@@ -1,6 +1,6 @@
 import { useId } from 'react';
 import Form from 'react-bootstrap/Form';
-import sanitizeInput from '../utils/sanitizeInput';
+// import sanitizeInput from '../utils/sanitizeInput';
 
 export default function TextInputWithLabel({
   className = 'flex-column',
