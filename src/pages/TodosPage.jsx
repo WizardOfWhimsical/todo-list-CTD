@@ -38,7 +38,7 @@ export default function TodosPage() {
     dataVersion,
   } = state;
 
-  const statusFilter = searchParams.get('status') || 'all'; //<--seem redundent, had this in the component
+  const statusFilter = searchParams.get('status') || 'active'; //<--changed from all to active
   const debouncedFilterTerm = useDebounce(filterTerm, 500);
 
   useEffect(() => {
@@ -216,6 +216,17 @@ export default function TodosPage() {
    * @param {string} newTerm
    */
   function handlefilterChange(newTerm) {
+    if (isValid(newTerm)) {
+      console.log('continues to sanitation');
+      if (sanitizeInput(newTerm) === '') {
+        dispatch({
+          fetchError: 'Only non-malious chracters',
+          type: TODO_ACTIONS.FETCH_ERROR,
+        });
+        return;
+      }
+    }
+
     dispatch({ type: TODO_ACTIONS.SET_S_E_O, filterTerm: newTerm });
   }
 
