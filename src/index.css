@@ -81,16 +81,26 @@ button {
   color: #fff;
 }
 
-button:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 1px;
+button:focus-visible,
+a:focus-visible,
+input[type='checkbox']:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 3px #ffe066,
+    0 0 8px 2px #f59e42;
+  border-color: var(--accent);
+  z-index: 1;
+  transition:
+    box-shadow 0.2s,
+    border-color 0.2s;
 }
 
-/* input,
-button,
-a:hover {
-  font-size: 2em;
-} */
+button:hover,
+a:hover,
+input[type='checkbox']:hover {
+  color: var(--primary);
+  background-color: var(--secondary);
+}
 
 #root {
   height: 100dvh;

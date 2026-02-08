@@ -98,7 +98,7 @@ export default function LoginPage() {
 
           <Button
             type="submit"
-            disabled={!email || !password}
+            // disabled={!email || !password}
             onClick={handleSubmit}
           >
             LogIn
