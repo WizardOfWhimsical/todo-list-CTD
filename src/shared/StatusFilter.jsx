@@ -3,10 +3,10 @@ import { Form } from 'react-bootstrap';
 
 export default function StatusFilter() {
   const [searchParams, setSearchParams] = useSearchParams('');
-  const currentStatus = searchParams.get('status') || 'all';
+  const currentStatus = searchParams.get('status') || 'active';
 
   function handleStatusChange(status) {
-    if (status === 'all') {
+    if (status === 'active') {
       searchParams.delete('status');
     } else {
       searchParams.set('status', status);
