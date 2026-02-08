@@ -86,6 +86,12 @@ button:focus-visible {
   outline-offset: 1px;
 }
 
+/* input,
+button,
+a:hover {
+  font-size: 2em;
+} */
+
 #root {
   height: 100dvh;
   width: 100dvw;

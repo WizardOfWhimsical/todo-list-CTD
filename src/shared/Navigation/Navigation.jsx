@@ -10,9 +10,11 @@ export default function Navigation() {
         Lewis Labs
       </NavLink>
       <ul className={styles.linkContainer}>
-        <li>
-          <NavLink to="/login">Login</NavLink>
-        </li>
+        {!isAuthenticated ? (
+          <li>
+            <NavLink to="/login">Login</NavLink>
+          </li>
+        ) : null}
         <li>
           <NavLink to="/about">About</NavLink>
         </li>

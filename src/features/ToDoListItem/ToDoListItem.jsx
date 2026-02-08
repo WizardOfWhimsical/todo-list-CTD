@@ -1,6 +1,6 @@
 import TextInputWithLabel from '../../shared/TextInputWithLabel';
 import useEditableTitle from '../../hooks/useEditableTitle';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import styles from './ToDoListItem.module.css';
 
 import Form from 'react-bootstrap/Form';
@@ -40,11 +40,6 @@ export default function ToDoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
   function handleEscape(e) {
     if (e.key === 'Escape') cancelEdit();
   }
-
-  // function handleOnChange() {
-  //   setIsChecked(!isChecked);
-  //   onCompleteTodo(todo.id);
-  // }
 
   return (
     <li className={styles.todoListItem}>
