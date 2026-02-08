@@ -80,7 +80,7 @@ export default function LoginPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            pattern="^([a-zA-Z0-9._-]+)@([a-zA-Z0-9.-]+)\\.([a-zA-Z]{2,})$"
+            // pattern="^([a-zA-Z0-9._-]+)@([a-zA-Z0-9.-]+)\\.([a-zA-Z]{2,})$"
             title="Please enter a valid email address"
             autoComplete="email"
           />
@@ -92,7 +92,7 @@ export default function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            pattern="^([A-Za-z0-9._-]+)$"
+            // pattern="^([A-Za-z0-9._-]+)$"
             title="Please enter a valid password"
           />
 
