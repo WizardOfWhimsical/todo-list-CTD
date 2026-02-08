@@ -135,7 +135,7 @@ export default function TodosPage() {
     const targetTodo = todoList.find((todo) => todo.id === todoId);
     dispatch({
       type: TODO_ACTIONS.UPDATE_TODO,
-      todo: { ...targetTodo, isCompleted: true },
+      todo: { ...targetTodo, isCompleted: !targetTodo.isCompleted },
     });
 
     const options = {
