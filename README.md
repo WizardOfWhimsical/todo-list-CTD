@@ -8,8 +8,9 @@
 6. [Screen Shots](#screen-shots)
 7. [Getting Started](#getting-started)
 8. [Available Scripts](#available-scripts)
-9. [License Info](#license-info)
-10. [Contact](#-contact)
+9. [Design Decission](#design-decission)
+10. [License Info](#license-info)
+11. [Contact](#-contact)
 
 ## Live Demo
 
@@ -27,7 +28,7 @@ with building this app)
 ### Things this application can do
 
 - Uses Authentication to access CTD backend database with logging in message
-- Create a new todo (with optamistic updating and feed back)
+- Create a new todo (with optimistic updating and feed back)
 - Edit existing todo (or cancel said edit. has optamistic updating and feed back)
 - Mark tasks as complete or incomplete (with optamistic updating and feed back)
 - View your completion percentage on profile page (with visual summary)
@@ -49,13 +50,12 @@ with building this app)
 
 ### The technology I used/learned for this project
 
-- HTML/CSS
-- JSX
-- React
-- React Router
-- React Bootstrap Components
-- Vite
-- Render.com (publication)
+- HTML/CSS - _Markup and styling_
+- React - _FrontEnd Framework_
+- React Router - _SPA Navigation/Routing_
+- React Bootstrap Components - _UI Components_
+- Vite - _Fast Dev Server_
+- Render.com - _Hosting and Deployment_
 
 ## Screen Shots
 
@@ -83,9 +83,35 @@ with building this app)
 
 ### Prerequisites
 
+- [Node.js](https://nodejs.org/) - v18.x or later(npm included with Node.js)
+- (Optional) [Git](https://git-scm.com/) for cloning the repo
+- Terminal or CLI (Command Line Interface)
+- **(Optional)** Code editor like VS Code or WindSurf
+
 ### Installation
 
+1. **Clone the Repo:**
+   ```bash
+   git clone https://github.com//WizardOfWhimsical/todo-list.git
+   cd todo-list
+   ```
+   Install Dependencies:
+   ```
+   npm install
+   ```
+2. **Running the Development Server**
+
+   Start the local dev server with:
+
+   ```
+   npm run dev
+   ```
+
+   Open your browser and go to the Local URL displayed in the terminal (typically http://localhost:3001).
+
 ## Available Scripts
+
+## Design Decission
 
 ## Licence
 
