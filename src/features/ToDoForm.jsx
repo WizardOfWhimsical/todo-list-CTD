@@ -1,6 +1,5 @@
 import { useRef, useState } from 'react';
 import TextInputWithLabel from '../shared/TextInputWithLabel';
-import isValidTodoTitle from '../utils/todoValidation';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -28,9 +27,7 @@ export default function ToDoForm({ onAddTodo }) {
         onChange={(e) => setWorkingTodoTitle(e.target.value)}
         ref={inputRef}
       />
-      <Button type="submit" disabled={!isValidTodoTitle(workingTodoTitle)}>
-        Add ToDo
-      </Button>
+      <Button type="submit">Add ToDo</Button>
     </Form>
   );
 }

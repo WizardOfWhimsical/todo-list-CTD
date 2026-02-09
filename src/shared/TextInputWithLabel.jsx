@@ -17,6 +17,7 @@ export default function TextInputWithLabel({
         type="text"
         id={id}
         {...controlProps}
+        required
       />
     </Form.Group>
   );
