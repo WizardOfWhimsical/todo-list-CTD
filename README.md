@@ -74,6 +74,10 @@ with building this app)
       <summary>Phone view of login screen</summary>
    <img src="./screenShots/Screenshot%202026-02-09%20124848.png" alt="phone view of todo app" width="200px"/>
    </details>
+1. <details>
+      <summary>Phone view of todo list</summary>
+   <img src="./screenShots/Screenshot 2026-02-09 165102.png" alt="phone view of todo app" width="200px"/>
+   </details>
 
 1. <details>
      <summary>Phone view to show logout button</summary>
