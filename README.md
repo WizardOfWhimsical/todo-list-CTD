@@ -7,11 +7,9 @@
 5. [Tech Used](#tech-used)
 6. [Screen Shots](#screen-shots)
 7. [Getting Started](#getting-started)
-8. []()
-9. []()
-10. []()
-11. []()
-12. [Contact](#-contact)
+8. [Available Scripts](#available-scripts)
+9. [License Info](#license-info)
+10. [Contact](#-contact)
 
 ## Live Demo
 
@@ -61,16 +59,35 @@ with building this app)
 
 ## Screen Shots
 
-<img src="./screenShots/Screenshot%202026-02-09%20113300.png" alt="zoomed out version of login screen" width="400px" />
-<img src="./screenShots/Screenshot%202026-02-09%20113331.png" alt="view of todo app" width="400px"/>
-<img src="./screenShots/Screenshot%202026-02-09%20113508.png" alt="phone view of todo app" width="400px"/>
-<img src="./screenShots/Screenshot%202026-02-09%20113537.png" alt="phone view to show logout button" width="200px"/>
+1. <details>
+     <summary>Zoomed out version of login screen on desktop</summary>
+     <img src="./screenShots/Screenshot%202026-02-09%20113300.png" alt="zoomed out version of login screen" width="400px" />
+   </details>
+
+1. <details>
+     <summary>View of todo app on desktop</summary>
+     <img src="./screenShots/Screenshot%202026-02-09%20113331.png" alt="view of todo app" width="400px"/>
+   </details>
+
+1. <details>
+      <summary>Phone view of login screen</summary>
+   <img src="./screenShots/Screenshot%202026-02-09%20124848.png" alt="phone view of todo app" width="200px"/>
+   </details>
+
+1. <details>
+     <summary>Phone view to show logout button</summary>
+     <img src="./screenShots/Screenshot%202026-02-09%20113537.png" alt="phone view to show logout button" width="200px"/>
+   </details>
 
 ## Getting Started
 
 ### Prerequisites
 
 ### Installation
+
+## Available Scripts
+
+## Licence
 
 ## 📬 Contact
 
