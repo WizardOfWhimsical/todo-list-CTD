@@ -4,7 +4,7 @@
   right: 2em;
 }
 
-@media (max-width: 625px) {
+@media (max-width: 576px) {
   .logoff-btn {
     position: relative;
     bottom: 3px;
