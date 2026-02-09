@@ -7,22 +7,3 @@
   justify-content: start;
   font-size: 1.25em;
 }
-
-/* @media (max-width: 385px){
-.sort-container{
-  display: flex;
-  flex-direction: column;
-}
-}
-
-
-@media (min-width: 576px) and (max-width: 991px){
-.sort-container{
-  display: block;
-}
-} */
-/*
-@media (min-width: 386px) and (max-width: 575px){
-}
-@media (min-width: 992px){
-} */

@@ -8,31 +8,11 @@ import ErrorPage from '../pages/ErrorPage';
 
 import Navigation from '../shared/Navigation';
 
-import Header from '../shared/Header';
 import RequireAuth from '../shared/RequireAuth';
 
 import styles from './App.module.css';
-// import Logon from './features/Logon';
-
-// import { useAuth } from './context/AuthContext';
-
-// import './App.css';
 
 function App() {
-  // const { isAuthenticated } = useAuth();
-  const TODOSPAGE = (
-    <>
-      <Header message={'Going To Do...'} />
-      <TodosPage />
-    </>
-  );
-  const LOGINPAGE = (
-    <>
-      <Header message={'Please Log In'} />
-      <LoginPage />
-    </>
-  );
-
   return (
     <>
       <Navigation />
@@ -40,10 +20,10 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route path="/login" element={LOGINPAGE} />
+          <Route path="/login" element={<LoginPage />} />
           <Route
             path="/todos"
-            element={<RequireAuth>{TODOSPAGE}</RequireAuth>}
+            element={<RequireAuth>{<TodosPage />}</RequireAuth>}
           />
           <Route
             path="/profile"

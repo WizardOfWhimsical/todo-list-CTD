@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { useAuth } from '../context/AuthContext';
 import ErrorDisplay from '../shared/ErrorDisplay';
+import Header from '../shared/Header';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -71,34 +72,36 @@ export default function LoginPage() {
       {isLoggingOn ? (
         <h1>Is Logging Inn....</h1>
       ) : (
-        // my pattern recog. isnt triggering form validation via the browser?
-        <Form ref={formRef} onSubmit={handleSubmit}>
-          <Form.Label htmlFor="email">Email: </Form.Label>
-          <Form.Control
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            title="Please enter a valid email address"
-            autoComplete="email"
-          />
-          <br />
-          <Form.Label htmlFor="password">Password: </Form.Label>
-          <Form.Control
-            type="password"
-            id="password"
-            minLength="10"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            title="Please enter a valid password"
-          />
+        <>
+          <Header message={'Please Log In'} />
+          <Form ref={formRef} onSubmit={handleSubmit}>
+            <Form.Label htmlFor="email">Email: </Form.Label>
+            <Form.Control
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              title="Please enter a valid email address"
+              autoComplete="email"
+            />
+            <br />
+            <Form.Label htmlFor="password">Password: </Form.Label>
+            <Form.Control
+              type="password"
+              id="password"
+              minLength="10"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              title="Please enter a valid password"
+            />
 
-          <Button type="submit" onClick={handleSubmit}>
-            LogIn
-          </Button>
-        </Form>
+            <Button type="submit" onClick={handleSubmit}>
+              LogIn
+            </Button>
+          </Form>
+        </>
       )}
     </>
   );

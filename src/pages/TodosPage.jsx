@@ -14,6 +14,7 @@ import sanitizeInput from '../utils/sanitizeInput';
 import { addTodo, patch, get } from '../utils/api';
 import { FilterInput } from '../shared/FilterInput';
 import SortBy from '../shared/SortBy';
+import Header from '../shared/Header';
 
 import {
   todoReducer,
@@ -263,6 +264,7 @@ export default function TodosPage() {
       {filterError && (
         <ErrorDisplay error={filterError} onClick={() => resetFilters()} />
       )}
+      <Header message={'Going To Do...'} />
       <h2>My Todos</h2>
       <ToDoForm onAddTodo={addToDo} />
       <FilterInput
