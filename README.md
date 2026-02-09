@@ -1,102 +1,71 @@
-# Todo List App – Week 1
+# Table Of Contents
 
-This is a simple Todo List web app built as part of my Code the Dream (CTD) React course, **Week 1**. The goal of this assignment was to set up a new React project using Vite, get familiar with version control (Git + GitHub), and render a dynamic list of todos in the browser.
+1. [Live Demo](#live-demo)
+2. [Project and Description](#project-and-description)
+3. [Features](#features)
+4. [Future Features](#future)
+5. [Tech Used](#tech-used)
+6. [Screen Shots](#screen-shots)
+7. [Getting Started](#getting-started)
+8. []()
+9. []()
+10. []()
+11. []()
+12. [Contact](#-contact)
 
----
+## Live Demo
 
-## 📝 App Overview
+[FancyNamePlaceHolder](link.to.site)
 
-- **Name:** Todo List
-- **Description:**  
-  A basic React app that displays a title and a list of todo items. It’s designed as a starting point for learning React, project scaffolding, and best practices around code style (ESLint, Prettier).
+## Project and Description
 
----
+A "ToDo" application that allows you to track the completion of your todos' you have set through your day,
+along with sort and search abilities, a profile overview that informs you of your success percentage with
+a bar graph, and a about page that shares the specific technologies (and my personal blog of experiences
+with building this app)
 
-## 🚀 Installation
+## Features
 
-1. **Clone the Repo:**
-   ```bash
-   git clone https://github.com/your-username/todo-list.git
-   cd todo-list
-   ```
-   Install Dependencies:
-   ```
-   npm install
-   ```
-2. **🏃 Running the Development Server**
+### Things this application can do
 
-   Start the local dev server with:
+- Uses Authentication to access CTD backend database with logging in message
+- Create a new todo (with optamistic updating and feed back)
+- Edit existing todo (or cancel said edit. has optamistic updating and feed back)
+- Mark tasks as complete or incomplete (with optamistic updating and feed back)
+- View your completion percentage on profile page (with visual summary)
+- Log out securely with success message
+- Browse About page without Authentication
 
-   ```
-   npm run dev
-   ```
+## Future Features
 
-   Open your browser and go to the Local URL displayed in the terminal (typically http://localhost:5173).
+### Things this application cant do yet...
 
-   You should see the Todo List title and three sample todos.
+- Set a Background
+- Have a light/dark theme
+- Optional Font styles
+- Ability to add sub-tasks
+- Delete a todo
+- Better About page full with a blog of this journey I took
 
-3. **🛠️ Technologies Used**
-   - **Vite** – for fast project setup and development server
-   - **React** (JSX) – building the UI
-   - **JavaScript** – app logic
-   - **ESLint & Prettier** – code quality and formatting (see Stretch Goals)
+## Tech Used
 
-4. **📚 Stretch Goals (Optional)**
-   - **ESLint:**
-     Added React linting to help catch code errors and enforce style.
+### The technology I used/learned for this project
 
-   - **Prettier:**
-     Integrated Prettier for consistent code formatting.
+- HTML/CSS
+- JSX
+- React
+- React Router
+- React Bootstrap Components
+- Vite
+- Render.com (publication)
 
-Both tools can be installed as VS Code extensions and with npm install as described in project instructions.
+## Screen Shots
 
----
+## Getting Started
 
-### 💡 What I Learned / Reflections – Week 1
+### Prerequisites
 
----
-
-#### This week, I worked closely with my mentor EJ. Here are some of the key things I learned, tripped over, or just found cool:
-
-- Config Files Matter:
-  I got my first real exposure to customizing config files—like ESLint and Prettier. It’s cool to see how these can enforce clean code and help catch mistakes before they get big.
-
-- Branching & Repo Management:
-  I made a common mistake—getting so excited I jumped into making a branch before pushing my “main” branch to GitHub. I learned how to reset things and manage my branches/commits properly, with EJ’s help. Turns out, knowing how to do a hard reset and reference commit IDs is invaluable!
-
-- Talking Through Problems:
-  Walking my mentor through my process—explaining how and why I did things—helped me lock down my own understanding. It felt good to be able to teach back what I learned.
-
-- Mapping in React:
-  Mapping an array to create dynamic UI (the todo list) felt straightforward, but it’s powerful. React’s way of turning data into DOM is starting to make sense!
-
-- It’s Okay to Ask for Help:
-  Having a mentor there when I got stuck made a huge difference. I’m getting better at knowing what I don’t know and reaching out for help early.
-
-### 🏁 Next Steps
-
-1. Continue to add new features and learn more React concepts
-
-2. Practice better git habits from the start (branching, commit discipline)
-
-3. Dive deeper into JSX and component structure
-
-**Note :**
-This project is a school assignment. Any code not written by me is clearly marked as "AI-assisted" or from my mentor.
-
-## If you have any questions or want to learn more about my process, feel free to check out my commits or reach out!
-
-## Disclaimer & Attribution
-
-This project is built primarily as a **learning exercise** following the [Web Dev Simplified “Learning React” Todo List Project](https://www.youtube.com/watch?v=bMknfKXIFA8). Most concepts, code structure, and logic are based on that video and its accompanying resources.
-
-- **Reference Material:**  
-  I have included a full or partial transcript from the video (`WebDevSimplified-learningReact.pdf`) in this project folder strictly for educational purposes and discussion.
-- **Source Credit:**  
-  All core code and logic (unless otherwise noted) are either directly from, or heavily inspired by, Web Dev Simplified's React Todo List example.
-- **AI Usage:**  
-  No code in this project was generated by AI (ChatGPT/Echo) up to this point; however, AI has been used for rubber-duck debugging, explaining concepts, and project planning/discussion only.  
-  If/when any code is suggested or generated by AI, it will be clearly marked as “AI-assisted” within code comments, in accordance with course guidelines.
+### Installation
 
 ## 📬 Contact
 
