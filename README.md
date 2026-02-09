@@ -10,7 +10,8 @@
 8. [Available Scripts](#available-scripts)
 9. [Design Decission](#design-decission)
 10. [License Info](#license-info)
-11. [Contact](#-contact)
+11. [Thanks](#thanks)
+12. [Contact](#-contact)
 
 ## Live Demo
 
@@ -111,9 +112,83 @@ with building this app)
 
 ## Available Scripts
 
-## Design Decission
+A script is a named command you can type into the CLI that executes a specific function. This is done by typing...
+
+```bash
+npm run <name>
+```
+
+Example:
+
+```
+npm run build
+```
+
+| name    | description                                       |
+| ------- | ------------------------------------------------- |
+| dev     | Starts local Vite dev server                      |
+| build   | Compiles code into production ready static file   |
+| preview | Starts a local server with the static files       |
+| lint    | Scans code base for bad practices or style issues |
+
+Vite is a modern frontend build tool. It makes framework development fast and easy
+while doing all the heavy lifting behind the scenes for us. Vite also takes care
+of bundling the application while optimizing it to have quick loading.
+
+## Design Decision
+
+My approach was shaped by a simple principle. A straightforward app shouldn’t
+be complicated with color schemes, background images, or fancy button gradients.
+I haven’t added any real color yet, though I do have a `:root` set up in my
+global stylesheet for when the time comes. For now, you’ll see just a few
+boxes to help distinguish key areas like the login and to-do sorting.
+
+I challenged myself to use as little CSS as possible, yes, to style everything
+from scratch. Even so, I decided to use Bootstrap components for basic
+accessibility; they provide solid focus management out of the box, even if that
+means accepting some pre-styling for certain elements.
+
+For statistics, I imported a bar chart component ([click to see refrence](https://www.geeksforgeeks.org/reactjs/how-to-implement-barchart-in-reactjs)). I
+used it because I thought it would be cool to show the stats this way. Also if felt more direct. I did run into some trouble with nested object labeling (the
+initial example I found was outdated), but the README documentation helped me
+resolve it.
+
+When it comes to responsive web design, I believe flexbox is "The Boss". It’s
+the quickest and most flexible way to start with mobile-first design. My
+favorite piece of the layout is actually the placement of the logout button. The
+navbar gave me a little bit of trouble.I had to fight with spacing and
+phone-sized layouts, but I got it working just right.
+
+Well that is my thought on the design process and where I landed as I did things.
+I hope you enjoy the end product! <3
 
 ## Licence
+
+MIT License
+
+Copyright (c) 2026 Lewis Labs
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+## Thanks
+
+Big thanks to my mentor EJ Mason and all the hours he challenged me to do better. To anyone who ever showed up in group class that asked a question I didn't think of. And Thank You to all of my peers who where here through this grueling process
 
 ## 📬 Contact
 
