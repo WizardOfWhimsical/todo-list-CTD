@@ -95,8 +95,8 @@ export default function AboutPage() {
           <li>
             <strong>Lindsey Stirling</strong>:
             <em>
-              And nothing other but the best for concentration and focus
-              (Artemis album)
+              And nothing but the best for concentration and focus (Artemis
+              album)
             </em>
           </li>
         </ul>
