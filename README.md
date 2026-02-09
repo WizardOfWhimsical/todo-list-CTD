@@ -61,6 +61,11 @@ with building this app)
 
 ## Screen Shots
 
+<img src="./screenShots/Screenshot%202026-02-09%20113300.png" alt="zoomed out version of login screen" width="400px" />
+<img src="./screenShots/Screenshot%202026-02-09%20113331.png" alt="view of todo app" width="400px"/>
+<img src="./screenShots/Screenshot%202026-02-09%20113508.png" alt="phone view of todo app" width="400px"/>
+<img src="./screenShots/Screenshot%202026-02-09%20113537.png" alt="phone view to show logout button" width="200px"/>
+
 ## Getting Started
 
 ### Prerequisites

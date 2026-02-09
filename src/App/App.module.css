@@ -7,3 +7,10 @@
   justify-content: start;
   font-size: 1.25em;
 }
+
+@media (max-width: 576px) {
+  .routes-container {
+    width: 95dvw;
+    margin: auto;
+  }
+}
