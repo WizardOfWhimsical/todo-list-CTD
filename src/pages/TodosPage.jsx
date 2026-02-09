@@ -101,7 +101,6 @@ export default function TodosPage() {
    */
   async function addToDo(todoTitle) {
     if (isValid(todoTitle)) {
-      console.log('continues to sanitation');
       if (sanitizeInput(todoTitle) === '') {
         dispatch({
           fetchError: 'Only non-malious chracters',
@@ -162,7 +161,6 @@ export default function TodosPage() {
    */
   async function updateTodo(editedTodo) {
     if (isValid(editedTodo)) {
-      console.log('continues to sanitation');
       if (sanitizeInput(editedTodo) === '') {
         dispatch({
           fetchError: 'Only non-malious chracters',
@@ -218,7 +216,6 @@ export default function TodosPage() {
    */
   function handlefilterChange(newTerm) {
     if (isValid(newTerm)) {
-      console.log('continues to sanitation');
       if (sanitizeInput(newTerm) === '') {
         dispatch({
           fetchError: 'Only non-malious chracters',
