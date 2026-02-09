@@ -1,4 +1,3 @@
-//ToDoList.jsx
 import { useMemo } from 'react';
 import ToDoListItem from '../ToDoListItem';
 import styles from './ToDoList.module.css';

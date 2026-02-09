@@ -33,7 +33,6 @@ export default function Logoff() {
   return (
     <>
       {error && <ErrorDisplay error={error} onclick={() => setError('')} />}
-
       {isLoggingOff ? (
         <h1>You have successfully logged off....</h1>
       ) : (

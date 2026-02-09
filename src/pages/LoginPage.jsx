@@ -22,7 +22,6 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // const from = '/todos';
   const from = location.state?.from?.pathname || '/todos';
 
   useEffect(() => {

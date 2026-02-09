@@ -46,6 +46,7 @@ export function todoReducer(state, action) {
     case 'DATA_VERSION_COUNT': {
       return { ...state, dataVersion: state.dataVersion + 1 };
     }
+
     case TODO_ACTIONS.FETCH_START: {
       return {
         ...state,
@@ -53,6 +54,7 @@ export function todoReducer(state, action) {
         error: '',
       };
     }
+
     case TODO_ACTIONS.FETCH_SUCCESS: {
       return {
         ...state,
@@ -61,7 +63,7 @@ export function todoReducer(state, action) {
         isTodoListLoading: false,
       };
     }
-    // want to change this to Error later
+
     case TODO_ACTIONS.FETCH_ERROR: {
       return {
         ...state,
@@ -73,12 +75,15 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.SET_SORT_BY: {
       return { ...state, sortBy: action.sortBy, filterError: '' };
     }
+
     case TODO_ACTIONS.SET_SORT_DIRECTION: {
       return { ...state, filterError: '', sortDirection: action.sortDirection };
     }
+
     case TODO_ACTIONS.SET_S_E_O: {
       return { ...state, filterTerm: action.filterTerm };
     }
+
     case TODO_ACTIONS.FILTER_ERROR: {
       return { ...state, filterError: action.sortError };
     }
@@ -91,6 +96,7 @@ export function todoReducer(state, action) {
       };
       return { ...state, todoList: [newToDo, ...state.todoList] };
     }
+
     case TODO_ACTIONS.UPDATE_TODO: {
       return {
         ...state,
@@ -102,6 +108,7 @@ export function todoReducer(state, action) {
         }),
       };
     }
+
     case TODO_ACTIONS.SYNCHRONIZE_TODO: {
       return {
         ...state,
@@ -113,12 +120,14 @@ export function todoReducer(state, action) {
         }),
       };
     }
+
     case TODO_ACTIONS.REVERT_ADD_TODO: {
       return {
         ...state,
         todoList: state.todoList.filter((todo) => todo.id !== action.id),
       };
     }
+
     default: {
       throw new Error(`Unknown action type: ${action.type}`);
     }

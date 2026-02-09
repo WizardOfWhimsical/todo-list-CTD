@@ -27,9 +27,7 @@ export default function Navigation() {
               <NavLink to="/todos">To-Dos List</NavLink>
             </li>
           </>
-        ) : (
-          ''
-        )}
+        ) : null}
       </ul>
     </nav>
   );

@@ -6,7 +6,6 @@ import styles from './ToDoListItem.module.css';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-//ToDoListItem.jsx
 export default function ToDoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
   const {
     startEditing,
@@ -21,7 +20,7 @@ export default function ToDoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
 
   useEffect(() => {
     if (isEditing) {
-      inputRef.current.focus();
+      inputRef.current?.focus();
     }
   }, [isEditing]);
 

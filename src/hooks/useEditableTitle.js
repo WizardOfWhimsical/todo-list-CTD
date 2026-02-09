@@ -4,24 +4,24 @@ export default function useEditableTitle(initialTitle) {
   const [workingTitle, setWorkingTitle] = useState(initialTitle);
   const [isEditing, setIsEditing] = useState(false);
 
-  const startEditing = () => {
+  function startEditing() {
     setWorkingTitle(initialTitle);
     setIsEditing(true);
-  };
+  }
 
-  const cancelEdit = () => {
+  function cancelEdit() {
     setWorkingTitle(initialTitle);
     setIsEditing(false);
-  };
+  }
 
-  const updateTitle = (newTitle) => {
+  function updateTitle(newTitle) {
     setWorkingTitle(newTitle);
-  };
+  }
 
-  const finishEdit = () => {
+  function finishEdit() {
     setIsEditing(false);
     return workingTitle;
-  };
+  }
 
   return {
     isEditing,

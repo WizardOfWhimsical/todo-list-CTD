@@ -6,7 +6,6 @@ const DEFAULT_OPTIONS = {
 };
 
 export async function fetchErrorHandling(endPoint, options = DEFAULT_OPTIONS) {
-  // i have to give credit to Ej for this
   const mergedOptions =
     options === DEFAULT_OPTIONS
       ? DEFAULT_OPTIONS
@@ -18,6 +17,7 @@ export async function fetchErrorHandling(endPoint, options = DEFAULT_OPTIONS) {
             ...options.headers,
           },
         };
+
   try {
     const response = await fetch(`${baseUrl}/${endPoint}`, mergedOptions);
 
@@ -31,12 +31,14 @@ export async function fetchErrorHandling(endPoint, options = DEFAULT_OPTIONS) {
     const data = contentType?.includes('application/json')
       ? await response.json()
       : await response.text();
+
     return data;
   } catch (error) {
     console.log('Fetch Error Handling:', error);
     throw error;
   }
 }
+
 export async function post(endPoint, options) {
   return await fetchErrorHandling(`${endPoint}`, {
     ...options,
