@@ -88,6 +88,7 @@ export default function LoginPage() {
           <Form.Control
             type="password"
             id="password"
+            minLength="10"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required

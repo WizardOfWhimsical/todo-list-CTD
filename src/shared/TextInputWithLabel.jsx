@@ -11,7 +11,13 @@ export default function TextInputWithLabel({
   return (
     <Form.Group className={className}>
       <Form.Label htmlFor={id}>{labelText}</Form.Label>
-      <Form.Control type="text" id={id} {...controlProps} />
+      <Form.Control
+        minLength="3"
+        maxLength="20"
+        type="text"
+        id={id}
+        {...controlProps}
+      />
     </Form.Group>
   );
 }
