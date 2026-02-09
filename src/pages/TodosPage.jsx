@@ -5,7 +5,7 @@ import ToDoForm from '../features/ToDoForm';
 import ErrorDisplay from '../shared/ErrorDisplay/ErrorDisplay';
 import StatusFilter from '../shared/StatusFilter';
 
-import Logoff from '../features/Logoff';
+import Logoff from '../features/Logoff/Logoff';
 
 import { useAuth } from '../context/AuthContext';
 import isValid from '../utils/todoValidation';

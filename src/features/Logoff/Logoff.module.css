@@ -1,0 +1,14 @@
+.logoff-btn {
+  position: fixed;
+  bottom: 3em;
+  right: 2em;
+}
+
+@media (max-width: 625px) {
+  .logoff-btn {
+    position: relative;
+    bottom: 3px;
+    left: 9em;
+    width: 106px;
+  }
+}

@@ -13,7 +13,7 @@ export default function TextInputWithLabel({
       <Form.Label htmlFor={id}>{labelText}</Form.Label>
       <Form.Control
         minLength="3"
-        maxLength="20"
+        maxLength="40"
         type="text"
         id={id}
         {...controlProps}
