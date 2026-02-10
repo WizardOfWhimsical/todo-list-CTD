@@ -88,7 +88,6 @@ export default function LoginPage() {
               title="Please enter a valid email address"
               autoComplete="email"
             />
-            <br />
             <Form.Label htmlFor="password">Password: </Form.Label>
             <Form.Control
               type="password"

@@ -35,16 +35,17 @@
   .login-container {
     width: 300px;
     padding: 1em;
+    margin: auto;
   }
   .login-container > button[type='submit'],
   .login-container > h1,
   .login-container > label,
   .login-container > input {
-    margin: 0;
+    margin-bottom: 0.5em;
     font-size: 1em;
     max-width: 200px;
   }
   .login-container > button[type='submit'] {
-    margin-top: 4px;
+    margin-top: 0.5em;
   }
 }
