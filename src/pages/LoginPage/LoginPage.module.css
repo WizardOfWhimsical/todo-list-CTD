@@ -12,6 +12,13 @@
   margin-bottom: 1em;
 }
 
+@media (max-width: 786) {
+  .login-container {
+    width: 450px;
+    padding: 8px;
+  }
+}
+
 @media (max-width: 576px) {
   .login-container {
     border: none;
@@ -24,9 +31,20 @@
   }
 }
 
-@media (max-width: 786) {
+@media (max-width: 385px) {
   .login-container {
-    width: 450px;
-    padding: 8px;
+    width: 300px;
+    padding: 1em;
+  }
+  .login-container > button[type='submit'],
+  .login-container > h1,
+  .login-container > label,
+  .login-container > input {
+    margin: 0;
+    font-size: 1em;
+    max-width: 200px;
+  }
+  .login-container > button[type='submit'] {
+    margin-top: 4px;
   }
 }
