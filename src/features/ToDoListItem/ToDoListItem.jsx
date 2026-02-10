@@ -6,7 +6,12 @@ import styles from './ToDoListItem.module.css';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-export default function ToDoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
+export default function ToDoListItem({
+  todo,
+  onCompleteTodo,
+  onUpdateTodo,
+  // onDeleteTodo,
+}) {
   const {
     startEditing,
     workingTitle,
@@ -78,6 +83,14 @@ export default function ToDoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
             >
               EDIT
             </Button>
+            {/* <Button
+              type="button"
+              onClick={() => {
+                onDeleteTodo();
+              }}
+            >
+              Delete
+            </Button> */}
           </Form.Group>
         )}
       </Form>

@@ -53,6 +53,7 @@ function ToDoList({
       ) : (
         filteredTodoList.todos.map((todo) => (
           <ToDoListItem
+            // onDeleteTodo={onDeleteTodo}
             onUpdateTodo={onUpdateTodo}
             onCompleteTodo={onCompleteTodo}
             key={todo.id}

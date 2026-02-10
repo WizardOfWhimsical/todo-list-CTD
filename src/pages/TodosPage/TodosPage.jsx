@@ -238,6 +238,10 @@ export default function TodosPage() {
     });
   }, [dataVersion]);
 
+  //  async function deleteTodo(todoObj){
+  //   // do the dispatch, then patch request
+  //  }
+
   function resetFilters() {
     dispatch({ type: TODO_ACTIONS.SET_S_E_O, filterTerm: '' });
     dispatch({ type: TODO_ACTIONS.SET_SORT_BY, sortBy: 'createDate' });
@@ -287,6 +291,7 @@ export default function TodosPage() {
           <Header message={'Going To Do...'} />
           <h2>My Todos</h2>
           <ToDoList
+            // onDeleteTodo={deleteTodo}
             onUpdateTodo={updateTodo}
             onCompleteTodo={completeTodo}
             dataVersion={dataVersion}
