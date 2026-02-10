@@ -8,6 +8,18 @@
   font-size: 1.25em;
 }
 
+@media (min-width: 990px) {
+  .routes-container {
+    width: 80dvw;
+    margin: 2em auto 0 auto;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    font-size: 1.25em;
+  }
+}
+
 @media (max-width: 576px) {
   .routes-container {
     width: 95dvw;

@@ -1,0 +1,17 @@
+.input-container,
+.sort-container {
+  width: fit-content;
+  margin: 0 0 1em 0;
+  padding: 0.5em 2em;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgb(67, 60, 60);
+  background-color: var(--surface);
+}
+
+@media (min-width: 992px) {
+  .filter-container {
+    margin: 0 auto;
+    display: flex;
+    gap: 1.5em;
+  }
+}

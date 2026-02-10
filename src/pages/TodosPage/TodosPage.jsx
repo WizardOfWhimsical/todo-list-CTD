@@ -1,27 +1,28 @@
 //TodosPage.jsx
 import { useReducer, useEffect, useCallback } from 'react';
-import ToDoList from '../features/ToDoList';
-import ToDoForm from '../features/ToDoForm';
-import ErrorDisplay from '../shared/ErrorDisplay/ErrorDisplay';
-import StatusFilter from '../shared/StatusFilter';
+import ToDoList from '../../features/ToDoList';
+import ToDoForm from '../../features/ToDoForm';
+import ErrorDisplay from '../../shared/ErrorDisplay/ErrorDisplay';
+import StatusFilter from '../../shared/StatusFilter';
 
-import Logoff from '../features/Logoff/Logoff';
+import Logoff from '../../features/Logoff/Logoff';
 
-import { useAuth } from '../context/AuthContext';
-import isValid from '../utils/todoValidation';
-import sanitizeInput from '../utils/sanitizeInput';
+import { useAuth } from '../../context/AuthContext';
+import isValid from '../../utils/todoValidation';
+import sanitizeInput from '../../utils/sanitizeInput';
 
-import { addTodo, patch, get } from '../utils/api';
-import { FilterInput } from '../shared/FilterInput';
-import SortBy from '../shared/SortBy';
-import Header from '../shared/Header';
+import { addTodo, patch, get } from '../../utils/api';
+import { FilterInput } from '../../shared/FilterInput';
+import SortBy from '../../shared/SortBy';
+import Header from '../../shared/Header';
+import styles from './TodosPage.module.css';
 
 import {
   todoReducer,
   initialTodoState,
   TODO_ACTIONS,
-} from '../hooks/todoReducer';
-import useDebounce from '../hooks/useDebounce';
+} from '../../hooks/todoReducer';
+import useDebounce from '../../hooks/useDebounce';
 import { useSearchParams } from 'react-router';
 
 export default function TodosPage() {
@@ -261,31 +262,39 @@ export default function TodosPage() {
       {filterError && (
         <ErrorDisplay error={filterError} onClick={() => resetFilters()} />
       )}
-      <Header message={'Going To Do...'} />
-      <h2>My Todos</h2>
-      <ToDoForm onAddTodo={addToDo} />
-      <FilterInput
-        filterTerm={filterTerm}
-        onFilterChange={handlefilterChange}
-      />
-      <br />
-      <SortBy
-        onSortByChange={handleSortByChange}
-        onSortDirectionChange={handleSortByDirectionChange}
-        sortBy={sortBy}
-        sortDirection={sortDirection}
-      />
-      <StatusFilter />
+      <div className={styles.filterContainer}>
+        <div className={styles.inputContainer}>
+          <ToDoForm onAddTodo={addToDo} />
+          <FilterInput
+            filterTerm={filterTerm}
+            onFilterChange={handlefilterChange}
+          />
+        </div>
+
+        <div className={styles.sortContainer}>
+          <SortBy
+            onSortByChange={handleSortByChange}
+            onSortDirectionChange={handleSortByDirectionChange}
+            sortBy={sortBy}
+            sortDirection={sortDirection}
+          />
+          <StatusFilter />
+        </div>
+      </div>
       {isTodoListLoading ? (
         <h1>Is Loading the List....</h1>
       ) : (
-        <ToDoList
-          onUpdateTodo={updateTodo}
-          onCompleteTodo={completeTodo}
-          dataVersion={dataVersion}
-          todos={todoList}
-          statusFilter={statusFilter}
-        />
+        <>
+          <Header message={'Going To Do...'} />
+          <h2>My Todos</h2>
+          <ToDoList
+            onUpdateTodo={updateTodo}
+            onCompleteTodo={completeTodo}
+            dataVersion={dataVersion}
+            todos={todoList}
+            statusFilter={statusFilter}
+          />
+        </>
       )}
       <Logoff />
     </>
