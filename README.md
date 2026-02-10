@@ -97,7 +97,7 @@ with building this app)
 
 1. **Clone the Repo:**
    ```bash
-   git clone https://github.com//WizardOfWhimsical/todo-list.git
+   git clone https://github.com//WizardOfWhimsical/todo-list-CTD.git
    cd todo-list
    ```
    Install Dependencies:
