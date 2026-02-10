@@ -25,7 +25,7 @@ export function AuthProvider({ children }) {
         setEmail(data.name);
         setToken(data.csrfToken);
         console.log('token/email AuthCon line 27 \n', {
-          token: data.csrf,
+          token: data.csrfToken,
           email: data.name,
         });
         localStorage.setItem('email', data.name);
