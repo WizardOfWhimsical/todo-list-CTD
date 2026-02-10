@@ -1,14 +1,15 @@
 import { useEffect, useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router';
-import { useAuth } from '../context/AuthContext';
-import ErrorDisplay from '../shared/ErrorDisplay';
-import Header from '../shared/Header';
+import { useAuth } from '../../context/AuthContext';
+import ErrorDisplay from '../../shared/ErrorDisplay';
+import Header from '../../shared/Header';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import styles from './LoginPage.module.css';
 
-import isValid from '../utils/todoValidation';
-import sanitizeInput from '../utils/sanitizeInput';
+import isValid from '../../utils/todoValidation';
+import sanitizeInput from '../../utils/sanitizeInput';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -71,7 +72,11 @@ export default function LoginPage() {
         <h1>Is Logging Inn....</h1>
       ) : (
         <>
-          <Form className="flex-column" ref={formRef} onSubmit={handleSubmit}>
+          <Form
+            className={styles.loginContainer}
+            ref={formRef}
+            onSubmit={handleSubmit}
+          >
             <Header message={'Please Log In'} />
             <Form.Label htmlFor="email">Email: </Form.Label>
             <Form.Control

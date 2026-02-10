@@ -106,6 +106,7 @@ input[type='checkbox']:hover {
 #root {
   height: 100dvh;
   width: 100dvw;
+  background-color: var(--background);
   display: flex;
   flex-direction: column;
 }
