@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 import Button from 'react-bootstrap/Button';
-import ErrorDisplay from '../shared/ErrorDisplay';
+import ErrorDisplay from '../../shared/ErrorDisplay/ErrorDisplay';
+import styles from './Logoff.module.css';
 
 export default function Logoff() {
   const [error, setError] = useState('');
@@ -32,11 +33,14 @@ export default function Logoff() {
   return (
     <>
       {error && <ErrorDisplay error={error} onclick={() => setError('')} />}
-
       {isLoggingOff ? (
         <h1>You have successfully logged off....</h1>
       ) : (
-        <Button type="button" onClick={() => handleLogoff()}>
+        <Button
+          type="button"
+          className={styles.logoffBtn}
+          onClick={() => handleLogoff()}
+        >
           Log Off
         </Button>
       )}

@@ -25,7 +25,7 @@ export default function BarChart({ total, active, completed, name }) {
     datasets: [
       {
         label: 'To-Dos',
-        data: [total, active, completed], // <--- put your numbers here
+        data: [total, active, completed],
         backgroundColor: ['#50b432', '#058DC7', '#ED561B'],
         borderColor: ['#50b432', '#058DC7', '#ED561B'],
         borderWidth: 1,

@@ -1,10 +1,134 @@
-/* *{
+@import url('https://fonts.googleapis.com/css?family=Inter|Poppins');
+
+:root {
+  /* used for buttons, links, highlights */
+  --primary: #2563eb;
+  /* nav, secondary buttons */
+  --secondary: #64748b;
+  /* warnings, call to action, maybe success/error */
+  --accent: #f59e42;
+  /* app background */
+  --background: #f8fafc;
+  /* Card or modal background */
+  --surface: #fff;
+  /* default text color and disabled */
+  --text-main: #22223b;
+  /* i thought this was stupid but i figure you can make it make sense to me */
+  --text-muted: #64748b;
+}
+
+* {
   box-sizing: border-box;
-  border: 1px solid red;
+  list-style-type: none;
 }
-h1{
-  margin-left: 0.6em;
+
+html {
+  font-size: 62.5%;
 }
-h2{
-  margin-left: 2em;
-} */
+
+body {
+  margin: 0;
+  font-size: 1.6rem;
+  font-family: 'Inter', Arial, sans-serif;
+  background-color: var(--background);
+}
+
+h1,
+h2 {
+  font-family: 'Poppins', Arial, sans-serif;
+  text-align: center;
+}
+
+select {
+  font-size: 1em;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  line-height: 1.25;
+  padding: 6px 12px;
+  border: 1px solid #aaa;
+  width: 10em;
+}
+
+label {
+  font-family: 'Poppins', Arial, sans-serif;
+  font-size: 1.25em;
+  font-style: italic;
+  line-height: 1.3em;
+  padding: 0 4px;
+  margin: 4px 0;
+  display: inline-block;
+
+  & > input[type='checkbox'] {
+    margin-right: 12px;
+  }
+}
+
+input {
+  max-width: 300px;
+}
+
+input[type='checkbox'] {
+  scale: 2;
+}
+
+button {
+  width: fit-content;
+  border-radius: 10px;
+  padding: 5px 16px;
+  margin: 5px;
+  font-size: 1.1em;
+  cursor: pointer;
+  border: 1px black solid;
+  background: rgb(67, 60, 60);
+  color: #fff;
+}
+
+button:focus-visible,
+a:focus-visible,
+input[type='checkbox']:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 3px #ffe066,
+    0 0 8px 2px #f59e42;
+  border-color: var(--accent);
+  z-index: 1;
+  transition:
+    box-shadow 0.2s,
+    border-color 0.2s;
+}
+
+button:hover,
+a:hover,
+input[type='checkbox']:hover {
+  color: var(--primary);
+  background-color: var(--secondary);
+}
+
+#root {
+  height: 100dvh;
+  width: 100dvw;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 
+All implecite classes that need to be global
+*/
+.form-control {
+  border-radius: 10px;
+  line-height: 1.25em;
+  font-size: 1.1em;
+  padding: 6px 12px;
+  border: 1px solid #aaa;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.active {
+  background-color: #aaa;
+}

@@ -2,7 +2,7 @@ import Form from 'react-bootstrap/Form';
 
 export function FilterInput({ filterTerm, onFilterChange }) {
   return (
-    <Form.Group>
+    <Form.Group className="flex-column">
       <Form.Label htmlFor="filterInput">Search Todo's: </Form.Label>
       <Form.Control
         id="filterInput"

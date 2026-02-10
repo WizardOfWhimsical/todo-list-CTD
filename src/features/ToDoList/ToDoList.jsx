@@ -1,7 +1,6 @@
-//ToDoList.jsx
-
 import { useMemo } from 'react';
-import { ToDoListItem } from './ToDoListItem';
+import ToDoListItem from '../ToDoListItem';
+import styles from './ToDoList.module.css';
 
 function ToDoList({
   todos,
@@ -46,7 +45,7 @@ function ToDoList({
   }
 
   return (
-    <ul className="todo-list-container">
+    <ul className={styles.todoListContainer}>
       {filteredTodoList.todos.length === 0 ? (
         <p>
           <em>{getEmptyMessage()}</em>

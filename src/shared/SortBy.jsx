@@ -20,7 +20,7 @@ export default function SortBy({
         <option value="title">Title</option>
       </Form.Select>
 
-      <Form.Label htmlFor="order">Order: </Form.Label>
+      <Form.Label htmlFor="order">Sorting Order: </Form.Label>
       <Form.Select
         arai-label="sort direction"
         value={sortDirection}

@@ -1,0 +1,30 @@
+.input-container,
+.sort-container {
+  width: fit-content;
+  /* margin: 0 0 1em 0; */
+  padding: 0.5em 2em;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgb(67, 60, 60);
+  background-color: var(--surface);
+}
+
+.filter-container {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+
+@media (min-width: 992px) {
+  .filter-container {
+    flex-direction: row;
+    gap: 1.5em;
+  }
+}
+
+@media (max-width: 576px) {
+  .input-container > div > input,
+  .input-container > form > div > input {
+    max-width: 200px;
+  }
+}
