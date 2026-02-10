@@ -71,8 +71,8 @@ export default function LoginPage() {
         <h1>Is Logging Inn....</h1>
       ) : (
         <>
-          <Header message={'Please Log In'} />
-          <Form ref={formRef} onSubmit={handleSubmit}>
+          <Form className="flex-column" ref={formRef} onSubmit={handleSubmit}>
+            <Header message={'Please Log In'} />
             <Form.Label htmlFor="email">Email: </Form.Label>
             <Form.Control
               type="email"

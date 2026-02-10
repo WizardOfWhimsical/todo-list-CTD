@@ -71,6 +71,7 @@ input[type='checkbox'] {
 }
 
 button {
+  width: fit-content;
   border-radius: 10px;
   padding: 5px 16px;
   margin: 5px;
