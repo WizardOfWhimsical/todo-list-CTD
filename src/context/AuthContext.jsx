@@ -13,8 +13,8 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  const [email, setEmail] = useState('');
-  const [token, setToken] = useState('');
+  const [email, setEmail] = useState(localStorage.getItem('email') || '');
+  const [token, setToken] = useState(localStorage.getItem('token') || '');
 
   async function login(userEmail, password) {
     try {
@@ -24,6 +24,9 @@ export function AuthProvider({ children }) {
       if (data.name && data.csrfToken) {
         setEmail(data.name);
         setToken(data.csrfToken);
+        console.log('token/email AuthCon line 27 \n', { token, email });
+        localStorage.setItem('email', data.name);
+        localStorage.setItem('token', data.csrfToken);
         return {
           success: true,
           message: `${userEmail} Successfully logged In`,
@@ -66,6 +69,8 @@ export function AuthProvider({ children }) {
     } finally {
       setToken('');
       setEmail('');
+      localStorage.removeItem('email');
+      localStorage.removeItem('token');
     }
   }
 
@@ -76,6 +81,8 @@ export function AuthProvider({ children }) {
     login,
     logout,
   };
+
+  // localStorage.setItem('token', token);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
