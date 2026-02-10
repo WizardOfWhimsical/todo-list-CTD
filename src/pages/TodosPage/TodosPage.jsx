@@ -158,11 +158,11 @@ export default function TodosPage() {
   }
   /**
    *
-   * @param {string} editedTodo
+   * @param {Object} editedTodo
    */
   async function updateTodo(editedTodo) {
-    if (isValid(editedTodo)) {
-      if (sanitizeInput(editedTodo) === '') {
+    if (isValid(editedTodo.title)) {
+      if (sanitizeInput(editedTodo.title) === '') {
         dispatch({
           fetchError: 'Only non-malious chracters',
           type: TODO_ACTIONS.FETCH_ERROR,
@@ -170,7 +170,6 @@ export default function TodosPage() {
         return;
       }
     }
-
     dispatch({
       type: TODO_ACTIONS.UPDATE_TODO,
       todo: editedTodo,
