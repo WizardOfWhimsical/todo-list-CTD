@@ -76,7 +76,8 @@ export default function AboutPage() {
             <em>Tools to keep the code clean, readable and error free.</em>
           </li>
           <li>
-            <strong>Visual Studio Code</strong>:<em></em>
+            <strong>Visual Studio Code</strong>:
+            <em>The most used IDE of choice by most Developers</em>
           </li>
           <li>
             <strong>Git/GitHub</strong>:
