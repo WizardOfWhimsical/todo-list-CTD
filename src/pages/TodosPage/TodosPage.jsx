@@ -7,7 +7,7 @@ import StatusFilter from '../../shared/StatusFilter';
 
 import Logoff from '../../features/Logoff/Logoff';
 
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../hooks/useAuth';
 import isValid from '../../utils/todoValidation';
 import sanitizeInput from '../../utils/sanitizeInput';
 
@@ -55,7 +55,6 @@ export default function TodosPage() {
     const params = new URLSearchParams(paramsObj);
 
     async function fetchTodos() {
-      //i made token to tokens to throw error but it never showed on the page. revisit
       const options = {
         headers: { 'X-CSRF-TOKEN': token },
       };
@@ -129,7 +128,6 @@ export default function TodosPage() {
     }
   }
   /**
-   *
    * @param {number} todoId
    */
   async function completeTodo(todoId) {
@@ -157,7 +155,6 @@ export default function TodosPage() {
     }
   }
   /**
-   *
    * @param {Object} editedTodo
    */
   async function updateTodo(editedTodo) {

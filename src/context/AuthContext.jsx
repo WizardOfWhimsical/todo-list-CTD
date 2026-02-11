@@ -1,16 +1,6 @@
-import { createContext, useContext, useState } from 'react';
+import { useState } from 'react';
 import { post } from '../utils/api';
-
-const AuthContext = createContext();
-
-export function useAuth() {
-  const context = useContext(AuthContext);
-
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
-}
+import { AuthContext } from '../hooks/useAuth';
 
 export function AuthProvider({ children }) {
   const [email, setEmail] = useState(localStorage.getItem('email') || '');
@@ -24,10 +14,6 @@ export function AuthProvider({ children }) {
       if (data.name && data.csrfToken) {
         setEmail(data.name);
         setToken(data.csrfToken);
-        console.log('token/email AuthCon line 27 \n', {
-          token: data.csrfToken,
-          email: data.name,
-        });
         localStorage.setItem('email', data.name);
         localStorage.setItem('token', data.csrfToken);
         return {
@@ -84,8 +70,6 @@ export function AuthProvider({ children }) {
     login,
     logout,
   };
-
-  // localStorage.setItem('token', token);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

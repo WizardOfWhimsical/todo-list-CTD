@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../hooks/useAuth';
 import ErrorDisplay from '../../shared/ErrorDisplay';
 import Header from '../../shared/Header';
 

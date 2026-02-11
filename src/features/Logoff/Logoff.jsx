@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../hooks/useAuth';
 import Button from 'react-bootstrap/Button';
 import ErrorDisplay from '../../shared/ErrorDisplay/ErrorDisplay';
 import styles from './Logoff.module.css';
