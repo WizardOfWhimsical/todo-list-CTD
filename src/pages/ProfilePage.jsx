@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { get } from '../utils/api';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../hooks/useAuth';
 import BarChart from '../utils/BarChart';
 import ProfileStats from '../utils/ProfileStats';
 import ErrorDisplay from '../shared/ErrorDisplay';
