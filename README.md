@@ -12,6 +12,7 @@
 10. [License Info](#license-info)
 11. [Thanks](#thanks)
 12. [Contact](#-contact)
+13. [Special Thanks]
 
 ## Live Demo
 
