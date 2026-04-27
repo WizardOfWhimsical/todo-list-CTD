@@ -12,7 +12,7 @@
 10. [License Info](#license-info)
 11. [Thanks](#thanks)
 12. [Contact](#-contact)
-13. [Special Thanks]
+13. [Special Thanks](#special-thanks)
 
 ## Live Demo
 
@@ -201,3 +201,5 @@ Big thanks to my mentor EJ Mason and all the hours he challenged me to do better
 - 📧 **Gmail:** [My Gmail](mailto:st.rayis1085@gmail.com)
 - 🐙 **GitHub:** [The Wizards Domain](https://github.com/WizardOfWhimsical)
 - 🔗 **LinkedIn:** [Stephen Raymond Lewis](https://linkedin.com/in/stephenrlewis)
+
+## Special Thanks
