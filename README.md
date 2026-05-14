@@ -203,3 +203,17 @@ Big thanks to my mentor EJ Mason and all the hours he challenged me to do better
 - 🔗 **LinkedIn:** [Stephen Raymond Lewis](https://linkedin.com/in/stephenrlewis)
 
 ## Special Thanks
+
+function add(a,b){
+return a+b
+}
+
+function multiply(a,b){
+return a\*b
+}
+
+function devide(a,b){
+return a/b
+}
+
+make
