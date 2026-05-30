@@ -67,7 +67,7 @@ export default function TodosPage() {
         const data = await get(`api/tasks?${params}`, options);
 
         if (!firstPost) {
-          dispatch({ data, type: TODO_ACTIONS.FETCH_SUCCESS });
+          dispatch({ data: data.tasks, type: TODO_ACTIONS.FETCH_SUCCESS });
         }
       } catch (error) {
         dispatch({ fetchError: error.message, type: TODO_ACTIONS.FETCH_ERROR });
