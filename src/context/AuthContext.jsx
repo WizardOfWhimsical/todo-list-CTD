@@ -8,11 +8,8 @@ export function AuthProvider({ children }) {
 
   async function login(userEmail, password) {
     try {
-      const data = await post('user/logon', {
-        method: 'POST',
-        headers: { 'Content-type': 'application/json' },
+      const data = await post('api/users/logon', {
         body: { email: userEmail, password },
-        credentials: 'include',
       });
       if (data.name && data.csrfToken) {
         setEmail(data.name);

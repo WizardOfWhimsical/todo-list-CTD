@@ -57,13 +57,14 @@ export default function TodosPage() {
     async function fetchTodos() {
       const options = {
         headers: { 'X-CSRF-TOKEN': token },
+        credentials: 'include',
       };
       try {
         dispatch({
           type: TODO_ACTIONS.FETCH_START,
         });
 
-        const data = await get(`tasks?${params}`, options);
+        const data = await get(`api/tasks?${params}`, options);
 
         if (!firstPost) {
           dispatch({ data, type: TODO_ACTIONS.FETCH_SUCCESS });
