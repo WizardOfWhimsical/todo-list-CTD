@@ -47,7 +47,13 @@ export default function TodosPage() {
     if (!token) return;
     let firstPost = false;
 
-    const paramsObj = { sortBy, sortDirection };
+    // const paramsObj = { sortBy, sortDirection };
+    const paramsObj = {
+      sortBy,
+      sortDirection,
+      isCompleted: false,
+      limit: 100,
+    };
     if (debouncedFilterTerm) {
       paramsObj.find = debouncedFilterTerm;
     }
