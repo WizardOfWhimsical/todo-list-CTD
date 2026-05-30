@@ -42,8 +42,8 @@ export async function fetchErrorHandling(endPoint, options = DEFAULT_OPTIONS) {
 export async function post(endPoint, options) {
   return await fetchErrorHandling(`${endPoint}`, {
     ...options,
-    method: 'POST',
-    body: JSON.stringify(options.body),
+    // method: 'POST',
+    // body: JSON.stringify(options.body),
   });
 }
 

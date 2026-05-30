@@ -9,25 +9,30 @@ export function AuthProvider({ children }) {
   async function login(userEmail, password) {
     try {
       const data = await post('user/logon', {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
         body: { email: userEmail, password },
+        credentials: 'include',
       });
       if (data.name && data.csrfToken) {
         setEmail(data.name);
         setToken(data.csrfToken);
-        localStorage.setItem('email', data.name);
-        localStorage.setItem('token', data.csrfToken);
+        // localStorage.setItem('email', data.name);
+        // localStorage.setItem('token', data.csrfToken);
         return {
           success: true,
           message: `${userEmail} Successfully logged In`,
           error: null,
         };
       } else {
+        console.log('login error report');
         const error = data;
         error.status = data.status;
         error.message = `Athentication failed: ${data?.message}`;
         throw error;
       }
     } catch (error) {
+      console.log('login catch error report');
       return {
         success: false,
         error,
@@ -37,7 +42,7 @@ export function AuthProvider({ children }) {
   }
 
   async function logout() {
-    if (!token) setToken('') && setEmail('');
+    if (!token) return setToken('') && setEmail('');
 
     try {
       await post('user/logoff', {
