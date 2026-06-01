@@ -191,10 +191,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-## Thanks
-
-Big thanks to my mentor EJ Mason and all the hours he challenged me to do better. To anyone who ever showed up in group class that asked a question I didn't think of. And Thank You to all of my peers who where here through this grueling process
-
 ## 📬 Contact
 
 - 📨 **Yahoo:** [My Yahoo Email](mailto:st.rayis1085@yahoo.com)
@@ -204,16 +200,6 @@ Big thanks to my mentor EJ Mason and all the hours he challenged me to do better
 
 ## Special Thanks
 
-function add(a,b){
-return a+b
-}
-
-function multiply(a,b){
-return a\*b
-}
-
-function devide(a,b){
-return a/b
-}
-
-make
+- [EJ Mason](https://github.com/mxmason) - My mentor and guide through this project, providing invaluable insights and support.
+- [CTD Team](https://www.ctd.academy/) - For creating an amazing curriculum and fostering a supportive learning environment.
+- [My Peers](https://www.ctd.academy/) - For their camaraderie, collaboration, and shared learning experiences throughout this journey.
