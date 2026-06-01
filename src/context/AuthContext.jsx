@@ -1,16 +1,6 @@
-import { createContext, useContext, useState } from 'react';
+import { useState } from 'react';
 import { post } from '../utils/api';
-
-const AuthContext = createContext();
-
-export function useAuth() {
-  const context = useContext(AuthContext);
-
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
-}
+import { AuthContext } from '../hooks/useAuth';
 
 export function AuthProvider({ children }) {
   const [email, setEmail] = useState(localStorage.getItem('email') || '');
@@ -18,30 +8,28 @@ export function AuthProvider({ children }) {
 
   async function login(userEmail, password) {
     try {
-      const data = await post('user/logon', {
+      const data = await post('api/users/logon', {
         body: { email: userEmail, password },
       });
       if (data.name && data.csrfToken) {
         setEmail(data.name);
         setToken(data.csrfToken);
-        console.log('token/email AuthCon line 27 \n', {
-          token: data.csrfToken,
-          email: data.name,
-        });
-        localStorage.setItem('email', data.name);
-        localStorage.setItem('token', data.csrfToken);
+        // localStorage.setItem('email', data.name);
+        // localStorage.setItem('token', data.csrfToken);
         return {
           success: true,
           message: `${userEmail} Successfully logged In`,
           error: null,
         };
       } else {
+        console.log('login error report');
         const error = data;
         error.status = data.status;
         error.message = `Athentication failed: ${data?.message}`;
         throw error;
       }
     } catch (error) {
+      console.log('login catch error report');
       return {
         success: false,
         error,
@@ -51,7 +39,7 @@ export function AuthProvider({ children }) {
   }
 
   async function logout() {
-    if (!token) setToken('') && setEmail('');
+    if (!token) return setToken('') && setEmail('');
 
     try {
       await post('user/logoff', {
@@ -84,8 +72,6 @@ export function AuthProvider({ children }) {
     login,
     logout,
   };
-
-  // localStorage.setItem('token', token);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

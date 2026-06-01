@@ -7,7 +7,7 @@ import StatusFilter from '../../shared/StatusFilter';
 
 import Logoff from '../../features/Logoff/Logoff';
 
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../hooks/useAuth';
 import isValid from '../../utils/todoValidation';
 import sanitizeInput from '../../utils/sanitizeInput';
 
@@ -47,7 +47,13 @@ export default function TodosPage() {
     if (!token) return;
     let firstPost = false;
 
-    const paramsObj = { sortBy, sortDirection };
+    // const paramsObj = { sortBy, sortDirection };
+    const paramsObj = {
+      sortBy,
+      sortDirection,
+      isCompleted: false,
+      limit: 100,
+    };
     if (debouncedFilterTerm) {
       paramsObj.find = debouncedFilterTerm;
     }
@@ -55,19 +61,19 @@ export default function TodosPage() {
     const params = new URLSearchParams(paramsObj);
 
     async function fetchTodos() {
-      //i made token to tokens to throw error but it never showed on the page. revisit
       const options = {
         headers: { 'X-CSRF-TOKEN': token },
+        credentials: 'include',
       };
       try {
         dispatch({
           type: TODO_ACTIONS.FETCH_START,
         });
 
-        const data = await get(`tasks?${params}`, options);
+        const data = await get(`api/tasks?${params}`, options);
 
         if (!firstPost) {
-          dispatch({ data, type: TODO_ACTIONS.FETCH_SUCCESS });
+          dispatch({ data: data.tasks, type: TODO_ACTIONS.FETCH_SUCCESS });
         }
       } catch (error) {
         dispatch({ fetchError: error.message, type: TODO_ACTIONS.FETCH_ERROR });
@@ -129,7 +135,6 @@ export default function TodosPage() {
     }
   }
   /**
-   *
    * @param {number} todoId
    */
   async function completeTodo(todoId) {
@@ -157,7 +162,6 @@ export default function TodosPage() {
     }
   }
   /**
-   *
    * @param {Object} editedTodo
    */
   async function updateTodo(editedTodo) {

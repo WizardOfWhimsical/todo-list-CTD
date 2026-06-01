@@ -29,31 +29,33 @@ export default function BarChart({ total, active, completed, name }) {
         backgroundColor: ['#50b432', '#058DC7', '#ED561B'],
         borderColor: ['#50b432', '#058DC7', '#ED561B'],
         borderWidth: 1,
+        borderRadius: 5,
       },
     ],
   };
 
   const options = {
     responsive: true,
-    maintainAspectRatio: false,
+    maintainAspectRatio: true,
     scales: {
       y: {
         beginAtZero: true,
         ticks: {
-          stepSize: 1,
+          stepSize: 3,
         },
       },
     },
     plugins: {
       legend: {
+        title: { display: true, text: ['here i am', 'another one'] },
         labels: {
-          font: { size: 15 },
+          font: { size: 18 },
         },
       },
       title: {
         display: true,
         text: `${name}'s To-Do Stats`,
-        font: { size: 18 },
+        font: { size: 20 },
       },
     },
   };

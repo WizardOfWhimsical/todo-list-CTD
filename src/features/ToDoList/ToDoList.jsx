@@ -43,7 +43,7 @@ function ToDoList({
         return 'Add a todo to get started';
     }
   }
-
+  console.log({ todos });
   return (
     <ul className={styles.todoListContainer}>
       {filteredTodoList.todos.length === 0 ? (
